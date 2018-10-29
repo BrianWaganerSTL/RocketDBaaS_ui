@@ -1,0 +1,12 @@
+<h3>Search Npm Packages</h3>
+<p><i>Searches when typing stops. Caches for 30 seconds.</i></p>
+<input (keyup)="search($event.target.value)" id="name" placeholder="Search"/>
+<input type="checkbox" id="refresh" [checked]="withRefresh" (click)="toggleRefresh()">
+<label for="refresh">with refresh</label>
+
+<ul>
+  <li *ngFor="let pkg of packages$ | async">
+    <b>{{pkg.name}} v.{{pkg.version}}</b> -
+    <i>{{pkg.description}}</i>
+  </li>
+</ul>
