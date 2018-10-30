@@ -1,28 +1,30 @@
 /* Master Styles */
 h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+  color: #369 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 250% !important;
+  margin-outside: 2em;
 }
 
 h2, h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: lighter;
+  color: #444 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-weight: lighter !important;
+  margin-outside: 2em;
 }
 
 body {
   margin: 2em;
 }
 
-body, input[text], button {
-  color: #888;
-  font-family: Cambria, Georgia;
-}
+/*body, input[text], button {*/
+/*color: #888;*/
+/*font-family: Cambria, Georgia;*/
+/*}*/
 
 a {
-  cursor: pointer;
-  cursor: hand;
+  cursor: pointer !important;
+  cursor: hand !important;
 }
 
 button {
@@ -46,38 +48,38 @@ button:disabled {
 }
 
 /* Navigation link styles */
-nav a {
-  padding: 5px 10px;
-  text-decoration: none;
-  margin-right: 10px;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #eee;
-  border-radius: 4px;
-}
+/*nav a {*/
+/*padding: 5px 10px !important;*/
+/*text-decoration: none !important;*/
+/*margin-right: 10px !important;*/
+/*margin-top: 10px !important;*/
+/*display: inline-block !important;*/
+/*!*background-color: #eee !important;*!*/
+/*border-radius: 4px !important;*/
+/*}*/
 
-nav a:visited, a:link {
-  color: #607D8B;
-}
+/*nav a:visited, a:link {*/
+/*color: #607D8B !important;*/
+/*}*/
 
-nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
-}
+/*nav a:hover {*/
+/*color: #039be5 !important;*/
+/*background-color: #CFD8DC !important;*/
+/*}*/
 
-nav a.active {
-  color: #039be5;
-}
+/*nav a.active {*/
+/*color: #039be5 !important;*/
+/*}*/
 
 /* everywhere else */
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .container {
-  width: 95%;
+  width: 95% !important;
   max-width: 1920px;
-  padding-top: inherit;
+  padding-top: inherit !important;
 }
 
 .card-header {
@@ -113,15 +115,15 @@ input {
 }
 
 .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link {
-  color: #80bdff;
+  color: #80bdff !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, .75);
+  color: rgba(255, 255, 255, .75) !important;
 }
 
 .navbar-brand {
-  color: #d58512
+  color: #d58512 !important;
 }
 
 .form-check-input {
@@ -214,10 +216,10 @@ input {
   margin-bottom: 30px;
 }
 
-body {
-  background: #EDECEC;
-  padding: 30px
-}
+/*body {*/
+/*background: #EDECEC;*/
+/*padding: 30px*/
+/*}*/
 
 @media all and (max-width: 724px) {
   .nav-tabs > li > a > span {
@@ -228,3 +230,12 @@ body {
     padding: 5px 5px;
   }
 }
+
+/*body {*/
+/*padding-top: 60px;*/
+/*}*/
+/*@media (max-width: 979px) {*/
+/*body {*/
+/*padding-top: 0px;*/
+/*}*/
+/*}*/

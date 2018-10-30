@@ -62,17 +62,17 @@
   margin-bottom: 30px;
 }
 
-body {
-  background: #EDECEC;
-  padding: 30px
-}
+/*body {*/
+/*background: #EDECEC;*/
+/*padding: 30px*/
+/*}*/
 
-@media all and (max-width: 724px) {
-  .nav-tabs > li > a > span {
-    display: none;
-  }
+/*@media all and (max-width: 724px) {*/
+/*.nav-tabs > li > a > span {*/
+/*display: none;*/
+/*}*/
 
-  .nav-tabs > li > a {
-    padding: 5px 5px;
-  }
-}
+/*.nav-tabs > li > a {*/
+/*padding: 5px 5px;*/
+/*}*/
+/*}*/
