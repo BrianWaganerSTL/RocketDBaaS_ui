@@ -21,11 +21,13 @@ import {PackageSearchComponent} from './package-search/package-search.component'
 import {UploaderComponent} from './uploader/uploader.component';
 
 import {httpInterceptorProviders} from './http-interceptors';
+import {AlertModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    AlertModule.forRoot(),
     // import HttpClientModule after BrowserModule.
     HttpClientModule,
     HttpClientXsrfModule.withOptions({

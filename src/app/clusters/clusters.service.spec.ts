@@ -45,8 +45,8 @@ describe('ClustersService', () => {
     beforeEach(() => {
       clusterService = TestBed.get(ClustersService);
       expectedClusters = [
-        {id: 1, name: 'A'},
-        {id: 2, name: 'B'},
+        {id: 1, cluster_name: 'A'},
+        {id: 2, cluster_name: 'B'},
       ] as Cluster[];
     });
 
@@ -116,7 +116,7 @@ describe('ClustersService', () => {
 
     it('should update a Cluster and return it', () => {
 
-      const updateCluster: Cluster = {id: 1, name: 'A'};
+      const updateCluster: Cluster = {id: 1, cluster_name: 'A'};
 
       clusterService.updateCluster(updateCluster).subscribe(
         data => expect(data).toEqual(updateCluster, 'should return the cluster'),
@@ -136,7 +136,7 @@ describe('ClustersService', () => {
 
     // This service reports the error but finds a way to let the app keep going.
     it('should turn 404 error into return of the update cluster', () => {
-      const updateCluster: Cluster = {id: 1, name: 'A'};
+      const updateCluster: Cluster = {id: 1, cluster_name: 'A'};
 
       clusterService.updateCluster(updateCluster).subscribe(
         data => expect(data).toEqual(updateCluster, 'should return the update cluster'),

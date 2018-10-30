@@ -1,27 +1,51 @@
-<h3>Clusters</h3>
 <div>
-  <label>Cluster name:
-    <input #clusterName/>
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(clusterName.value); clusterName.value=''">
-    add
-  </button>
-  <button (click)="search(clusterName.value)">
-    search
-  </button>
+  <label>Cluster name:<input #clusterName/></label>
+  <button (click)="search(clusterName.value)">search</button>
 </div>
 
-<ul class="clusters">
-  <li *ngFor="let cluster of clusters">
-    <a (click)="edit(cluster)">
-      <span class="badge">{{ cluster.id || -1 }}</span>
-      <span *ngIf="cluster!==editCluster">{{cluster.cluster_name}}</span>
-      <input *ngIf="cluster===editCluster" [(ngModel)]="cluster.cluster_name"
-             (blur)="update()" (keyup.enter)="update()">
-    </a>
-    <button class="delete" title="delete cluster"
-            (click)="delete(cluster)">x
-    </button>
-  </li>
-</ul>
+<h2 class="card-title" xmlns="http://www.w3.org/1999/html">Overview</h2>
+
+<table class="table table-hover" style="background-color: #eaf8ff">
+  <thead>
+  <tr style="background-color: #79aec8">
+    <th scope="col">Cluster</th>
+    <th scope="col">DBMS</th>
+    <th scope="col">Application</th>
+    <th scope="col">CPU (GB)</th>
+    <th scope="col">RAM (GB)</th>
+    <th scope="col">DB GB</th>
+    <th scope="col">Health</th>
+    <th scope="col">R/W Port</th>
+    <th scope="col">R/O Port</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let c of clusters; index as idx; ">
+  <tr>
+    <th>
+      <!--<button (click)="#{{ c.cluster_name }}" class="btn btn-info btn-sm" data-toggle="collapse">+</button>-->
+      <a href="">{{ c.cluster_name }}</a>
+    </th>
+    <td>{{ c.dbms_type }}</td>
+    <td>{{ c.application.application_name }}</td>
+    <td>{{ c.requested_cpu }}</td>
+    <td>{{ c.requested_mem_gb }}</td>
+    <td>{{ c.requested_db_gb }}</td>
+    <td>{{ c.cluster_health }}</td>
+    <td>{{ c.read_write_port.port }}</td>
+    <td>{{ c.read_only_port.port }}</td>
+  </tr>
+  <!--{% for s in c. %}-->
+  <!--<tr id="{{ c.cluster_name }}" style="height: 30px" class="collapse in">-->
+  <!--{% if s.node_role == 'Primary' %}-->
+  <!--<td style="font-size: .8rem; padding:.25rem; text-align:right">-->
+  <!--<img class="img-responsive" src="{% static 'icons/primary.jpg' %}" height="20px"></td>-->
+  <!--{% else %}-->
+  <!--<td style="font-size: .8rem; padding:.25rem; text-align:right">-->
+  <!--<img class="img-responsive" src="{% static 'icons/secondary.jpg' %}" height="20px"></td>-->
+  <!--{% endif %}-->
+  <!--<td style="font-size: .8rem; padding:.25rem">{{ s.data_center }} : {{ s.server_name }}-->
+  <!--: {{ s.ip_address }} : {{ s.role }} : {{ s.health }} : {{ s.pending_restart }}</td>-->
+  <!--</tr>-->
+  <!--{% endfor %}-->
+  </tbody>
+</table>

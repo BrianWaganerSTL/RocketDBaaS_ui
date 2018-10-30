@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Cluster} from './cluster.model';
 import {ClustersService} from './clusters.service';
+import {Application} from './application.model';
 
 @Component({
   selector: 'app-clusters',
@@ -11,6 +12,7 @@ import {ClustersService} from './clusters.service';
 })
 export class ClustersComponent implements OnInit {
   clusters: Cluster[];
+  application: Application;
   editCluster: Cluster; // the cluster currently being edited
 
   constructor(private clustersService: ClustersService) {

@@ -5,13 +5,13 @@ export interface Cluster {
   id: number;
   cluster_name: string;
   dbms_type: string;
-  application: Application[];
+  application: Application;
   environment: string;
   requested_cpu: string;
   requested_mem_gb: string;
   requested_db_gb: string;
-  read_write_port: ServerPort[];
-  read_only_port: ServerPort[];
+  read_write_port: ServerPort;
+  read_only_port: ServerPort;
   tls_enabled_sw: string;
   backup_retention_days: string;
   cluster_health: string;

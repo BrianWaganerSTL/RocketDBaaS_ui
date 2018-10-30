@@ -1,8 +1,7 @@
 <h1>Rocket DBaaS</h1>
-<alert type="success">hello</alert>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 
-  <img class="navbar-brand" src="../static/icons/favicon-32x32.png">
+  <img class="navbar-brand" src="{% static 'icons/favicon-32x32.png' %}">
   <a class="navbar-brand" href="#"> Rocket DBaaS</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -13,17 +12,17 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="overview">Overview</a>
+        <a class="nav-link" href="{% url 'overview' %}">Overview</a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="bottom"
           title="Click on the Application->Cluster Name">
         <a class="nav-link disabled" href="#">Details</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pool_servers">Pool Servers</a>
+        <a class="nav-link" href="{% url 'pool_servers' %}">Pool Servers</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="dropdownCreate" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdownCreate" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">Create ...</a>
         <div class="dropdown-menu" aria-labelledby="dropdownCreate">
           <a class="dropdown-item" href="/dbaas/cluster/create">Create Cluster</a>
@@ -31,7 +30,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="dropdownAdmin" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdownAdmin" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">Admin ...</a>
         <div class="dropdown-menu" aria-labelledby="dropdownAdmin">
           <a class="dropdown-item" href="/admin/dbaas/applicationcontact">Application Contact</a>
@@ -48,7 +47,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="dropdownReports" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdownReports" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">Reports ...</a>
         <div class="dropdown-menu" aria-labelledby="dropdownReports">
           <a class="dropdown-item disabled" href="#">Cluster, Servers, & Contacts</a>
@@ -57,6 +56,35 @@
         </div>
       </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
 </nav>
-<app-clusters></app-clusters>
+
+<main role="main" class="container">
+  <app-clusters></app-clusters>
+</main>
+
+<div>
+  <input type="checkbox" id="clusters" [checked]="toggleClusters" (click)="toggleClusters()">
+  <label for="heroes">Clusters</label>
+
+  <input type="checkbox" id="heroes" [checked]="toggleHeroes" (click)="toggleHeroes()">
+  <label for="heroes">Heroes</label>
+
+  <input type="checkbox" id="config" [checked]="showConfig" (click)="toggleConfig()">
+  <label for="config">Config</label>
+
+  <input type="checkbox" id="downloader" [checked]="showDownloader" (click)="toggleDownloader()">
+  <label for="downloader">Downloader</label>
+
+  <input type="checkbox" id="uploader" [checked]="showUploader" (click)="toggleUploader()">
+  <label for="uploader">Uploader</label>
+
+  <input type="checkbox" id="search" [checked]="showSearch" (click)="toggleSearch()">
+  <label for="search">Search</label>
+</div>
+
+
