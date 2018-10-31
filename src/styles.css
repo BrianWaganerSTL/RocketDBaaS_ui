@@ -231,6 +231,13 @@ input {
   }
 }
 
+.btn-group-xsm > .btn, .btn-xsm {
+  padding: .1rem .4rem !important;
+  font-size: .875rem !important;
+  line-height: 1.5 !important;
+  border-radius: .2rem !important;
+}
+
 /*body {*/
 /*padding-top: 60px;*/
 /*}*/

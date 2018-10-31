@@ -14,13 +14,31 @@ export class ClustersComponent implements OnInit {
   clusters: Cluster[];
   application: Application;
   editCluster: Cluster; // the cluster currently being edited
+  toggle = {};
+
 
   constructor(private clustersService: ClustersService) {
+    this.toggle = {}; // init is required
   }
 
   ngOnInit() {
     this.getClusters();
   }
+
+  // toggle(id) {
+  //   if (isNullOrUndefined(this.showDialog[id])) {
+  //     this.showDialog[id] = true;
+  //   } else {
+  //     this.showDialog[id] = !this.showDialog[id];
+  //   }
+  // }
+  //
+  // getShowDialog(id) {
+  //   if (isNullOrUndefined(this.showDialog[id])) {
+  //     this.showDialog[id] = true;
+  //   }
+  //   return this.showDialog[id];
+  // }
 
   getClusters(): void {
     this.clustersService.getClusters()

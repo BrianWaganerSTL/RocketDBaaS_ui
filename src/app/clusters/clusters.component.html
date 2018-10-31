@@ -24,8 +24,9 @@
   <tbody *ngFor="let c of clusters; index as idx; ">
   <tr>
     <th>
-      <!--<button (click)="#{{ c.cluster_name }}" class="btn btn-info btn-sm" data-toggle="collapse">+</button>-->
-      <a href="">{{ c.cluster_name }}</a>
+      <button (click)="toggle[c.id]= !toggle[c.id]" class="btn btn-outline-secondary btn-xsm" data-toggle="collapse">+
+      </button>
+      <a href="" style="margin-left: 1rem;">{{ c.cluster_name }}</a>
     </th>
     <td>{{ c.dbms_type }}</td>
     <td>{{ c.application.application_name }}</td>
@@ -36,18 +37,6 @@
     <td>{{ c.read_write_port.port }}</td>
     <td>{{ c.read_only_port.port }}</td>
   </tr>
-  <!--{% for s in c. %}-->
-  <!--<tr id="{{ c.cluster_name }}" style="height: 30px" class="collapse in">-->
-  <!--{% if s.node_role == 'Primary' %}-->
-  <!--<td style="font-size: .8rem; padding:.25rem; text-align:right">-->
-  <!--<img class="img-responsive" src="{% static 'icons/primary.jpg' %}" height="20px"></td>-->
-  <!--{% else %}-->
-  <!--<td style="font-size: .8rem; padding:.25rem; text-align:right">-->
-  <!--<img class="img-responsive" src="{% static 'icons/secondary.jpg' %}" height="20px"></td>-->
-  <!--{% endif %}-->
-  <!--<td style="font-size: .8rem; padding:.25rem">{{ s.data_center }} : {{ s.server_name }}-->
-  <!--: {{ s.ip_address }} : {{ s.role }} : {{ s.health }} : {{ s.pending_restart }}</td>-->
-  <!--</tr>-->
-  <!--{% endfor %}-->
+  <app-servers [clusterId]="c.id" *ngIf="toggle[c.id]"></app-servers>
   </tbody>
 </table>

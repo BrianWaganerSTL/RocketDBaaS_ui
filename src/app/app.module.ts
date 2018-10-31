@@ -22,6 +22,7 @@ import {UploaderComponent} from './uploader/uploader.component';
 
 import {httpInterceptorProviders} from './http-interceptors';
 import {AlertModule} from 'ngx-bootstrap';
+import {ServersComponent} from './servers/servers.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import {AlertModule} from 'ngx-bootstrap';
     MessagesComponent,
     UploaderComponent,
     PackageSearchComponent,
+    ServersComponent,
   ],
   providers: [
     AuthService,
