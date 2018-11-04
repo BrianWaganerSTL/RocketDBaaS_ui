@@ -25,31 +25,32 @@ export class ServersService {
   }
 
   /** GET servers from the server */
-  getServers(): Observable<Server[]> {
-    return this.http.get<Server[]>(this.url)
+  getServers(clusterId: number): Observable<Server[]> {
+    return this.http.get<Server[]>(this.url + clusterId + '/')
       .pipe(
         catchError(this.handleError('getServers', []))
       );
   }
-
-  /* GET servers whose name contains search term */
-  // searchServers(term: number): Observable<Server[]> {
-  //   const options = term ?
-  //     {params: new HttpParams().set('cluster_id', String(term))} : {};
-  //   // return this.http.get<Servers[]>(this.url + '1/')
-  //   return this.http.get<Server[]>(this.url, options)
-  //     .pipe(
-  //       catchError(this.handleError<Servers[]>('searchServers', []))
-  //     );
-  // }
-
-  /** POST: add a new server to the database */
-  // addServer(server: Server): Observable<Server> {
-  //   return this.http.post<Server>(this.url, server, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('addServers', server))
-  //     );
 }
+
+/* GET servers whose name contains search term */
+// searchServers(term: number): Observable<Server[]> {
+//   const options = term ?
+//     {params: new HttpParams().set('cluster_id', String(term))} : {};
+//   // return this.http.get<Servers[]>(this.url + '1/')
+//   return this.http.get<Server[]>(this.url, options)
+//     .pipe(
+//       catchError(this.handleError<Servers[]>('searchServers', []))
+//     );
+// }
+
+/** POST: add a new server to the database */
+// addServer(server: Server): Observable<Server> {
+//   return this.http.post<Server>(this.url, server, httpOptions)
+//     .pipe(
+//       catchError(this.handleError('addServers', server))
+//     );
+//}
 
 /** DELETE: delete the server from the server */
 // deleteServer(id: number): Observable<{}> {

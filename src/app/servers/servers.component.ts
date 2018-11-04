@@ -22,7 +22,7 @@ export class ServersComponent implements OnInit {
   }
 
   getServers(): void {
-    this.serverService.getServers()
+    this.serverService.getServers(this.clusterId)
       .subscribe(servers => this.servers = servers);
   }
 }
