@@ -1,9 +1,18 @@
-<div class="servers" *ngFor="let s of servers">
-  <div *ngIf="s.cluster===clusterId">
-    <div id="{{ s.cluster }}"
-         style="height: 30px; font-size: .8rem; padding:.25rem; text-align:left; margin-left: 3rem">
-      {{ s.data_center }} : {{ s.server_name }} : {{ s.server_ip }} : {{ s.node_role }} : {{ s.server_health }} : {{
-      s.pending_restart_sw }}
-    </div>
-  </div>
-</div>
+<table class="servers table table-sm" style="">
+  <tr class="bg-server-header">
+    <th>DC</th>
+    <th>Server Name</th>
+    <th>Server IP</th>
+    <th>Node Role</th>
+    <th>Health</th>
+    <th>Pending Restart</th>
+  </tr>
+  <tr *ngFor="let s of servers" id="{{ s.cluster }}" class="bg-hover {{ getCssClass(s) }}">
+    <td>{{ s.data_center }}</td>
+    <td>{{ s.server_name }}</td>
+    <td>{{ s.server_ip }}</td>
+    <td>{{ s.node_role }}</td>
+    <td>{{ s.server_health }}</td>
+    <td>{{ s.pending_restart_sw }}</td>
+  </tr>
+</table>

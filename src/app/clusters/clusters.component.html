@@ -1,15 +1,15 @@
 <div style="margin: 1rem">
   <div>
-    <label>Cluster name:<input #clusterName/></label>
+    <label>Cluster name: <input #clusterName/></label>
     <button (click)="search(clusterName.value)">search</button>
   </div>
 
   <h2 class="card-title" xmlns="http://www.w3.org/1999/html">Overview</h2>
 </div>
 
-<table class="table table-hover" style="background-color: #eaf8ff">
+<table class="table">
   <thead>
-  <tr style="background-color: #79aec8">
+  <tr class="bg-clusters-header">
     <th scope="col">Cluster</th>
     <th scope="col">DBMS</th>
     <th scope="col">Application</th>
@@ -22,7 +22,7 @@
   </tr>
   </thead>
   <tbody *ngFor="let c of clusters; index as idx; ">
-  <tr>
+  <tr class="bg-clusters bg-hover">
     <th>
       <button (click)="toggle[c.id]= !toggle[c.id]" class="btn btn-outline-secondary btn-xsm" data-toggle="collapse">+
       </button>
@@ -37,6 +37,10 @@
     <td>{{ c.read_write_port.port }}</td>
     <td>{{ c.read_only_port.port }}</td>
   </tr>
-  <app-servers [clusterId]="c.id" *ngIf="toggle[c.id]"></app-servers>
+  <tr *ngIf="toggle[c.id]">
+    <td colspan="100%" style="border-top: 0px none; padding-top:0px;">
+      <app-servers [clusterId]="c.id"></app-servers>
+    </td>
+  </tr>
   </tbody>
 </table>

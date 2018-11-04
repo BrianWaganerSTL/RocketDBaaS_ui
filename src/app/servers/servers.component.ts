@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ServersService} from './server.service';
 import {Server} from './server.model';
+import {until} from 'selenium-webdriver';
 
 
 @Component({
@@ -19,6 +20,32 @@ export class ServersComponent implements OnInit {
 
   ngOnInit() {
     this.getServers();
+  }
+
+  getCssClass(server) {
+    let cssClasses;
+    switch (server.server_health) {
+      case 'ServerConfig':
+        cssClasses = 'bg-ServerConfig';
+        break;
+      case 'ServerUp':
+        if (server.node_role === 'Primary') {
+          cssClasses = 'bg-ServerUp-Primary';
+        } else {
+          cssClasses = 'bg-ServerUp-Other';
+        }
+        break;
+      case 'ServerUpWithIssues':
+        cssClasses = 'bg-ServerUpWithIssues';
+        break;
+      case 'ServerDown':
+        cssClasses = 'bg-ServerDown';
+        break;
+      case 'ServerOnLineMaint':
+        cssClasses = 'bg-ServerOnLineMaint';
+        break;
+    }
+    return cssClasses;
   }
 
   getServers(): void {
