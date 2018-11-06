@@ -19,17 +19,20 @@ import {MessageService} from './message.service';
 import {MessagesComponent} from './messages/messages.component';
 import {PackageSearchComponent} from './package-search/package-search.component';
 import {UploaderComponent} from './uploader/uploader.component';
-
+import {Router} from '@angular/router';
 import {httpInterceptorProviders} from './http-interceptors';
 import {AlertModule} from 'ngx-bootstrap';
 import {ServersComponent} from './servers/servers.component';
+import {ClusterDetailsComponent} from './cluster-details/cluster-details.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {AppRoutingModule} from './app-routing.module';
+import {ClusterDetailsService} from './cluster-details/clusters-details.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AlertModule.forRoot(),
-    // import HttpClientModule after BrowserModule.
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'My-Xsrf-Cookie',
@@ -45,7 +48,8 @@ import {ServersComponent} from './servers/servers.component';
         passThruUnknownUrl: true,
         put204: false // return entity after PUT/update
       }
-    )
+    ),
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -53,19 +57,30 @@ import {ServersComponent} from './servers/servers.component';
     DownloaderComponent,
     HeroesComponent,
     ClustersComponent,
+    ClusterDetailsComponent,
     MessagesComponent,
     UploaderComponent,
     PackageSearchComponent,
     ServersComponent,
+    PageNotFoundComponent,
   ],
   providers: [
     AuthService,
     HttpErrorHandler,
     MessageService,
+    ClusterDetailsService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    // Use a custom replacer to display function names in the route configs
+    // const replacer = (key, value) => (typeof value === 'function') ? value.name : value;
+
+    // console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
+  }
 }
+

@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ServersService} from './server.service';
 import {Server} from './server.model';
-import {until} from 'selenium-webdriver';
 
 
 @Component({
@@ -12,7 +11,6 @@ import {until} from 'selenium-webdriver';
 })
 export class ServersComponent implements OnInit {
   @Input() clusterId: number;
-
   servers: Server[];
 
   constructor(private serverService: ServersService) {

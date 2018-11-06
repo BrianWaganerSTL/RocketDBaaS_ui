@@ -26,7 +26,9 @@
     <th>
       <button (click)="toggle[c.id]= !toggle[c.id]" class="btn btn-outline-secondary btn-xsm" data-toggle="collapse">+
       </button>
-      <a href="" style="margin-left: 1rem;">{{ c.cluster_name }}</a>
+      <a style="margin-left: 1rem;"
+         [routerLink]="['/cluster',c.id]"
+         routerLinkActive="active">{{ c.cluster_name }}</a>
     </th>
     <td>{{ c.dbms_type }}</td>
     <td>{{ c.application.application_name }}</td>

@@ -1,0 +1,64 @@
+<h2 class="card-title" xmlns="http://www.w3.org/1999/html">Cluster Details</h2>
+<h2>Cluster ID = {{ clusterId }}</h2>
+<div>
+  <table class="table">
+    <thead>
+    <tr class="bg-clusters-header">
+      <th scope="col">Cluster{{ cluster_name }}</th>
+      <th scope="col">DBMS</th>
+      <th scope="col">Application</th>
+      <th scope="col">CPU (GB)</th>
+      <th scope="col">RAM (GB)</th>
+      <th scope="col">DB GB</th>
+      <th scope="col">Health</th>
+      <th scope="col">R/W Port</th>
+      <th scope="col">R/O Port</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="bg-clusters bg-hover">
+      <th>{{ cluster.cluster_name }}</th>
+      <td>{{ cluster.dbms_type }}</td>
+      <!--<td>{{ cluster.application.application_name }}</td>-->
+      <td></td>
+      <td>{{ cluster.requested_cpu }}</td>
+      <td>{{ cluster.requested_mem_gb }}</td>
+      <td>{{ cluster.requested_db_gb }}</td>
+      <td>{{ cluster.cluster_health }}</td>
+      <td>{{ cluster.read_write_port }}</td>
+      <td>{{ cluster.read_only_port }}</td>
+    </tr>
+    <tr>
+      <td colspan="100%" style="border-top: 0px none; padding-top:0px;">
+        <app-servers [clusterId]="1"></app-servers>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <nav>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#Graphs">Graphs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Backups">Backups</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Restores">Restores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Activities">Activities</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Alerts">Alerts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Contacts">Contacts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Notes">Notes</a>
+      </li>
+    </ul>
+  </nav>
+</div>
