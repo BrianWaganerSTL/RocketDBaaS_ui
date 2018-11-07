@@ -1,5 +1,4 @@
-<h2 class="card-title" xmlns="http://www.w3.org/1999/html">Cluster Details</h2>
-<h2>Cluster ID = {{ clusterId }}</h2>
+<h2 *ngIf="cluster">{{ cluster.cluster_name }}</h2>
 <div>
   <table class="table">
     <thead>
@@ -16,21 +15,20 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="bg-clusters bg-hover">
+    <tr class="bg-clusters bg-hover" *ngIf="cluster">
       <th>{{ cluster.cluster_name }}</th>
       <td>{{ cluster.dbms_type }}</td>
-      <!--<td>{{ cluster.application.application_name }}</td>-->
-      <td></td>
+      <td>{{ cluster.application.application_name }}</td>
       <td>{{ cluster.requested_cpu }}</td>
       <td>{{ cluster.requested_mem_gb }}</td>
       <td>{{ cluster.requested_db_gb }}</td>
       <td>{{ cluster.cluster_health }}</td>
-      <td>{{ cluster.read_write_port }}</td>
-      <td>{{ cluster.read_only_port }}</td>
+      <td>{{ cluster.read_write_port.port }}</td>
+      <td>{{ cluster.read_only_port.port }}</td>
     </tr>
     <tr>
       <td colspan="100%" style="border-top: 0px none; padding-top:0px;">
-        <app-servers [clusterId]="1"></app-servers>
+        <app-servers [clusterId]="cluster.id"></app-servers>
       </td>
     </tr>
     </tbody>

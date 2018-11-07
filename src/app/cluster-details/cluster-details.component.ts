@@ -1,19 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Cluster} from '../clusters/cluster.model';
 import {ClusterDetailsService} from './clusters-details.service';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-cluster-details',
   templateUrl: './cluster-details.component.html',
   styleUrls: ['./cluster-details.component.css'],
-  // providers: [ClusterDetailsService],
 })
 export class ClusterDetailsComponent implements OnInit {
-  cluster: Observable<Cluster>;
+  id: number;
+  error: any;
+  cluster: Cluster;
 
   constructor(private clusterDetailsService: ClusterDetailsService,
               private route: ActivatedRoute,
@@ -21,34 +19,35 @@ export class ClusterDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cluster = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.clusterDetailsService.getClusters(+params.get('clusterId')))
-    );
+    this.showCluster();
   }
 
-  // this.route.params
-  //   .subscribe(
-  //     (params: Params) => {
-  //       console.log(params);
-  //       this.clusterId = +params['clusterId'];
-  //       this.clusterDetailsService.getClusters(this.clusterId);
-  //     },
-  //   (error) => console.error(error)
-  //   );
-  // this.clusterId = parseInt(this.route.snapshot.paramMap.get('clusterId'));
-  // this.route.data
-  //   .subscribe(
-  //     (data: Data) => {
-  //       this.cluster = data['cluster'];
-  //     });
-  //  this.getClusters();
-}
+  showCluster() {
+    this.id = parseInt(this.route.snapshot.paramMap.get('clusterId'));
+    this.clusterDetailsService.getCluster(this.id)
+      .subscribe(
+        (data: Cluster) => this.cluster = {...data}, // success path
+        error => this.error = error // error path
+      );
+  }
 
-// getClusters(): void {
-//   this.clusterDetailsService.getClusters(this.clusterId)
-//     .subscribe(clusters => this.clusters = clusters);
-// }
+// this.route.params
+//   .subscribe(
+//     (params: Params) => {
+//       console.log(params);
+//       this.clusterId = +params['clusterId'];
+//       this.clusterDetailsService.getClusters(this.clusterId);
+//     },
+//   (error) => console.error(error)
+//   );
+// this.clusterId = parseInt(this.route.snapshot.paramMap.get('clusterId'));
+// this.route.data
+//   .subscribe(
+//     (data: Data) => {
+//       this.cluster = data['cluster'];
+//     });
+//  this.getClusters();
+}
 
 // edit(cluster) {
 //   this.editCluster = cluster;
@@ -60,4 +59,4 @@ export class ClusterDetailsComponent implements OnInit {
 //       .subscribe(cluster => { this.cluster = cluster; });
 //   }
 // }
-}
+// }

@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable, Subject} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Cluster} from '../clusters/cluster.model';
 import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
-  })
-};
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     'Content-Type': 'application/json',
+//     'Authorization': 'my-auth-token'
+//   })
+// };
 
 @Injectable()
 export class ClusterDetailsService {
-  url = 'http://localhost:8000/api/clusters/';  // URL to web api
+  clusterUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   clusterChanged = new Subject<Cluster[]>();
   private handleError: HandleError;
 
@@ -27,14 +27,17 @@ export class ClusterDetailsService {
     this.handleError = httpErrorHandler.createHandleError('ClusterDetailsService');
   }
 
-  /** GET clusters from the server */
-  getClusters(clusterId: number): Observable<Cluster> {
-    return this.httpClient.get<Cluster>(this.url + clusterId + '/')
+  getCluster(clusterId: number): Observable<Cluster> {
+
+    // Add safe, URL encoded search parameter if there is a search term
+    // const options = clusterId ?
+    //   { params: new HttpParams().set('clusterId', clusterId) } : {};
+    const url = `${this.clusterUrl}${clusterId}/`;
+    return this.httpClient.get<Cluster>(url)
       .pipe(
-        retry(3), // Retry up to 3 times before failing
-        catchError(this.handleError(
-          'clusters-details.service',
-          {})));
+        retry(3),  // retry a failed request up to 3 times
+        catchError(this.handleError<Cluster>('getCluster'))
+      );
   }
 
   //////// Save methods //////////
