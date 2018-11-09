@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {Cluster} from './cluster.model';
+import {Cluster} from '../models/cluster.model';
 import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
 
 const httpOptions = {
@@ -15,7 +15,7 @@ const httpOptions = {
   })
 };
 
-@Injectable({providedIn: 'root',})
+@Injectable({providedIn: 'root'})
 export class ClustersService {
   clustersUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;

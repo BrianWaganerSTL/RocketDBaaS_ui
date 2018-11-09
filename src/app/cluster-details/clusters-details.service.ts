@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {Observable, Subject} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-import {Cluster} from '../clusters/cluster.model';
+import {Cluster} from '../models/cluster.model';
 import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
 
 // const httpOptions = {

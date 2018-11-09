@@ -1,0 +1,30 @@
+<div id="Backups">
+  <div class="album">
+    <h4>Latest Backups</h4>
+    <table class="table table-hover">
+      <thead>
+      <tr style="background-color: #28a745">
+        <th scope="col">Type</th>
+        <th scope="col">Status</th>
+        <th scope="col">Started</th>
+        <th scope="col">Stopped</th>
+        <th scope="col">Duration</th>
+        <th scope="col">DB (GB)</th>
+        <th scope="col">Backup (GB)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let b of backups" class="bg-hover">
+        <!--class="bg-hover {{ getCssClass(b) }}">-->
+        <td>{{ b.backup_type }}</td>
+        <td>{{ b.backup_status }}</td>
+        <td>{{ b.start_dttm }}</td>
+        <td>{{ b.stop_dttm }}</td>
+        <td>{{ b.duration }}</td>
+        <td>{{ b.db_size_gb }}</td>
+        <td>{{ b.backup_size_gb }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

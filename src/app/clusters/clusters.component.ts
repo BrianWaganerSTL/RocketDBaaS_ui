@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Cluster} from './cluster.model';
+import {Cluster} from '../models/cluster.model';
 import {ClustersService} from './clusters.service';
-import {Application} from './application.model';
+import {Application} from '../models/application.model';
 
 @Component({
   selector: 'app-clusters',

@@ -1,0 +1,27 @@
+<div class="tab-pane fade" id="Activities">
+  <div class="album">
+    <h4>Latest Server Activities</h4>
+    <table class="table table-hover">
+      <thead>
+      <tr style="background-color: #28a745">
+        <th scope="col">Server</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Status</th>
+        <th scope="col">Start</th>
+        <th scope="col">Stop</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for sa in server_activities %}
+      <tr>
+        <td>{{ sa.server.server_name }}</td>
+        <td>{{ sa.server_activity }}</td>
+        <td>{{ sa.activity_status }}</td>
+        <td>{{ sa.start_dttm }}</td>
+        <td>{{ sa.stop_dttm }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

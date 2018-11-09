@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Cluster} from '../clusters/cluster.model';
+import {Cluster} from '../models/cluster.model';
 import {ClusterDetailsService} from './clusters-details.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -9,9 +9,10 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./cluster-details.component.css'],
 })
 export class ClusterDetailsComponent implements OnInit {
-  id: number;
+  private id: number;
   error: any;
   cluster: Cluster;
+  tabSelectedName: string;
 
   constructor(private clusterDetailsService: ClusterDetailsService,
               private route: ActivatedRoute,
@@ -20,6 +21,14 @@ export class ClusterDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.showCluster();
+    this.setTab('Graphs');
+
+    // this.subTabSelected$.pipe(
+    //   debounceTime(500),
+    //   distinctUntilChanged(),
+    //   switchMap(packageName =>
+    //     this.searchService.search(packageName, this.withRefresh))
+    // );
   }
 
   showCluster() {
@@ -31,6 +40,18 @@ export class ClusterDetailsComponent implements OnInit {
       );
   }
 
+  setTab(value) {
+    this.tabSelectedName = value;
+  }
+
+  getTab() {
+    return this.tabSelectedName;
+  }
+
+  //
+  // setTab(feature: string) {
+  //   this.tabSelected.emit(feature);
+  // }
 // this.route.params
 //   .subscribe(
 //     (params: Params) => {
