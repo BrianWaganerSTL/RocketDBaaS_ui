@@ -11,8 +11,6 @@ import {Backup} from '../../models/backup.model';
 export class ClusterBackupsComponent implements OnInit {
   @Input() clusterId: number;
   backups: Backup[];
-  // id: number;
-  // error: any;
 
   constructor(private clusterBackupsService: ClusterBackupsService) {
   }
@@ -21,35 +19,25 @@ export class ClusterBackupsComponent implements OnInit {
     this.showBackups();
   }
 
-  // getCssClass(server) {
-  //   let cssClasses;
-  //   switch (server.server_health) {
-  //     case 'ServerConfig':
-  //       cssClasses = 'bg-ServerConfig';
-  //       break;
-  //     case 'ServerUp':
-  //       if (server.node_role === 'Primary') {
-  //         cssClasses = 'bg-ServerUp-Primary';
-  //       } else {
-  //         cssClasses = 'bg-ServerUp-Other';
-  //       }
-  //       break;
-  //     case 'ServerUpWithIssues':
-  //       cssClasses = 'bg-ServerUpWithIssues';
-  //       break;
-  //     case 'ServerDown':
-  //       cssClasses = 'bg-ServerDown';
-  //       break;
-  //     case 'ServerOnLineMaint':
-  //       cssClasses = 'bg-ServerOnLineMaint';
-  //       break;
-  //   }
-  //   return cssClasses;
-  // }
-
   showBackups(): void {
     this.clusterBackupsService.getBackups(this.clusterId)
       .subscribe(backups => this.backups = backups);
+  }
+
+  getCssClass(b) {
+    let cssClasses;
+    switch (b.backup_status) {
+      case 'Failed':
+        cssClasses = 'bg-BkupFailed';
+        break;
+      case 'Running':
+        cssClasses = 'bg-BkupRunning';
+        break;
+      case 'Successful':
+        cssClasses = 'bg-BkupSuccessful';
+        break;
+    }
+    return cssClasses;
   }
 }
 

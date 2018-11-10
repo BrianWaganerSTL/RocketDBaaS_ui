@@ -1,6 +1,8 @@
+import {Cluster} from './cluster.model';
+
 export interface Restore {
-  from_cluster: number;
-  to_cluster: number;
+  from_cluster: Cluster;
+  to_cluster: Cluster;
   restore_type: string;
   restore_to_dttm: string;
   restore_status: string;

@@ -27,7 +27,8 @@
       <td>{{ cluster.read_only_port.port }}</td>
     </tr>
     <tr>
-      <td colspan="100%" style="border-top: 0px none; padding-top:0px;">
+      <td colspan="100%"
+          style="padding-top:2rem;">
         <app-servers [clusterId]="cluster.id"></app-servers>
       </td>
     </tr>
@@ -37,17 +38,27 @@
 
   <div class="container">
     <tabset>
-      <tab heading="Graphs" id="tab1">
+      <tab heading="Metrics" id="tab1">
         <app-cluster-metrics [clusterId]="cluster.id"></app-cluster-metrics>
       </tab>
       <tab heading="Backups">
         <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>
       </tab>
-      <tab heading="Restores">Restores</tab>
-      <tab heading="Activities">Activities</tab>
-      <tab heading="Alerts">Alerts</tab>
-      <tab heading="Contacts">Contacts</tab>
-      <tab heading="Notes">Notes</tab>
+      <tab heading="Restores">
+        <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
+      </tab>
+      <tab heading="Activities">
+        Activities
+      </tab>
+      <tab heading="Alerts">
+        <app-cluster-alerts></app-cluster-alerts>
+      </tab>
+      <tab heading="Contacts">
+        Contacts
+      </tab>
+      <tab heading="Notes">
+        Notes
+      </tab>
     </tabset>
   </div>
 </div>

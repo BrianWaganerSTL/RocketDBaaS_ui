@@ -20,6 +20,11 @@ export class ServersComponent implements OnInit {
     this.getServers();
   }
 
+  getServers(): void {
+    this.serverService.getServers(this.clusterId)
+      .subscribe(servers => this.servers = servers);
+  }
+
   getCssClass(server) {
     let cssClasses;
     switch (server.server_health) {
@@ -44,10 +49,5 @@ export class ServersComponent implements OnInit {
         break;
     }
     return cssClasses;
-  }
-
-  getServers(): void {
-    this.serverService.getServers(this.clusterId)
-      .subscribe(servers => this.servers = servers);
   }
 }

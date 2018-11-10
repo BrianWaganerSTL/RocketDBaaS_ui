@@ -37,6 +37,9 @@ import {ClusterBackupsService} from './cluster-details/cluster-backups/cluster-b
 import {ClusterMetricsComponent} from './cluster-details/cluster-metrics/cluster-metrics.component';
 // import { ClusterNotes } from './models/clusterNotes.model.ts/cluster-notes.model.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {ClusterRestoresComponent} from './cluster-details/cluster-restores/cluster-restores.component';
+import {ClusterRestoresService} from './cluster-details/cluster-restores/cluster-restores.service';
+import {ClusterAlertsComponent} from './cluster-details/cluster-alerts/cluster-alerts.component';
 
 @NgModule({
   imports: [
@@ -77,9 +80,9 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
     ServersComponent,
     PageNotFoundComponent,
     ClusterBackupsComponent,
-    // ClusterRestoresComponent,
+    ClusterRestoresComponent,
     // ClusterActivitiesComponent,
-    // ClusterAlertsComponent,
+    ClusterAlertsComponent,
     // ClusterContactsComponent,
     // ClusterNotesComponent,
     ClusterMetricsComponent,
@@ -92,6 +95,8 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
     MessageService,
     ClusterDetailsService,
     ClusterBackupsService,
+    ClusterRestoresService,
+    ClusterAlertsComponent,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],
