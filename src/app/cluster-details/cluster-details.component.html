@@ -48,16 +48,16 @@
         <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
       </tab>
       <tab heading="Activities">
-        Activities
+        <app-cluster-activities [clusterId]="cluster.id"></app-cluster-activities>
       </tab>
       <tab heading="Alerts">
-        <app-cluster-alerts></app-cluster-alerts>
+        <app-cluster-alerts [clusterId]="cluster.id"></app-cluster-alerts>
       </tab>
       <tab heading="Contacts">
         Contacts
       </tab>
       <tab heading="Notes">
-        Notes
+        <app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>
       </tab>
     </tabset>
   </div>

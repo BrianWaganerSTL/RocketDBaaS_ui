@@ -33,13 +33,17 @@ import {ClusterBackupsService} from './cluster-details/cluster-backups/cluster-b
 // import { ClusterActivitiesComponent } from './cluster-details/cluster-activities/cluster-activities.component';
 // import { ClusterAlertsComponent } from './cluster-details/cluster-alerts/cluster-alerts.component';
 // import { ClusterContactsComponent } from './cluster-details/cluster-contacts/cluster-contacts.component';
-// import { ClusterNotesComponent } from './cluster-details/cluster-notes/cluster-notes.component';
+import {ClusterNotesComponent} from './cluster-details/cluster-notes/cluster-notes.component';
 import {ClusterMetricsComponent} from './cluster-details/cluster-metrics/cluster-metrics.component';
 // import { ClusterNotes } from './models/clusterNotes.model.ts/cluster-notes.model.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ClusterRestoresComponent} from './cluster-details/cluster-restores/cluster-restores.component';
 import {ClusterRestoresService} from './cluster-details/cluster-restores/cluster-restores.service';
 import {ClusterAlertsComponent} from './cluster-details/cluster-alerts/cluster-alerts.component';
+import {ClusterActivitiesComponent} from './cluster-details/cluster-activities/cluster-activities.component';
+import {ClusterActivitiesService} from './cluster-details/cluster-activities/cluster-activities.service';
+import {ClusterAlertsService} from './cluster-details/cluster-alerts/cluster-alerts.service';
+import {ClusterNotesService} from './cluster-details/cluster-notes/cluster-notes.service';
 
 @NgModule({
   imports: [
@@ -81,12 +85,12 @@ import {ClusterAlertsComponent} from './cluster-details/cluster-alerts/cluster-a
     PageNotFoundComponent,
     ClusterBackupsComponent,
     ClusterRestoresComponent,
-    // ClusterActivitiesComponent,
+    ClusterActivitiesComponent,
     ClusterAlertsComponent,
     // ClusterContactsComponent,
     // ClusterNotesComponent,
     ClusterMetricsComponent,
-    // ClusterNotes.ModelComponent,
+    ClusterNotesComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -96,7 +100,9 @@ import {ClusterAlertsComponent} from './cluster-details/cluster-alerts/cluster-a
     ClusterDetailsService,
     ClusterBackupsService,
     ClusterRestoresService,
-    ClusterAlertsComponent,
+    ClusterActivitiesService,
+    ClusterAlertsService,
+    ClusterNotesService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],

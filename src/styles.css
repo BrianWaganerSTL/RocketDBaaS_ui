@@ -146,7 +146,7 @@ input {
 
 .tab-content .album {
   background-color: #f8f9fa !important;
-  border: 2px solid #DDD;
+  border: 3px solid #DDD;
   padding: 5px;
 }
 
@@ -338,6 +338,11 @@ input {
 body {
   background: #EDECEC;
   max-width: 1300px !important;
+}
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
 @media all and (max-width: 724px) {

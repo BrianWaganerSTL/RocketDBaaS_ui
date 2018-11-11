@@ -1,21 +1,17 @@
-<div class="tab-pane fade" id="Notes">
+<div id="Notes">
   <div class="album">
-    <div class="row">
-      <h4>Latest Notes</h4>
-      <i class="material-icons">edit</i>
-    </div>
-    {% for note in cluster.clusternote_set.all %}
-    <div class="card border-{{ note.note_color }}">
-      <div class="card-header bg-{{ note.note_color }}">
-        <span style="font-size: large; font-weight: bold">{{ note.title }}</span>
-        <div></div>
-        <span
-          style="font-size: small; font-weight: bold"> {{ note.created_by }} - {{ note.prettyNoteCreateDate }}</span>
+    <!--<div class="row">-->
+    <!--<i class="material-icons">edit</i>-->
+    <!--</div>-->
+    <div *ngFor="let n of notes"
+         class="card {{ getCssClass(n) }}">
+      <div class="card-header bg-{{ n.note_color }} row">
+        <div class="col-md-11 lg font-weight-bold">{{ n.title }}</div>
+        <div class="col-md-1 ml-auto badge badge-pill badge-dark">{{n.created_by}}</div>
       </div>
       <div class="card-body">
-        <p class="card-text">{{ note.note }}</p>
+        <p class="card-text">{{ n.note }}</p>
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>
