@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Cluster} from '../models/cluster.model';
 import {ClustersService} from './clusters.service';
 import {Application} from '../models/application.model';
+import {interval} from 'rxjs';
 
 @Component({
   selector: 'app-clusters',
@@ -10,12 +11,12 @@ import {Application} from '../models/application.model';
   providers: [ClustersService],
   styleUrls: ['./clusters.component.css']
 })
-export class ClustersComponent implements OnInit {
+export class ClustersComponent implements OnInit, OnDestroy {
   clusters: Cluster[];
   application: Application;
   editCluster: Cluster; // the cluster currently being edited
   toggle = {};
-
+  refreshTimer: any;
 
   constructor(private clustersService: ClustersService) {
     this.toggle = {}; // init is required
@@ -23,22 +24,21 @@ export class ClustersComponent implements OnInit {
 
   ngOnInit() {
     this.getClusters();
+
+    // Refresh from database
+    this.refreshTimer = interval((15 * 1000))
+      .subscribe((value: number) => {
+        console.log('Refresh Overview,  cnt:' + value);
+        this.getClusters();
+        if (value === 60) {
+          this.refreshTimer.unsubscribe();
+        }
+      });
   }
 
-  // toggle(id) {
-  //   if (isNullOrUndefined(this.showDialog[id])) {
-  //     this.showDialog[id] = true;
-  //   } else {
-  //     this.showDialog[id] = !this.showDialog[id];
-  //   }
-  // }
-  //
-  // getShowDialog(id) {
-  //   if (isNullOrUndefined(this.showDialog[id])) {
-  //     this.showDialog[id] = true;
-  //   }
-  //   return this.showDialog[id];
-  // }
+  ngOnDestroy() {
+    this.refreshTimer.unsubscribe();
+  }
 
   getClusters(): void {
     this.clustersService.getClusters()

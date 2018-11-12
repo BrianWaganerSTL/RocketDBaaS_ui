@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Cluster} from '../models/cluster.model';
 import {ClusterDetailsService} from './clusters-details.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {interval} from 'rxjs';
 
 @Component({
   selector: 'app-cluster-details',
@@ -9,11 +10,12 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./cluster-details.component.css'],
   providers: [ClusterDetailsService]
 })
-export class ClusterDetailsComponent implements OnInit {
+export class ClusterDetailsComponent implements OnInit, OnDestroy {
   private id: number;
   error: any;
   cluster: Cluster;
   tabSelectedName: string;
+  refreshTimer: any;
 
   constructor(private clusterDetailsService: ClusterDetailsService,
               private route: ActivatedRoute,
@@ -22,7 +24,21 @@ export class ClusterDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.showCluster();
+    // Refresh from database
+    this.refreshTimer = interval((15 * 1000))
+      .subscribe((value: number) => {
+        console.log('Refresh ClusterDetails,  cnt:' + value);
+        this.showCluster();
+        if (value === 60) {
+          this.refreshTimer.unsubscribe();
+        }
+      });
   }
+
+  ngOnDestroy() {
+    this.refreshTimer.unsubscribe();
+  }
+
 
   showCluster() {
     this.id = parseInt(this.route.snapshot.paramMap.get('clusterId'));

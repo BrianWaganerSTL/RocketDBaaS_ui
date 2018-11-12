@@ -15,7 +15,7 @@ const httpOptions = {
   })
 };
 
-@Injectable({providedIn: 'root',})
+@Injectable({providedIn: 'root'})
 export class ClustersService {
   clustersUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
