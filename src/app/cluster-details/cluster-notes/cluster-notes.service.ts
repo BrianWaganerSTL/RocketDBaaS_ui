@@ -8,7 +8,7 @@ import {Note} from '../../models/note.model';
 
 @Injectable()
 export class ClusterNotesService {
-  activityUrl = 'http://localhost:8000/api/cluster/';  // URL to web api
+  activityUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
 
   constructor(

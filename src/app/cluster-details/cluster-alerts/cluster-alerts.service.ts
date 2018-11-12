@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
 import {Observable} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
@@ -8,7 +7,7 @@ import {AlertModel} from '../../models/alert.model';
 
 @Injectable()
 export class ClusterAlertsService {
-  activityUrl = 'http://localhost:8000/api/cluster/';  // URL to web api
+  activityUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
 
   constructor(

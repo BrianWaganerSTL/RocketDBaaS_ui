@@ -1,0 +1,20 @@
+<table class="servers table table-sm">
+  <tr class="bg-server-header">
+    <th>DC</th>
+    <th>Server Name</th>
+    <th>Server IP</th>
+    <th>Node Role</th>
+    <th>Health</th>
+    <th>Pending Restart</th>
+  </tr>
+  <tr *ngFor="let s of servers" id="{{ s.cluster }}" class="bg-hover {{ getCssClass(s) }}">
+    <td>{{ s.data_center }}</td>
+    <td>{{ s.server_name }}</td>
+    <td>{{ s.server_ip }}</td>
+    <td>{{ s.node_role }}</td>
+    <td>{{ s.server_health }}</td>
+    <td>{{ s.pending_restart_sw }}</td>
+  </tr>
+</table>
+
+

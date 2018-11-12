@@ -1,38 +1,38 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ServersService} from './servers.service';
-import {Server} from '../models/server.model';
+import {ClusterServersService} from './cluster-servers.service';
+import {Server} from '../../models/server.model';
 
 
 @Component({
-  selector: 'app-servers',
-  templateUrl: './servers.component.html',
-  styleUrls: ['./servers.component.css'],
-  providers: [ServersService]
+  selector: 'app-cluster-servers',
+  templateUrl: './cluster-servers.component.html',
+  styleUrls: ['./cluster-servers.component.css'],
+  providers: [ClusterServersService]
 })
-export class ServersComponent implements OnInit {
+export class ClusterServersComponent implements OnInit {
   @Input() clusterId: number;
   servers: Server[];
 
-  constructor(private serverService: ServersService) {
+  constructor(private clusterServerService: ClusterServersService) {
   }
 
   ngOnInit() {
-    this.getServers();
+    this.showServers();
   }
 
-  getServers(): void {
-    this.serverService.getServers(this.clusterId)
+  showServers(): void {
+    this.clusterServerService.getServers(this.clusterId)
       .subscribe(servers => this.servers = servers);
   }
 
-  getCssClass(server) {
+  getCssClass(a) {
     let cssClasses;
-    switch (server.server_health) {
+    switch (a.server_health) {
       case 'ServerConfig':
         cssClasses = 'bg-ServerConfig';
         break;
       case 'ServerUp':
-        if (server.node_role === 'Primary') {
+        if (a.node_role === 'Primary') {
           cssClasses = 'bg-ServerUp-Primary';
         } else {
           cssClasses = 'bg-ServerUp-Other';

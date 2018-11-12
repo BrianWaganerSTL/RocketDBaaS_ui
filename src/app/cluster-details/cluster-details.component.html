@@ -1,64 +1,65 @@
-<h2 *ngIf="cluster">{{ cluster.cluster_name }}</h2>
-<div>
-  <table class="table">
-    <thead>
-    <tr class="bg-clusters-header">
-      <th scope="col">Cluster{{ cluster_name }}</th>
-      <th scope="col">DBMS</th>
-      <th scope="col">Application</th>
-      <th scope="col">CPU (GB)</th>
-      <th scope="col">RAM (GB)</th>
-      <th scope="col">DB GB</th>
-      <th scope="col">Health</th>
-      <th scope="col">R/W Port</th>
-      <th scope="col">R/O Port</th>
-    </tr>
-    </thead>
-    <tbody *ngIf="cluster">
-    <tr class="bg-clusters bg-hover">
-      <th>{{ cluster.cluster_name }}</th>
-      <td>{{ cluster.dbms_type }}</td>
-      <td>{{ cluster.application.application_name }}</td>
-      <td>{{ cluster.requested_cpu }}</td>
-      <td>{{ cluster.requested_mem_gb }}</td>
-      <td>{{ cluster.requested_db_gb }}</td>
-      <td>{{ cluster.cluster_health }}</td>
-      <td>{{ cluster.read_write_port.port }}</td>
-      <td>{{ cluster.read_only_port.port }}</td>
-    </tr>
-    <tr>
-      <td colspan="100%"
-          style="padding-top:2rem;">
-        <app-servers [clusterId]="cluster.id"></app-servers>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div *ngIf="cluster">
+  <h2>{{ cluster.cluster_name }}</h2>
+  <div>
+    <table class="table">
+      <thead>
+      <tr class="bg-clusters-header">
+        <th scope="col">Cluster{{ cluster_name }}</th>
+        <th scope="col">DBMS</th>
+        <th scope="col">Application</th>
+        <th scope="col">CPU (GB)</th>
+        <th scope="col">RAM (GB)</th>
+        <th scope="col">DB GB</th>
+        <th scope="col">Health</th>
+        <th scope="col">R/W Port</th>
+        <th scope="col">R/O Port</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="bg-clusters bg-hover">
+        <th>{{ cluster.cluster_name }} {{ cluster.id }}</th>
+        <td>{{ cluster.dbms_type }}</td>
+        <td>{{ cluster.application.application_name }}</td>
+        <td>{{ cluster.requested_cpu }}</td>
+        <td>{{ cluster.requested_mem_gb }}</td>
+        <td>{{ cluster.requested_db_gb }}</td>
+        <td>{{ cluster.cluster_health }}</td>
+        <td>{{ cluster.read_write_port.port }}</td>
+        <td>{{ cluster.read_only_port.port }}</td>
+      </tr>
+      <tr>
+        <td colspan="100%"
+            style="padding-top:2rem;">
+          <app-cluster-servers [clusterId]="cluster.id"></app-cluster-servers>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
-
-  <div class="container">
-    <tabset>
-      <tab heading="Metrics" id="tab1">
-        <app-cluster-metrics [clusterId]="cluster.id"></app-cluster-metrics>
-      </tab>
-      <tab heading="Backups">
-        <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>
-      </tab>
-      <tab heading="Restores">
-        <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
-      </tab>
-      <tab heading="Activities">
-        <app-cluster-activities [clusterId]="cluster.id"></app-cluster-activities>
-      </tab>
-      <tab heading="Alerts">
-        <app-cluster-alerts [clusterId]="cluster.id"></app-cluster-alerts>
-      </tab>
-      <tab heading="Contacts">
-        Contacts
-      </tab>
-      <tab heading="Notes">
-        <app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>
-      </tab>
-    </tabset>
+    <div class="container">
+      <tabset>
+        <tab heading="Metrics">
+          <!--<app-cluster-metrics></app-cluster-metrics>-->
+        </tab>
+        <tab heading="Backups" [active]="true">
+          <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>
+        </tab>
+        <tab heading="Restores">
+          <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
+        </tab>
+        <tab heading="Activities">
+          <app-cluster-activities [clusterId]="cluster.id"></app-cluster-activities>
+        </tab>
+        <tab heading="Alerts">
+          <app-cluster-alerts [clusterId]="cluster.id"></app-cluster-alerts>
+        </tab>
+        <tab heading="Contacts">
+          <app-application-contacts [applicationId]="cluster.application.id"></app-application-contacts>
+        </tab>
+        <tab heading="Notes">
+          <app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>
+        </tab>
+      </tabset>
+    </div>
   </div>
 </div>

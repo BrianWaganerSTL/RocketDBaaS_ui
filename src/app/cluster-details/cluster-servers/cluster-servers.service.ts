@@ -2,35 +2,27 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-
-import {Server} from './server.model';
-import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
-
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Authorization': 'my-auth-token'
-//   })
-// };
+import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
+import {Server} from '../../models/server.model';
 
 @Injectable()
-export class ServersService {
-  serversUrl = 'http://localhost:8000/api/servers/';  // URL to web api
+export class ClusterServersService {
+  serversUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
 
   constructor(
-    private http: HttpClient,
+    private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('ServersService');
+    this.handleError = httpErrorHandler.createHandleError('ClusterServersService');
   }
 
   /** GET servers from the server */
   getServers(clusterId: number): Observable<Server[]> {
-    const url = `${this.serversUrl}${clusterId}/`;
-    return this.http.get<Server[]>(url)
+    const url = `${this.serversUrl}${clusterId}/servers/`;
+    return this.httpClient.get<Server[]>(url)
       .pipe(
         retry(3),  // retry a failed request up to 3 times
-        catchError(this.handleError('getServers', []))
+        catchError(this.handleError<Server[]>('getServers'))
       );
   }
 }

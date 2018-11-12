@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
 import {Observable, Subject} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-import {Cluster} from '../models/cluster.model';
 import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
+import {Cluster} from '../models/cluster.model';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -19,8 +18,6 @@ export class ClusterDetailsService {
   clusterChanged = new Subject<Cluster[]>();
   private handleError: HandleError;
 
-  // getClusters$: Observable<Cluster>;
-
   constructor(
     private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -28,10 +25,6 @@ export class ClusterDetailsService {
   }
 
   getCluster(clusterId: number): Observable<Cluster> {
-
-    // Add safe, URL encoded search parameter if there is a search term
-    // const options = clusterId ?
-    //   { params: new HttpParams().set('clusterId', clusterId) } : {};
     const url = `${this.clusterUrl}${clusterId}/`;
     return this.httpClient.get<Cluster>(url)
       .pipe(

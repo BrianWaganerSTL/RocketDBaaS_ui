@@ -1,4 +1,4 @@
-import {Server} from '../servers/server.model';
+import {Server} from './server.model';
 
 export interface ServerActivity {
   server: Server[];

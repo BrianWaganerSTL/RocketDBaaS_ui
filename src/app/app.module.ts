@@ -32,7 +32,7 @@ import {ClusterBackupsService} from './cluster-details/cluster-backups/cluster-b
 // import { ClusterRestoresComponent } from './cluster-details/cluster-restores/cluster-restores.component';
 // import { ClusterActivitiesComponent } from './cluster-details/cluster-activities/cluster-activities.component';
 // import { ClusterAlertsComponent } from './cluster-details/cluster-alerts/cluster-alerts.component';
-// import { ClusterContactsComponent } from './cluster-details/cluster-contacts/cluster-contacts.component';
+// import { ClusterContactsComponent } from './cluster-details/application-contacts/application-contacts.component';
 import {ClusterNotesComponent} from './cluster-details/cluster-notes/cluster-notes.component';
 import {ClusterMetricsComponent} from './cluster-details/cluster-metrics/cluster-metrics.component';
 // import { ClusterNotes } from './models/clusterNotes.model.ts/cluster-notes.model.component';
@@ -44,6 +44,10 @@ import {ClusterActivitiesComponent} from './cluster-details/cluster-activities/c
 import {ClusterActivitiesService} from './cluster-details/cluster-activities/cluster-activities.service';
 import {ClusterAlertsService} from './cluster-details/cluster-alerts/cluster-alerts.service';
 import {ClusterNotesService} from './cluster-details/cluster-notes/cluster-notes.service';
+import {ApplicationContactsService} from './cluster-details/application-contacts/application-contacts.service';
+import {ApplicationContactsComponent} from './cluster-details/application-contacts/application-contacts.component';
+import {ClusterServersComponent} from './cluster-details/cluster-servers/cluster-servers.component';
+import {ClusterServersService} from './cluster-details/cluster-servers/cluster-servers.service';
 
 @NgModule({
   imports: [
@@ -87,8 +91,8 @@ import {ClusterNotesService} from './cluster-details/cluster-notes/cluster-notes
     ClusterRestoresComponent,
     ClusterActivitiesComponent,
     ClusterAlertsComponent,
-    // ClusterContactsComponent,
-    // ClusterNotesComponent,
+    ApplicationContactsComponent,
+    ClusterServersComponent,
     ClusterMetricsComponent,
     ClusterNotesComponent,
   ],
@@ -103,6 +107,8 @@ import {ClusterNotesService} from './cluster-details/cluster-notes/cluster-notes
     ClusterActivitiesService,
     ClusterAlertsService,
     ClusterNotesService,
+    ClusterServersService,
+    ApplicationContactsService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],

@@ -8,7 +8,7 @@ import {Restore} from '../../models/restore.model';
 
 @Injectable()
 export class ClusterRestoresService {
-  restoresUrl = 'http://localhost:8000/api/cluster/';  // URL to web api
+  restoresUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
 
   constructor(

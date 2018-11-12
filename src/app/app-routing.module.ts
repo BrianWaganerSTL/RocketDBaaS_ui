@@ -10,7 +10,7 @@ const appRoutes: Routes = [
   {path: '', redirectTo: '/clusters', pathMatch: 'full'},
   {path: 'overview', redirectTo: '/clusters', pathMatch: 'full'},
   {path: 'clusters', component: ClustersComponent, data: {title: 'RocketDBaaS - Overview'}},
-  {path: 'cluster/:clusterId', component: ClusterDetailsComponent},
+  {path: 'clusters/:clusterId', component: ClusterDetailsComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 
 @Injectable()
 export class ClusterBackupsService {
-  backupsUrl = 'http://localhost:8000/api/cluster/';  // URL to web api
+  backupsUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
 
   constructor(

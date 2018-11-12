@@ -1,10 +1,10 @@
 <div style="margin: 1rem">
-  <div>
-    <label>Cluster name: <input #clusterName/></label>
-    <button (click)="search(clusterName.value)">search</button>
+  <div style="color:dodgerblue; font-weight: bold">
+    <label>Cluster filter: <input #clusterName/></label>
+    <button (click)="search(clusterName.value)"
+            style="background-color: dodgerblue; color:whitesmoke;">search
+    </button>
   </div>
-
-  <h2 class="card-title" xmlns="http://www.w3.org/1999/html">Overview</h2>
 </div>
 
 <table class="table">
@@ -27,7 +27,7 @@
       <button (click)="toggle[c.id]= !toggle[c.id]" class="btn btn-outline-secondary btn-xsm" data-toggle="collapse">+
       </button>
       <a style="margin-left: 1rem;"
-         [routerLink]="['/cluster',c.id]"
+         [routerLink]="['/clusters',c.id]"
          routerLinkActive="active">{{ c.cluster_name }}</a>
     </th>
     <td>{{ c.dbms_type }}</td>

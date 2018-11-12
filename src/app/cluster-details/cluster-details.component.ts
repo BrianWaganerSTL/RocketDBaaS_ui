@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   selector: 'app-cluster-details',
   templateUrl: './cluster-details.component.html',
   styleUrls: ['./cluster-details.component.css'],
+  providers: [ClusterDetailsService]
 })
 export class ClusterDetailsComponent implements OnInit {
   private id: number;
@@ -21,18 +22,11 @@ export class ClusterDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.showCluster();
-    this.setTab('Graphs');
-
-    // this.subTabSelected$.pipe(
-    //   debounceTime(500),
-    //   distinctUntilChanged(),
-    //   switchMap(packageName =>
-    //     this.searchService.search(packageName, this.withRefresh))
-    // );
   }
 
   showCluster() {
     this.id = parseInt(this.route.snapshot.paramMap.get('clusterId'));
+    console.log('clusterId=' + this.id);
     this.clusterDetailsService.getCluster(this.id)
       .subscribe(
         (data: Cluster) => this.cluster = {...data}, // success path
@@ -47,7 +41,7 @@ export class ClusterDetailsComponent implements OnInit {
   getTab() {
     return this.tabSelectedName;
   }
-
+}
   //
   // setTab(feature: string) {
   //   this.tabSelected.emit(feature);
@@ -68,7 +62,7 @@ export class ClusterDetailsComponent implements OnInit {
 //       this.cluster = data['cluster'];
 //     });
 //  this.getClusters();
-}
+
 
 // edit(cluster) {
 //   this.editCluster = cluster;
