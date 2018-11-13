@@ -26,30 +26,24 @@ export class ClusterAlertsComponent implements OnInit {
 
   getCssClass(a) {
     let cssClasses;
-    switch (a.note_color) {
-      case 'Primary':
-        cssClasses = 'primary';
-        break;
-      case 'Secondary':
-        cssClasses = 'secondary';
-        break;
-      case 'Success':
-        cssClasses = 'success';
-        break;
-      case 'Danger':
-        cssClasses = 'danger';
+    switch (a.alert_status) {
+      case 'Normal':
+        cssClasses = 'bg-alertNormal';
         break;
       case 'Warning':
-        cssClasses = 'warning';
+        cssClasses = 'bg-alertWarning';
+        break;
+      case 'Critical':
+        cssClasses = 'bg-alertCritical';
+        break;
+      case 'Blackout':
+        cssClasses = 'bg-alertBlackout';
         break;
       case 'Info':
-        cssClasses = 'info';
+        cssClasses = 'bg-alertInfo';
         break;
-      case 'Light':
-        cssClasses = 'light';
-        break;
-      case 'Dark':
-        cssClasses = 'dark';
+      case 'Unknown':
+        cssClasses = 'bg-alertUnknown';
         break;
     }
     return cssClasses;

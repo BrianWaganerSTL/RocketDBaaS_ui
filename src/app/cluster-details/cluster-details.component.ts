@@ -57,6 +57,29 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   getTab() {
     return this.tabSelectedName;
   }
+
+  getFgClass(inValue) {
+    let cssClass;
+    switch (inValue) {
+      case 'ClusterConfig':
+        cssClass = 'fg-ClusterConfig';
+        break;
+      case 'ClusterUp':
+        cssClass = 'fg-ClusterUp';
+        break;
+      case 'ClusterUpWithIssues':
+        cssClass = 'fg-ClusterUpWithIssues';
+        break;
+      case 'ClusterDown':
+        cssClass = 'fg-ClusterDown';
+        break;
+      case 'ClusterOnLineMaint':
+        cssClass = 'fg-ClusterOnLineMaint';
+        break;
+    }
+    console.log('cssClass=' + cssClass);
+    return cssClass;
+  }
 }
   //
   // setTab(feature: string) {

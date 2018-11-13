@@ -77,4 +77,52 @@ export class ClustersService {
         catchError(this.handleError('updateCluster', cluster))
       );
   }
+
+  getCssClass(element, value) {
+    let cssClass;
+    switch (element) {
+      case 'cluster_health':
+        switch (value) {
+          case 'ClusterConfiguring':
+            cssClass = 'fg-ClusterConfiguring';
+            break;
+          case 'ClusterUp':
+            cssClass = 'fg-ClusterUp';
+            break;
+          case 'ClusterUpWithIssues':
+            cssClass = 'fg-ClusterUpWithIssues';
+            break;
+          case 'ClusterDown':
+            cssClass = 'fg-ClusterDown';
+            break;
+          case 'ClusterOnLineMaint':
+            cssClass = 'fg-ClusterOnLineMaint';
+            break;
+        }
+        break;
+      case 'alert':
+        switch (value) {
+          case 'Normal':
+            cssClass = 'bg-alertNormal';
+            break;
+          case 'Warning':
+            cssClass = 'bg-alertWarning';
+            break;
+          case 'Critical':
+            cssClass = 'bg-alertCritical';
+            break;
+          case 'Blackout':
+            cssClass = 'bg-alertBlackout';
+            break;
+          case 'Info' :
+            cssClass = 'bg-alertInfo';
+            break;
+          case 'Unknown':
+            cssClass = 'bg-alertUnknown';
+            break;
+        }
+        break;
+    }
+    return cssClass;
+  }
 }

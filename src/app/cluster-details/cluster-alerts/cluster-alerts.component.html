@@ -4,7 +4,8 @@
       <thead>
       <tr>
         <th scope="col">Server</th>
-        <th scope="col">AlertModel</th>
+        <th scope="col">Alert</th>
+        <th scope="col">Status</th>
         <th scope="col">Cleared</th>
         <th scope="col">Notification</th>
         <th scope="col">Start</th>
@@ -19,11 +20,12 @@
           class="bg-hover {{ getCssClass(a)}}">
         <td>{{ a.server_name }}</td>
         <td>{{ a.alert }}</td>
+        <td>{{ a.alert_status }}</td>
         <td>{{ a.alert_cleared_sw }}</td>
         <td>{{ a.sent_notification_sw }}</td>
         <td>{{ a.start_dttm }}</td>
         <td>{{ a.stop_dttm }}</td>
-        <td>{{ a.note }}</td>
+        <td style="text-overflow: ellipsis">{{ a.note }}</td>
         <td>{{ a.note_by }}</td>
         <td>{{ a.ticket }}</td>
       </tr>

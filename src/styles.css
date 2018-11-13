@@ -117,11 +117,14 @@ input {
 .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link {
   color: #80bdff !important;
 }
-
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, .75) !important;
 }
 
+.navbar-dark .navbar-nav .nav-link.disabled {
+  color: rgba(255, 255, 255, .25) !important;
+  cursor: default !important;
+}
 .navbar-brand {
   color: #d58512 !important;
 }
@@ -227,37 +230,47 @@ input {
   font-weight: 400;
 }
 
+.bg-alertBlackout {
+  background-image: linear-gradient(to bottom, rgba(120, 120, 120, .7), rgba(0, 0, 0, .8));
+  color: white;
+}
+
 .bg-BkupSuccessful,
-.bg-RestoreSuccessful {
+.bg-RestoreSuccessful,
+.bg-alertNormal {
   background-color: whitesmoke;
   color: black;
 }
 
-.bg-ServerConfig, {
+.bg-ServerConfig {
   background-color: rgba(247, 224, 119, 0.5);
 }
 
-.bg-ServerUp-Primary {
+.bg-ServerUp-PrimaryNode {
   background-color: rgba(20, 128, 39, 0.3);
 }
 
-.bg-ServerUp-Other {
+.bg-ServerUp-OtherNode {
   background-color: rgba(0, 102, 255, 0.3);
 }
 
 .bg-ServerUpWithIssues,
 .bg-BkupFailed,
-.bg-RestoreFailed {
+.bg-RestoreFailed,
+.bg-alertWarning,
+.bg-alertUnknown {
   background-color: rgba(255, 114, 0, 0.3);
 }
 
-.bg-ServerDown {
+.bg-ServerDown,
+.bg-alertCritical {
   background-color: rgba(255, 0, 55, 0.3);
 }
 
 .bg-ServerOnLineMaint,
 .bg-BkupRunning,
-.bg-RestoreRunning {
+.bg-RestoreRunning,
+.bg-alertInfo {
   background-color: rgba(255, 237, 0, 0.3);
 }
 
@@ -265,14 +278,51 @@ input {
   font-style: italic;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(150, 150, 150, .3)); /* Standard syntax (must be last) */
 }
-/*body {*/
-/*padding-top: 60px;*/
-/*}*/
-/*@media (max-width: 979px) {*/
-/*body {*/
-/*padding-top: 0px;*/
-/*}*/
-/*}*/
+
+/*============================================================================*/
+.fg-ClusterUpWithIssues,
+.fg-ServerUpWithIssues {
+  color: rgb(247, 209, 0);
+  font-weight: bolder;
+  text-shadow: 3px 3px 20px #000,
+  -1px -1px 4px #000,
+  1px -1px 4px #000,
+  -1px 1px 4px #000,
+  1px 1px 4px #000;
+}
+
+.fg-ClusterDown,
+.fg-ServerDown {
+  color: rgb(255, 158, 0);
+  font-weight: bolder;
+  text-shadow: 3px 3px 20px #000,
+  -5px -1px 5px #000,
+  1px -1px 5px #000,
+  -1px 1px 5px #000,
+  1px 1px 5px #000;
+}
+
+.fg-ClusterConfig,
+.fg-ServerConfig {
+  -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 5s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+  50% {
+    text-shadow: 5px 5px 30px blue;
+  }
+}
+
+/* Standard syntax */
+@keyframes mymove {
+  50% {
+    text-shadow: 5px 5px 30px blue;
+  }
+}
+
+
 .nav-tabs {
   border-bottom: 2px solid #DDD;
 }
@@ -343,6 +393,10 @@ body {
 .row {
   margin-left: 0px !important;
   margin-right: 0px !important;
+}
+
+.badge {
+  padding: .5em .4em !important;
 }
 
 @media all and (max-width: 724px) {

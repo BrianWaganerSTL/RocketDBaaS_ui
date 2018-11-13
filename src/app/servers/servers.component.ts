@@ -50,4 +50,27 @@ export class ServersComponent implements OnInit {
     }
     return cssClasses;
   }
+
+  getFgClass2(inValue) {
+    let cssClass;
+    switch (inValue) {
+      case 'ServerConfig':
+        cssClass = 'fg-ServerConfig';
+        break;
+      case 'ServerUp':
+        cssClass = 'fg-ServerUp';
+        break;
+      case 'ServerUpWithIssues':
+        cssClass = 'fg-ServerUpWithIssues';
+        break;
+      case 'ServerDown':
+        cssClass = 'fg-ServerDown';
+        break;
+      case 'ServerOnLineMaint':
+        cssClass = 'fg-ServerOnLineMaint';
+        break;
+    }
+    console.log('cssFgClass=' + cssClass);
+    return cssClass;
+  }
 }

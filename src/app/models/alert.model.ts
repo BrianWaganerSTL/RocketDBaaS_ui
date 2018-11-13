@@ -3,6 +3,7 @@ export interface AlertModel {
   cluster: number;
   server_name: string;
   alert: string;
+  alert_status: string;
   alert_cleared_sw: boolean;
   start_dttm: boolean;
   sent_notification_sw: boolean;

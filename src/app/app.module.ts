@@ -94,7 +94,7 @@ import {ClusterServersService} from './cluster-details/cluster-servers/cluster-s
     ApplicationContactsComponent,
     ClusterServersComponent,
     ClusterMetricsComponent,
-    ClusterNotesComponent,
+    ClusterNotesComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

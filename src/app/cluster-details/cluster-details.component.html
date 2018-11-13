@@ -23,7 +23,7 @@
         <td>{{ cluster.requested_cpu }}</td>
         <td>{{ cluster.requested_mem_gb }}</td>
         <td>{{ cluster.requested_db_gb }}</td>
-        <td>{{ cluster.cluster_health }}</td>
+        <td class="{{ getFgClass(cluster.cluster_health) }}">{{ cluster.cluster_health }}</td>
         <td>{{ cluster.read_write_port.port }}</td>
         <td>{{ cluster.read_only_port.port }}</td>
       </tr>

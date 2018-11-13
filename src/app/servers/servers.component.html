@@ -12,7 +12,7 @@
     <td>{{ s.server_name }}</td>
     <td>{{ s.server_ip }}</td>
     <td>{{ s.node_role }}</td>
-    <td>{{ s.server_health }}</td>
+    <td class="{{getFgClass2(s.server_health)}}">{{ s.server_health }}</td>
     <td>{{ s.pending_restart_sw }}</td>
   </tr>
 </table>
