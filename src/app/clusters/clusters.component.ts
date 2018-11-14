@@ -92,4 +92,27 @@ export class ClustersComponent implements OnInit, OnDestroy {
       this.editCluster = undefined;
     }
   }
+
+  getFgClass(inValue) {
+    let cssClass;
+    switch (inValue) {
+      case 'ClusterConfig':
+        cssClass = 'fg-ClusterConfig';
+        break;
+      case 'ClusterUp':
+        cssClass = 'fg-ClusterUp';
+        break;
+      case 'ClusterUpWithIssues':
+        cssClass = 'fg-ClusterUpWithIssues';
+        break;
+      case 'ClusterDown':
+        cssClass = 'fg-ClusterDown';
+        break;
+      case 'ClusterOnLineMaint':
+        cssClass = 'fg-ClusterOnLineMaint';
+        break;
+    }
+    console.log('cssClass=' + cssClass);
+    return cssClass;
+  }
 }

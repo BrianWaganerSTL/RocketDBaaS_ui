@@ -230,14 +230,16 @@ input {
   font-weight: 400;
 }
 
-.bg-alertBlackout {
+.bg-alertBlackout,
+.bg-PoolServerUsed {
   background-image: linear-gradient(to bottom, rgba(120, 120, 120, .7), rgba(0, 0, 0, .8));
   color: white;
 }
 
 .bg-BkupSuccessful,
 .bg-RestoreSuccessful,
-.bg-alertNormal {
+.bg-alertNormal,
+.bg-PoolServerAvailable {
   background-color: whitesmoke;
   color: black;
 }
@@ -246,7 +248,8 @@ input {
   background-color: rgba(247, 224, 119, 0.5);
 }
 
-.bg-ServerUp-PrimaryNode {
+.bg-ServerUp-PrimaryNode,
+.bg-PoolServerLocked {
   background-color: rgba(20, 128, 39, 0.3);
 }
 
@@ -310,15 +313,14 @@ input {
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes mymove {
-  50% {
-    text-shadow: 5px 5px 30px blue;
+  70% {
+    text-shadow: 4px 3px 20px red;
   }
 }
-
 /* Standard syntax */
 @keyframes mymove {
-  50% {
-    text-shadow: 5px 5px 30px blue;
+  70% {
+    text-shadow: 4px 3px 20px red;
   }
 }
 

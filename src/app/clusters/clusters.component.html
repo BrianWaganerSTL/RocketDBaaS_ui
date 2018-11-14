@@ -24,18 +24,20 @@
   <tbody *ngFor="let c of clusters; index as idx; ">
   <tr class="bg-clusters bg-hover">
     <th>
-      <button (click)="toggle[c.id]= !toggle[c.id]" class="btn btn-outline-secondary btn-xsm" data-toggle="collapse">+
+      <button (click)="toggle[c.id]= !toggle[c.id]"
+              class="btn btn-outline-secondary btn-xsm" data-toggle="collapse">+
       </button>
       <a style="margin-left: 1rem;"
          [routerLink]="['/clusters',c.id]"
-         routerLinkActive="active">{{ c.cluster_name }}</a>
+         routerLinkActive="active">
+        {{ c.cluster_name }}</a>
     </th>
     <td>{{ c.dbms_type }}</td>
     <td>{{ c.application.application_name }}</td>
     <td>{{ c.requested_cpu }}</td>
     <td>{{ c.requested_mem_gb }}</td>
     <td>{{ c.requested_db_gb }}</td>
-    <td>>{{ c.cluster_health }}</td>
+    <td class="{{ getFgClass(c.cluster_health) }}">{{ c.cluster_health }}</td>
     <td>{{ c.read_write_port.port }}</td>
     <td>{{ c.read_only_port.port }}</td>
   </tr>

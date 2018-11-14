@@ -10,22 +10,22 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/overview" routerLinkActive="true">Overview</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/clusters" routerLinkActive="active">Overview</a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="bottom"
           title="Click on the Application->Cluster Name">
         <a class="nav-link disabled">Details</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/pool_servers">Pool Servers</a>
+        <a class="nav-link" routerLink="/poolservers" routerLinkActive="active">Pool Servers</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" routerLink="" id="dropdownCreate" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">Create ...</a>
         <div class="dropdown-menu" aria-labelledby="dropdownCreate">
-          <a class="dropdown-item" routerLink="localhost:8080:/dbaas/cluster/create">Create Cluster</a>
-          <a class="dropdown-item disabled" routerLink="#">Create AlertModel Triggers</a>
+          <a class="dropdown-item" routerLink="/cluster/create" routerLinkActive="active">Create Cluster</a>
+          <a class="dropdown-item disabled">Create AlertModel Triggers</a>
         </div>
       </li>
       <li class="nav-item dropdown">

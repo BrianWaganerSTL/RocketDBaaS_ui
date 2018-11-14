@@ -48,6 +48,8 @@ import {ApplicationContactsService} from './cluster-details/application-contacts
 import {ApplicationContactsComponent} from './cluster-details/application-contacts/application-contacts.component';
 import {ClusterServersComponent} from './cluster-details/cluster-servers/cluster-servers.component';
 import {ClusterServersService} from './cluster-details/cluster-servers/cluster-servers.service';
+import {PoolServersComponent} from './pool-servers/pool-servers.component';
+import {ClusterCreateComponent} from './cluster-create/cluster-create.component';
 
 @NgModule({
   imports: [
@@ -94,7 +96,9 @@ import {ClusterServersService} from './cluster-details/cluster-servers/cluster-s
     ApplicationContactsComponent,
     ClusterServersComponent,
     ClusterMetricsComponent,
-    ClusterNotesComponent
+    ClusterNotesComponent,
+    PoolServersComponent,
+    ClusterCreateComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
