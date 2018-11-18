@@ -5,7 +5,7 @@
   <h3>Cluster</h3>
   <div class="row">
     <mat-form-field>
-      <input matInput placeholder="Cluster Name" formControlName="cluster_name">
+      <input matInput placeholder="Cluster Name" formControlName="cluster_name" type="text">
       <mat-error *ngIf="f.cluster_name.invalid && f.cluster_name.touched">
         Name is too short or too long
       </mat-error>
@@ -14,23 +14,72 @@
     <mat-form-field>
       <mat-select placeholder="DBMS Type" formControlName="dbms_type" [errorStateMatcher]="matcher">
         <mat-option>Clear</mat-option>
-        <mat-option *ngFor="let dbmsType of dbmsTypes" [value]="dbmsType">{{dbmsType}}</mat-option>
+        <mat-option *ngFor="let dbmsChoice of dbmsChoices" [value]="dbmsChoice">{{dbmsChoice}}</mat-option>
       </mat-select>
       <mat-error *ngIf="f.dbms_type.invalid">You must make a selection</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Environment" formControlName="environment">
+      <mat-select placeholder="Environment" formControlName="environment" [errorStateMatcher]="matcher">
+        <mat-option>Clear</mat-option>
+        <mat-option *ngFor="let envChoice of envChoices" [value]="envChoice">{{envChoice}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.environment.invalid">You must make a selection</mat-error>
     </mat-form-field>
-  </div>
 
+    <mat-form-field>
+      <input matInput placeholder="Backup Retention Days" formControlName="backup_retention_days">
+      <mat-error *ngIf="f.backup_retention_days.invalid">Days must be from 1-35</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox
+      class="mat-checkbox-layout"
+      [checked]
+      labelPosition="after" formControlName="tls_enabled_sw">
+      TLS
+      <!--<div class="mat-form-field-underline ng-tns-c1-6 ng-star-inserted"><span class="mat-form-field-ripple"></span></div>-->
+
+    </mat-checkbox>
+
+
+  </div>
+  <h6>Requested Resources</h6>
+  <div class="row">
+    <mat-form-field>
+      <input matInput placeholder="Requested CPUs" formControlName="requested_cpu" type="number">
+      <mat-error *ngIf="f.requested_cpu.invalid">CPUs must be from 1-14</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Requested RAM (GB)" formControlName="requested_mem_gb" type="number">
+      <mat-error *ngIf="f.requested_mem_gb.invalid">RAM must be from 2-36 GiB</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Requested DB (GB)" formControlName="requested_db_gb" type="number">
+      <mat-error *ngIf="f.requested_db_gb.invalid">DB must be from 0-1024 GiB</mat-error>
+    </mat-form-field>
+
+
+  </div>
   <br>
   <div formGroupName="servers">
     <h3>Servers</h3>
     <div class="row">
       <mat-form-field>
-        <input matInput placeholder="Server Name" formControlName="server_name">
+        <mat-select placeholder="DataCenter" formControlName="data_center" [errorStateMatcher]="matcher">
+          <mat-option>Clear</mat-option>
+          <mat-option *ngFor="let dcChoice of dcChoices" [value]="dcChoice">{{dcChoice}}</mat-option>
+        </mat-select>
       </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Server Name" formControlName="server_name" type="text">
+      </mat-form-field>
+
+      <button mat-button class="mat-raised-button" color="primary" (click)="openDialog()">
+        Pick New Server
+      </button>
     </div>
   </div>
 

@@ -51,7 +51,8 @@ import {ClusterServersService} from './cluster-details/cluster-servers/cluster-s
 import {PoolServersComponent} from './pool-servers/pool-servers.component';
 import {ClusterCreateComponent} from './cluster-create/cluster-create.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {ServerPickerComponent} from './cluster-create/server-picker/server-picker.component';
 
 @NgModule({
   imports: [
@@ -86,7 +87,8 @@ import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatInputModule, MatS
     MatSelectModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
   ],
   declarations: [
     AppComponent,
@@ -109,7 +111,8 @@ import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatInputModule, MatS
     ClusterMetricsComponent,
     ClusterNotesComponent,
     PoolServersComponent,
-    ClusterCreateComponent
+    ClusterCreateComponent,
+    ServerPickerComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -127,7 +130,8 @@ import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatInputModule, MatS
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ServerPickerComponent]
 })
 export class AppModule {
   // Diagnostic only: inspect router configuration
