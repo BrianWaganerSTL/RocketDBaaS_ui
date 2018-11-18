@@ -1,6 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
@@ -50,6 +50,8 @@ import {ClusterServersComponent} from './cluster-details/cluster-servers/cluster
 import {ClusterServersService} from './cluster-details/cluster-servers/cluster-servers.service';
 import {PoolServersComponent} from './pool-servers/pool-servers.component';
 import {ClusterCreateComponent} from './cluster-create/cluster-create.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatInputModule, MatSelectModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -76,6 +78,15 @@ import {ClusterCreateComponent} from './cluster-create/cluster-create.component'
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ModalModule.forRoot(),
+    //
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    //
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatChipsModule
   ],
   declarations: [
     AppComponent,

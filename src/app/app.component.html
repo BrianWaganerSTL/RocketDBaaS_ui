@@ -8,8 +8,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
+  <ul class="collapse navbar-collapse navbar-nav mr-auto" id="navbarsExampleDefault">
       <li class="nav-item">
         <a class="nav-link" routerLink="/clusters" routerLinkActive="active">Overview</a>
       </li>
@@ -20,31 +19,35 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/poolservers" routerLinkActive="active">Pool Servers</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" routerLink="" id="dropdownCreate" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">Create ...</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownCreate">
-          <a class="dropdown-item" routerLink="/cluster/create" routerLinkActive="active">Create Cluster</a>
-          <a class="dropdown-item disabled">Create AlertModel Triggers</a>
-        </div>
+    <!--========================================================================-->
+    <li dropdown class="nav-item dropdown">
+      <a dropdownToggle class="nav-link dropdown-toggle" aria-controls="dropdownCreate">Create ...</a>
+      <ul id="dropdownCreate" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="basic-link">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/cluster/create">Create Cluster</a></li>
+        <li class="divider dropdown-divider"></li>
+        <li role="menuitem"><a class="dropdown-item disabled">Create Alert Triggers</a></li>
+      </ul>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="dropdownAdmin" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">Admin ...</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownAdmin">
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/applicationcontact">Application Contact</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/application">Application</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/backup">Backups</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/clusternote">Cluster Notes</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/cluster">Cluster</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/contact">Contacts</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/poolserver">Pool Servers</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/restore">Restores</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/serveractivities">Server Activities</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/serverport">Server Ports</a>
-          <a class="dropdown-item" routerLink="localhost:8080:/admin/dbaas/servers">Servers</a>
-        </div>
-      </li>
+    <!--========================================================================-->
+    <div dropdown class="nav-item dropdown">
+      <a dropdownToggle class="nav-link dropdown-toggle" aria-controls="dropdownAdmin">Admin ...</a>
+      <div id="dropdownAdmin" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/alerts">Alerts</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/application">Application</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/applicationcontact">Application Contact</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/backup">Backups</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/cluster">Cluster</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/clusternote">Cluster Notes</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/contact">Contacts</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/poolserver">Pool Servers</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/restore">Restores</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/serveractivities">Server Activities</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/serverport">Server Ports</a>
+        <a class="dropdown-item" href="http://localhost:8000/admin/dbaas/servers">Servers</a>
+      </div>
+    </div>
+    <!--========================================================================-->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" routerLink="" id="dropdownReports" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">Reports ...</a>
@@ -55,7 +58,6 @@
         </div>
       </li>
     </ul>
-  </div>
 </nav>
 <alert class="alert-danger text-center font-weight-bold" type="danger">1 Cluster has been DOWN for 5.3 minutes</alert>
 

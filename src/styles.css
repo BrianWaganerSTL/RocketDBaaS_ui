@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 /* Master Styles */
 h1 {
   color: #369 !important;
@@ -17,18 +19,13 @@ body {
   margin: 2em;
 }
 
-/*body, input[text], button {*/
-/*color: #888;*/
-/*font-family: Cambria, Georgia;*/
-/*}*/
-
 a {
   cursor: pointer !important;
   cursor: hand !important;
 }
 
 button {
-  font-family: Arial;
+  font-family: Arial, serif;
   background-color: #eee;
   border: none;
   padding: 5px 10px;
@@ -47,6 +44,38 @@ button:disabled {
   cursor: auto;
 }
 
+.mat-select-arrow {
+  position: absolute;
+  left: 0px;
+  -webkit-transform: rotate(-10deg) !important;
+  -moz-transform: rotate(-10deg) !important;
+  -ms-transform: rotate(-10deg) !important;
+  -o-transform: rotate(-10deg) !important;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3) !important;
+}
+
+.mat-form-field-type-mat-select .mat-form-field-label {
+  position: inherit;
+  left: 1.3rem;
+  /*width: auto;*/
+}
+
+.mat-select-value {
+  overflow: visible !important;
+  position: inherit;
+  left: 1.3rem;
+}
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  /*overflow: visible !important;*/
+  position: inherit;
+  left: .3rem;
+}
+
+.mat-form-field-hide-placeholder :hover {
+  -webkit-text-fill-color: rgba(30, 144, 255, 0.44);
+  color: rgba(30, 144, 255, 0.44);
+}
 /* Navigation link styles */
 /*nav a {*/
 /*padding: 5px 10px !important;*/
@@ -418,4 +447,11 @@ body {
   }
 }
 
+html, body {
+  height: 100%;
+}
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
