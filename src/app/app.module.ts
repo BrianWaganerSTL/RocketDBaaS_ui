@@ -53,6 +53,7 @@ import {ClusterCreateComponent} from './cluster-create/cluster-create.component'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatInputModule, MatSelectModule} from '@angular/material';
 import {ServerPickerComponent} from './cluster-create/server-picker/server-picker.component';
+import {ServerPickerService} from './cluster-create/server-picker/server-picker.service';
 
 @NgModule({
   imports: [
@@ -127,6 +128,7 @@ import {ServerPickerComponent} from './cluster-create/server-picker/server-picke
     ClusterNotesService,
     ClusterServersService,
     ApplicationContactsService,
+    ServerPickerService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],

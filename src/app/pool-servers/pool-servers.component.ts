@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PoolServer} from '../models/poolServer.model.ts';
-import {PoolServersService} from './cluster-restores.service';
+import {PoolServersService} from './pool-servers.service';
 
 @Component({
   selector: 'app-pool-servers',

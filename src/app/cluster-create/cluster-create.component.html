@@ -1,7 +1,7 @@
 <form [formGroup]="createForm">
-  For Testing: {{ createForm.value | json }}
+  <!--For Testing: {{ createForm.value | json }}-->
 
-  <hr>
+  <!--<hr>-->
   <h3>Cluster</h3>
   <div class="row">
     <mat-form-field>
@@ -37,11 +37,7 @@
       [checked]
       labelPosition="after" formControlName="tls_enabled_sw">
       TLS
-      <!--<div class="mat-form-field-underline ng-tns-c1-6 ng-star-inserted"><span class="mat-form-field-ripple"></span></div>-->
-
     </mat-checkbox>
-
-
   </div>
   <h6>Requested Resources</h6>
   <div class="row">
@@ -59,28 +55,41 @@
       <input matInput placeholder="Requested DB (GB)" formControlName="requested_db_gb" type="number">
       <mat-error *ngIf="f.requested_db_gb.invalid">DB must be from 0-1024 GiB</mat-error>
     </mat-form-field>
-
-
   </div>
   <br>
-  <div formGroupName="servers">
-    <h3>Servers</h3>
+  <div>
     <div class="row">
-      <mat-form-field>
-        <mat-select placeholder="DataCenter" formControlName="data_center" [errorStateMatcher]="matcher">
-          <mat-option>Clear</mat-option>
-          <mat-option *ngFor="let dcChoice of dcChoices" [value]="dcChoice">{{dcChoice}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Server Name" formControlName="server_name" type="text">
-      </mat-form-field>
-
-      <button mat-button class="mat-raised-button" color="primary" (click)="openDialog()">
-        Pick New Server
+      <h3 class="col">Servers</h3>
+      <div class="col-md-auto"></div>
+      <button mat-button class="mat-raised-button justify-content-end col col-lg-2" color="primary" (click)="openDialog()">
+        Add New Server
       </button>
+
     </div>
+    <table class="table">
+      <thead>
+      <tr class="bg-clusters-header">
+        <th scope="col">DataCenter</th>
+        <th scope="col">Server Name</th>
+        <th scope="col">Server IP</th>
+        <th scope="col">CPU</th>
+        <th scope="col">RAM (GB)</th>
+        <th scope="col">DB GB</th>
+        <th scope="col">Node Role</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let s of serverFA.controls; let i = index;">
+      <tr class="bg-clusters bg-hover">
+        <td>{{ s.value.data_center }}</td>
+        <td>{{ s.value.server_name }}</td>
+        <td>{{ s.value.server_ip }}</td>
+        <td>{{ s.value.cpu }}</td>
+        <td>{{ s.value.mem_gb }}</td>
+        <td>{{ s.value.db_gb }}</td>
+        <td>{{ s.value.node_role }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
 

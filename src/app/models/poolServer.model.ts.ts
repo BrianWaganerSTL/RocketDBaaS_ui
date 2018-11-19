@@ -1,4 +1,5 @@
 export interface PoolServer {
+  id: number;
   environment: string;
   server_name: string;
   server_ip: string;
