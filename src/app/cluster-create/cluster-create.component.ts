@@ -24,7 +24,7 @@ export class ClusterCreateComponent implements OnInit {
       server_name: poolServer.server_name,
       server_ip: poolServer.server_ip,
       cpu: poolServer.cpu,
-      mem_gb: poolServer.mem_gb,
+      ram_gb: poolServer.ram_gb,
       db_gb: poolServer.db_gb,
       data_center: poolServer.data_center,
       node_role: '',
@@ -54,7 +54,7 @@ export class ClusterCreateComponent implements OnInit {
       // application: applicationModel,
       environment: ['SBX', [Validators.required]],
       requested_cpu: ['2', [Validators.required, Validators.min(1), Validators.max(14), Validators.pattern('^[0-9]*$')]],
-      requested_mem_gb: ['4', [Validators.required, Validators.min(2), Validators.max(36)]],
+      requested_ram_gb: ['4', [Validators.required, Validators.min(2), Validators.max(36)]],
       requested_db_gb: ['10', [Validators.required, Validators.min(0), Validators.max(1024)]],
       // read_write_port: serverPort,
       // read_only_port: serverPort,
@@ -75,7 +75,7 @@ export class ClusterCreateComponent implements OnInit {
     const env = this.createForm.controls.environment.value;
     const dbmsType = this.createForm.controls.dbms_type.value;
     const reqCpu = this.createForm.controls.requested_cpu.value;
-    const reqRamGb = this.createForm.controls.requested_mem_gb.value;
+    const reqRamGb = this.createForm.controls.requested_ram_gb.value;
     const reqDbGb = this.createForm.controls.requested_db_gb.value;
 
     console.log('env=' + env);

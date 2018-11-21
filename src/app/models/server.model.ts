@@ -3,7 +3,7 @@ export interface Server {
   server_name: string;
   server_ip: string;
   cpu: number;
-  mem_gb: number;
+  ram_gb: number;
   db_gb: number;
   data_center: string;
   node_role: string;

@@ -5,7 +5,7 @@ export interface PoolServer {
   server_ip: string;
   dbms_type: string;
   cpu: number;
-  mem_gb: number;
+  ram_gb: number;
   db_gb: number;
   data_center: string;
   status_in_pool: string;

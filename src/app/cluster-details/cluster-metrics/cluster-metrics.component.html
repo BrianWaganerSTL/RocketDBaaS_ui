@@ -1,13 +1,29 @@
-<div class="tab-pane fade show active" id="Graphs">
-  <div class="album">
-    <h3>Graphs</h3>
-    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
-      retro
-      synth
-      master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher
-      retro
-      keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
-      placeat
-      salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+<div *ngIf="metricsCpus">
+  <h4>CPU</h4>
+  <div>
+    <table class="table">
+      <thead>
+      <tr class="bg-clusters-header">
+        <th scope="col">Server ID</th>
+        <th scope="col">Created</th>
+        <th scope="col">Idle %</th>
+        <th scope="col">User %</th>
+        <th scope="col">System %</th>
+        <th scope="col">Wait %</th>
+        <th scope="col">Steal %</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="bg-clusters bg-hover" *ngFor="let m of metricsCpus">
+        <td>{{ m.server_id }}</td>
+        <td>{{ m.created_dttm }}</td>
+        <td>{{ m.cpu_idle_pct }}</td>
+        <td>{{ m.cpu_user_pct }}</td>
+        <td>{{ m.cpu_system_pct }}</td>
+        <td>{{ m.cpu_wait_pct }}</td>
+        <td>{{ m.cpu_steal_pct }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

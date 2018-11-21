@@ -21,7 +21,7 @@
         <td>{{ cluster.dbms_type }}</td>
         <td>{{ cluster.application.application_name }}</td>
         <td>{{ cluster.requested_cpu }}</td>
-        <td>{{ cluster.requested_mem_gb }}</td>
+        <td>{{ cluster.requested_ram_gb }}</td>
         <td>{{ cluster.requested_db_gb }}</td>
         <td class="{{ getFgClass(cluster.cluster_health) }}">{{ cluster.cluster_health }}</td>
         <td>{{ cluster.read_write_port.port }}</td>
@@ -39,7 +39,7 @@
     <div class="container">
       <tabset>
         <tab heading="Metrics">
-          <!--<app-cluster-metrics></app-cluster-metrics>-->
+          <app-cluster-metrics [clusterId]="cluster.id"></app-cluster-metrics>
         </tab>
         <tab heading="Backups" [active]="true">
           <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>

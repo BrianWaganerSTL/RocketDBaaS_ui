@@ -8,7 +8,7 @@ export interface Cluster {
   application: Application;
   environment: string;
   requested_cpu: string;
-  requested_mem_gb: string;
+  requested_ram_gb: string;
   requested_db_gb: string;
   read_write_port: ServerPort;
   read_only_port: ServerPort;

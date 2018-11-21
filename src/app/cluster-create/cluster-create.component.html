@@ -47,8 +47,8 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Requested RAM (GB)" formControlName="requested_mem_gb" type="number">
-      <mat-error *ngIf="f.requested_mem_gb.invalid">RAM must be from 2-36 GiB</mat-error>
+      <input matInput placeholder="Requested RAM (GB)" formControlName="requested_ram_gb" type="number">
+      <mat-error *ngIf="f.requested_ram_gb.invalid">RAM must be from 2-36 GiB</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -84,7 +84,7 @@
         <td>{{ s.value.server_name }}</td>
         <td>{{ s.value.server_ip }}</td>
         <td>{{ s.value.cpu }}</td>
-        <td>{{ s.value.mem_gb }}</td>
+        <td>{{ s.value.ram_gb }}</td>
         <td>{{ s.value.db_gb }}</td>
         <td>{{ s.value.node_role }}</td>
       </tr>

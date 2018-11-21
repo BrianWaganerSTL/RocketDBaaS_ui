@@ -22,7 +22,7 @@ export class ServerPickerService {
     params = params.append('env', filters.env);
     params = params.append('dbms', filters.dbmsType);
     params = params.append('req_cpu', filters.reqCpu);
-    params = params.append('req_mem_gb', filters.reqRamGb);
+    params = params.append('req_ram_gb', filters.reqRamGb);
     params = params.append('req_db_gb', filters.reqDbGb);
     params = params.append('status_in_pool', 'Available');
 
