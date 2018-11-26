@@ -39,19 +39,31 @@
     <div class="container">
       <tabset>
         <tab heading="Metrics">
-          <app-cluster-metrics [clusterId]="cluster.id"></app-cluster-metrics>
+          <div class="row">
+            <div class="col" *ngFor="let s of servers">
+              {{ s.server_name }}
+              <app-server-metrics [serverId]="s.id"></app-server-metrics>
+            </div>
+          </div>
         </tab>
         <tab heading="Backups" [active]="true">
+          <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
           <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>
         </tab>
         <tab heading="Restores">
+          <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
           <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
         </tab>
         <tab heading="Activities">
+          <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
           <app-cluster-activities [clusterId]="cluster.id"></app-cluster-activities>
         </tab>
-        <tab heading="Alerts">
-          <app-cluster-alerts [clusterId]="cluster.id"></app-cluster-alerts>
+        <tab heading="Issues">
+          <div class="row">
+            <div class="col" *ngFor="let s of servers">
+              <app-cluster-issues [serverId]="s.id"></app-cluster-issues>
+            </div>
+          </div>
         </tab>
         <tab heading="Contacts">
           <app-application-contacts [applicationId]="cluster.application.id"></app-application-contacts>

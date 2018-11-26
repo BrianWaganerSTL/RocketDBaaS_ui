@@ -21,8 +21,8 @@ import {PackageSearchComponent} from './package-search/package-search.component'
 import {UploaderComponent} from './uploader/uploader.component';
 import {Router} from '@angular/router';
 import {httpInterceptorProviders} from './http-interceptors';
-import {AlertModule, ModalModule, TabsModule} from 'ngx-bootstrap';
-import {ServersComponent} from './servers/servers.component';
+import {ModalModule, TabsModule} from 'ngx-bootstrap';
+import {ServersComponent} from './clusters/servers/servers.component';
 import {ClusterDetailsComponent} from './cluster-details/cluster-details.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -31,18 +31,18 @@ import {ClusterBackupsComponent} from './cluster-details/cluster-backups/cluster
 import {ClusterBackupsService} from './cluster-details/cluster-backups/cluster-backups.service';
 // import { ClusterRestoresComponent } from './cluster-details/cluster-restores/cluster-restores.component';
 // import { ClusterActivitiesComponent } from './cluster-details/cluster-activities/cluster-activities.component';
-// import { ClusterAlertsComponent } from './cluster-details/cluster-alerts/cluster-alerts.component';
+// import { ClusterIssuesComponent } from './cluster-details/cluster-issues/cluster-issues.component';
 // import { ClusterContactsComponent } from './cluster-details/application-contacts/application-contacts.component';
 import {ClusterNotesComponent} from './cluster-details/cluster-notes/cluster-notes.component';
-import {ClusterMetricsComponent} from './cluster-details/cluster-metrics/cluster-metrics.component';
+import {ServerMetricsComponent} from './cluster-details/server-metrics/server-metrics.component';
 // import { ClusterNotes } from './models/clusterNotes.model.ts/cluster-notes.model.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ClusterRestoresComponent} from './cluster-details/cluster-restores/cluster-restores.component';
 import {ClusterRestoresService} from './cluster-details/cluster-restores/cluster-restores.service';
-import {ClusterAlertsComponent} from './cluster-details/cluster-alerts/cluster-alerts.component';
+import {ClusterIssuesComponent} from './cluster-details/cluster-issues/cluster-issues.component';
 import {ClusterActivitiesComponent} from './cluster-details/cluster-activities/cluster-activities.component';
 import {ClusterActivitiesService} from './cluster-details/cluster-activities/cluster-activities.service';
-import {ClusterAlertsService} from './cluster-details/cluster-alerts/cluster-alerts.service';
+import {ClusterIssuesService} from './cluster-details/cluster-issues/cluster-issues.service';
 import {ClusterNotesService} from './cluster-details/cluster-notes/cluster-notes.service';
 import {ApplicationContactsService} from './cluster-details/application-contacts/application-contacts.service';
 import {ApplicationContactsComponent} from './cluster-details/application-contacts/application-contacts.component';
@@ -59,7 +59,6 @@ import {ServerPickerService} from './cluster-create/server-picker/server-picker.
   imports: [
     BrowserModule,
     FormsModule,
-    AlertModule.forRoot(),
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'My-Xsrf-Cookie',
@@ -106,10 +105,10 @@ import {ServerPickerService} from './cluster-create/server-picker/server-picker.
     ClusterBackupsComponent,
     ClusterRestoresComponent,
     ClusterActivitiesComponent,
-    ClusterAlertsComponent,
+    ClusterIssuesComponent,
     ApplicationContactsComponent,
     ClusterServersComponent,
-    ClusterMetricsComponent,
+    ServerMetricsComponent,
     ClusterNotesComponent,
     PoolServersComponent,
     ClusterCreateComponent,
@@ -124,7 +123,7 @@ import {ServerPickerService} from './cluster-create/server-picker/server-picker.
     ClusterBackupsService,
     ClusterRestoresService,
     ClusterActivitiesService,
-    ClusterAlertsService,
+    ClusterIssuesService,
     ClusterNotesService,
     ClusterServersService,
     ApplicationContactsService,

@@ -16,8 +16,8 @@
         <td>{{ sa.server.server_name }}</td>
         <td>{{ sa.server_activity }}</td>
         <td>{{ sa.activity_status }}</td>
-        <td>{{ sa.start_dttm }}</td>
-        <td>{{ sa.stop_dttm }}</td>
+        <td>{{ sa.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ sa.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
       </tr>
       </tbody>
     </table>

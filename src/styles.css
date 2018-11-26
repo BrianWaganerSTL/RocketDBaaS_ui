@@ -249,7 +249,7 @@ input {
   font-weight: 400;
 }
 
-.bg-alertBlackout,
+.bg-issueBlackout,
 .bg-PoolServerUsed {
   background-image: linear-gradient(to bottom, rgba(120, 120, 120, .7), rgba(0, 0, 0, .8));
   color: white;
@@ -257,7 +257,7 @@ input {
 
 .bg-BkupSuccessful,
 .bg-RestoreSuccessful,
-.bg-alertNormal,
+.bg-issueNormal,
 .bg-PoolServerAvailable {
   background-color: whitesmoke;
   color: black;
@@ -279,20 +279,20 @@ input {
 .bg-ServerUpWithIssues,
 .bg-BkupFailed,
 .bg-RestoreFailed,
-.bg-alertWarning,
-.bg-alertUnknown {
+.bg-issueWarning,
+.bg-issueUnknown {
   background-color: rgba(255, 114, 0, 0.3);
 }
 
 .bg-ServerDown,
-.bg-alertCritical {
+.bg-issueCritical {
   background-color: rgba(255, 0, 55, 0.3);
 }
 
 .bg-ServerOnLineMaint,
 .bg-BkupRunning,
 .bg-RestoreRunning,
-.bg-alertInfo {
+.bg-issueInfo {
   background-color: rgba(255, 237, 0, 0.3);
 }
 

@@ -31,7 +31,7 @@
         <td>{{ ps.cpu }}</td>
         <td>{{ ps.ram_gb }}</td>
         <td>{{ ps.db_gb }}</td>
-        <td>{{ ps.created_dttm }}</td>
+        <td>{{ ps.created_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>
           <button mat-button class="mat-raised-button" color="primary" [mat-dialog-close]="ps">
             Add

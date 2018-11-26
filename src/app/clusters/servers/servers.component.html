@@ -7,7 +7,7 @@
     <th>Health</th>
     <th>Pending Restart</th>
   </tr>
-  <tr *ngFor="let s of servers" id="{{ s.cluster }}" class="bg-hover {{ getCssClass(s) }}">
+  <tr *ngFor="let s of clusterServers" id="{{ s.server_name }}" class="bg-hover {{ getCssClass(s) }}">
     <td>{{ s.data_center }}</td>
     <td>{{ s.server_name }}</td>
     <td>{{ s.server_ip }}</td>

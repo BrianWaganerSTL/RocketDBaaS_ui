@@ -38,7 +38,7 @@
     
       * Show all your clusters and servers
       
-      * Show all active alerts
+      * Show all active issues
       
       * Expandable Clusters to reveal the servers
       

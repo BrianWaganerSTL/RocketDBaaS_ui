@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ServersService} from './servers.service';
-import {Server} from '../models/server.model';
+import {Server} from '../../models/server.model';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {Server} from '../models/server.model';
 })
 export class ServersComponent implements OnInit {
   @Input() clusterId: number;
-  servers: Server[];
+  clusterServers: Server[];
 
   constructor(private serverService: ServersService) {
   }
@@ -22,7 +22,7 @@ export class ServersComponent implements OnInit {
 
   getServers(): void {
     this.serverService.getServers(this.clusterId)
-      .subscribe(servers => this.servers = servers);
+      .subscribe(servers => this.clusterServers = servers);
   }
 
   getCssClass(server) {

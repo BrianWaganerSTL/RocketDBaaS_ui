@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ClusterMetricsService} from './cluster-metrics.service';
+import {ServerMetricsService} from './server-metrics.service';
 import {MetricsCpu} from '../../models/metricsCpu.model';
 
+
 @Component({
-  selector: 'app-cluster-metrics',
-  templateUrl: './cluster-metrics.component.html',
-  styleUrls: ['./cluster-metrics.component.css'],
-  providers: [ClusterMetricsService]
+  selector: 'app-server-metrics',
+  templateUrl: './server-metrics.component.html',
+  styleUrls: ['./server-metrics.component.css'],
+  providers: [ServerMetricsService]
 })
-export class ClusterMetricsComponent implements OnInit {
-  @Input() clusterId: number;
+export class ServerMetricsComponent implements OnInit {
+  @Input() serverId: number;
   metricsCpus: MetricsCpu[];
 
-  constructor(private clusterMetricsService: ClusterMetricsService) {
+  constructor(private serverMetricsService: ServerMetricsService) {
   }
 
   ngOnInit() {
@@ -20,7 +21,8 @@ export class ClusterMetricsComponent implements OnInit {
   }
 
   showMetricsCpu(): void {
-    this.clusterMetricsService.getMetricsCpu(this.clusterId)
+    console.log('Server: ' + this.serverId);
+    this.serverMetricsService.getMetricsCpu(this.serverId)
       .subscribe(metricsCpus => this.metricsCpus = metricsCpus);
   }
 

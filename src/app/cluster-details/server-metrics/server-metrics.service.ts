@@ -7,19 +7,19 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {MetricsCpu} from '../../models/metricsCpu.model';
 
 @Injectable()
-export class ClusterMetricsService {
-  metricsUrl = 'http://localhost:8000/api/clusters';  // URL to web api
+export class ServerMetricsService {
+  metricsUrl = 'http://localhost:8000/api/servers';  // URL to web api
   private handleError: HandleError;
 
   constructor(
     private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('ClusterMetricsService');
+    this.handleError = httpErrorHandler.createHandleError('ServerMetricsService');
   }
 
-  getMetricsCpu(clusterId: number): Observable<MetricsCpu[]> {
+  getMetricsCpu(serverId: number): Observable<MetricsCpu[]> {
     // const url = `${this.activityUrl}/${clusterId}/metrics/cpu/`;
-    const url = `${this.metricsUrl}/metrics/cpu/`;
+    const url = `${this.metricsUrl}/${serverId}/metrics/cpu/`;
     return this.httpClient.get<MetricsCpu[]>(url)
       .pipe(
         retry(3),  // retry a failed request up to 3 times

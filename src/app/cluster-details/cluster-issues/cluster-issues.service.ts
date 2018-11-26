@@ -3,25 +3,25 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
-import {AlertModel} from '../../models/alert.model';
+import {IssueModel} from '../../models/issue.model';
 
 @Injectable()
-export class ClusterAlertsService {
-  activityUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
+export class ClusterIssuesService {
+  issueUrl = 'http://localhost:8000/api/servers';  // URL to web api
   private handleError: HandleError;
 
   constructor(
     private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('ClusterAlertsService');
+    this.handleError = httpErrorHandler.createHandleError('ClusterIssuesService');
   }
 
-  getAlerts(clusterId: number): Observable<AlertModel[]> {
-    const url = `${this.activityUrl}${clusterId}/alerts/`;
-    return this.httpClient.get<AlertModel[]>(url)
+  getIssues(serverId: number): Observable<IssueModel[]> {
+    const url = `${this.issueUrl}/${serverId}/issues/`;
+    return this.httpClient.get<IssueModel[]>(url)
       .pipe(
         retry(3),  // retry a failed request up to 3 times
-        catchError(this.handleError<AlertModel[]>('getAlerts'))
+        catchError(this.handleError<IssueModel[]>('getIssues'))
       );
   }
 }

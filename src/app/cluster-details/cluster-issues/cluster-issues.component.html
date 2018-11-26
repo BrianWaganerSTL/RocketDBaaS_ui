@@ -1,13 +1,9 @@
-<div id="Alerts">
+<div id="issues">
   <div class="album">
     <table class="table table-hover">
       <thead>
       <tr>
-        <th scope="col">Server</th>
-        <th scope="col">Alert</th>
-        <th scope="col">Status</th>
-        <th scope="col">Cleared</th>
-        <th scope="col">Notification</th>
+        <th scope="col">Issue</th>
         <th scope="col">Start</th>
         <th scope="col">Stop</th>
         <th scope="col">Note</th>
@@ -15,16 +11,12 @@
         <th scope="col">Ticket</th>
       </tr>
       </thead>
-      <tbody>
-      <tr *ngFor="let a of alerts"
+      <tbody *ngIf="issues">
+      <tr *ngFor="let a of issues"
           class="bg-hover {{ getCssClass(a)}}">
-        <td>{{ a.server_name }}</td>
-        <td>{{ a.alert }}</td>
-        <td>{{ a.alert_status }}</td>
-        <td>{{ a.alert_cleared_sw }}</td>
-        <td>{{ a.sent_notification_sw }}</td>
-        <td>{{ a.start_dttm }}</td>
-        <td>{{ a.stop_dttm }}</td>
+        <td>{{ a.issue }}</td>
+        <td>{{ a.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ a.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td style="text-overflow: ellipsis">{{ a.note }}</td>
         <td>{{ a.note_by }}</td>
         <td>{{ a.ticket }}</td>

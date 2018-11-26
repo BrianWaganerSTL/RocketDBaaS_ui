@@ -17,10 +17,10 @@
           class="bg-hover {{ getCssClass(r) }}">
         <td>{{ r.from_cluster.cluster_name }}</td>
         <td>{{ r.restore_type }}</td>
-        <td>{{ r.restore_to_dttm }}</td>
+        <td>{{ r.restore_to_dttm | date: 'd-MMM-yy HH:mm:sss Z'}}</td>
         <td>{{ r.restore_status }}</td>
-        <td>{{ r.start_dttm }}</td>
-        <td>{{ r.stop_dttm }}</td>
+        <td>{{ r.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ r.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <!--<td></td>-->
       </tr>
       </tbody>

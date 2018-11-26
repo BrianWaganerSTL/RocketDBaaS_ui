@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Cluster} from '../models/cluster.model';
 import {ClusterDetailsService} from './clusters-details.service';
+import {ClusterServersService} from './cluster-servers/cluster-servers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {interval} from 'rxjs';
+import {Server} from '../models/server.model';
 
 @Component({
   selector: 'app-cluster-details',
@@ -14,10 +16,20 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   private id: number;
   error: any;
   cluster: Cluster;
+  servers: Server[];
   tabSelectedName: string;
   refreshTimer: any;
+  tabLoadTimes: Date[] = [];
 
+  getTimeLoaded(index: number) {
+    if (!this.tabLoadTimes[index]) {
+      this.tabLoadTimes[index] = new Date();
+    }
+
+    return this.tabLoadTimes[index];
+  }
   constructor(private clusterDetailsService: ClusterDetailsService,
+              private clusterServersService: ClusterServersService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -48,6 +60,8 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
         (data: Cluster) => this.cluster = {...data}, // success path
         error => this.error = error // error path
       );
+    this.clusterServersService.getServers(this.id)
+      .subscribe(servers => this.servers = servers);
   }
 
   setTab(value) {

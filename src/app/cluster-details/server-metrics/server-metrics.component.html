@@ -1,10 +1,8 @@
 <div *ngIf="metricsCpus">
-  <h4>CPU</h4>
   <div>
     <table class="table">
       <thead>
-      <tr class="bg-clusters-header">
-        <th scope="col">Server ID</th>
+      <tr class="bg-server-header">
         <th scope="col">Created</th>
         <th scope="col">Idle %</th>
         <th scope="col">User %</th>
@@ -14,9 +12,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="bg-clusters bg-hover" *ngFor="let m of metricsCpus">
-        <td>{{ m.server_id }}</td>
-        <td>{{ m.created_dttm }}</td>
+      <tr class="bg-server bg-hover" *ngFor="let m of metricsCpus">
+        <td>{{ m.created_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>{{ m.cpu_idle_pct }}</td>
         <td>{{ m.cpu_user_pct }}</td>
         <td>{{ m.cpu_system_pct }}</td>

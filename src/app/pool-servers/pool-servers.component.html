@@ -25,7 +25,7 @@
       <td>{{ ps.db_gb }}</td>
       <td>{{ ps.data_center }}</td>
       <td>{{ ps.status_in_pool }}</td>
-      <td>{{ ps.created_dttm }}</td>
+      <td>{{ ps.created_dttm | date: 'd-MMM HH:mm:ss' }}</td>
     </tr>
     </tbody>
   </table>

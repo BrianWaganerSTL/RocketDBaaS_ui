@@ -100,25 +100,25 @@ export class ClustersService {
             break;
         }
         break;
-      case 'alert':
+      case 'issue':
         switch (value) {
           case 'Normal':
-            cssClass = 'bg-alertNormal';
+            cssClass = 'bg-issueNormal';
             break;
           case 'Warning':
-            cssClass = 'bg-alertWarning';
+            cssClass = 'bg-issueWarning';
             break;
           case 'Critical':
-            cssClass = 'bg-alertCritical';
+            cssClass = 'bg-issueCritical';
             break;
           case 'Blackout':
-            cssClass = 'bg-alertBlackout';
+            cssClass = 'bg-issueBlackout';
             break;
           case 'Info' :
-            cssClass = 'bg-alertInfo';
+            cssClass = 'bg-issueInfo';
             break;
           case 'Unknown':
-            cssClass = 'bg-alertUnknown';
+            cssClass = 'bg-issueUnknown';
             break;
         }
         break;

@@ -6,8 +6,8 @@
     <div *ngFor="let n of notes"
          class="card {{ getCssClass(n) }}">
       <div class="card-header bg-{{ n.note_color }} row">
-        <div class="col-md-11 lg font-weight-bold">{{ n.title }}</div>
-        <div class="col-md-1 ml-auto badge badge-pill badge-dark">{{n.created_by}}</div>
+        <div class="col-md-10 lg font-weight-bold">{{ n.title }}</div>
+        <div class="col-md-2 ml-auto badge badge-pill badge-dark">{{n.created_by}} : {{n.created_dttm | date: 'd-MMM-yy HH:mm' }}</div>
       </div>
       <div class="card-body">
         <p class="card-text">{{ n.note }}</p>
