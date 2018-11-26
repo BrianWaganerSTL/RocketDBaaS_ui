@@ -26,7 +26,7 @@ export class ClusterIssuesComponent implements OnInit {
 
   getCssClass(a) {
     let cssClasses;
-    switch (a.issue_status) {
+    switch (a.note_color) {
       case 'Normal':
         cssClasses = 'bg-issueNormal';
         break;

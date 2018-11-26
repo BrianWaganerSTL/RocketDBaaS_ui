@@ -13,7 +13,7 @@
       </thead>
       <tbody *ngIf="issues">
       <tr *ngFor="let a of issues"
-          class="bg-hover {{ getCssClass(a)}}">
+          class="bg-hover {{ getCssClass(a) }}">
         <td>{{ a.issue }}</td>
         <td>{{ a.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>{{ a.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
