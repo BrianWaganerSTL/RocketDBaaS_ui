@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ClusterServersService} from './cluster-servers.service';
-import {Server} from '../../models/server.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { ClusterServersService } from './cluster-servers.service';
+import { Server } from '../../models/server.model';
 
 
 @Component({
@@ -70,7 +70,7 @@ export class ClusterServersComponent implements OnInit {
         cssClass = 'fg-ServerOnLineMaint';
         break;
     }
-    console.log('cssFgClass=' + cssClass);
+    // console.log('cssFgClass=' + cssClass);
     return cssClass;
   }
 }

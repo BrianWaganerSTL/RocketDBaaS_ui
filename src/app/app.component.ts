@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,13 @@ export class AppComponent {
   showDownloader = true;
   showUploader = true;
   showSearch = true;
+
+  refreshRateChoices = [
+    { 'seconds': 15, 'displayRate': '15 secs' },
+    { 'seconds': 30, 'displayRate': '30 secs' },
+    { 'seconds': 60, 'displayRate': '1 min' },
+    { 'seconds': 120, 'displayRate': '2 min' },
+  ];
 
   toggleClusters() {
     this.showClusters = !this.showClusters;

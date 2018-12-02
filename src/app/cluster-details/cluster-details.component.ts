@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Cluster} from '../models/cluster.model';
-import {ClusterDetailsService} from './clusters-details.service';
-import {ClusterServersService} from './cluster-servers/cluster-servers.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {interval} from 'rxjs';
-import {Server} from '../models/server.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Cluster } from '../models/cluster.model';
+import { ClusterDetailsService } from './clusters-details.service';
+import { ClusterServersService } from './cluster-servers/cluster-servers.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { interval } from 'rxjs';
+import { Server } from '../models/server.model';
 
 @Component({
   selector: 'app-cluster-details',
@@ -37,7 +37,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.showCluster();
     // Refresh from database
-    this.refreshTimer = interval((15 * 1000))
+    this.refreshTimer = interval((120 * 1000))
       .subscribe((value: number) => {
         console.log('Refresh ClusterDetails,  cnt:' + value);
         this.showCluster();
@@ -91,7 +91,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
         cssClass = 'fg-ClusterOnLineMaint';
         break;
     }
-    console.log('cssClass=' + cssClass);
+    // console.log('cssClass=' + cssClass);
     return cssClass;
   }
 }

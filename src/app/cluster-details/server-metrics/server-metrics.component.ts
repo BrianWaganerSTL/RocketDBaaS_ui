@@ -1,13 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ServerMetricsService} from './server-metrics.service';
-import {MetricsCpu} from '../../models/metricsCpu.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { ServerMetricsService } from './server-metrics.service';
+import { MetricsCpu } from '../../models/metricsCpu.model';
 
 
 @Component({
   selector: 'app-server-metrics',
   templateUrl: './server-metrics.component.html',
-  styleUrls: ['./server-metrics.component.css'],
-  providers: [ServerMetricsService]
+  styleUrls: [ './server-metrics.component.css' ],
+  providers: [ ServerMetricsService ]
 })
 export class ServerMetricsComponent implements OnInit {
   @Input() serverId: number;
