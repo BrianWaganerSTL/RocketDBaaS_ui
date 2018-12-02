@@ -1,4 +1,4 @@
-export interface MetricsServerPing {
+export interface MetricsPingServer {
   server_id: number;
   created_dttm: string;
   ping_status: string;

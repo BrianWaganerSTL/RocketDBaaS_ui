@@ -29,13 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClusterDetailsService } from './cluster-details/clusters-details.service';
 import { ClusterBackupsComponent } from './cluster-details/cluster-backups/cluster-backups.component';
 import { ClusterBackupsService } from './cluster-details/cluster-backups/cluster-backups.service';
-// import { ClusterRestoresComponent } from './cluster-details/cluster-restores/cluster-restores.component';
-// import { ClusterActivitiesComponent } from './cluster-details/cluster-activities/cluster-activities.component';
-// import { ClusterIssuesComponent } from './cluster-details/cluster-issues/cluster-issues.component';
-// import { ClusterContactsComponent } from './cluster-details/application-contacts/application-contacts.component';
 import { ClusterNotesComponent } from './cluster-details/cluster-notes/cluster-notes.component';
 import { ServerMetricsComponent } from './cluster-details/server-metrics/server-metrics.component';
-// import { ClusterNotes } from './models/clusterNotes.model.ts/cluster-notes.model.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ClusterRestoresComponent } from './cluster-details/cluster-restores/cluster-restores.component';
 import { ClusterRestoresService } from './cluster-details/cluster-restores/cluster-restores.service';
@@ -56,6 +51,10 @@ import { ServerPickerComponent } from './cluster-create/server-picker/server-pic
 import { ServerPickerService } from './cluster-create/server-picker/server-picker.service';
 import { ServerMetricsCpuComponent } from './cluster-details/server-metrics/server-metrics-cpu/server-metrics-cpu.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ServerMetricsMountPointsComponent } from './cluster-details/server-metrics/server-metrics-mount-points/server-metrics-mount-points.component';
+import { ServerMetricsPingDbComponent } from './cluster-details/server-metrics/server-metrics-ping-db/server-metrics-ping-db.component';
+import { ServerMetricsPingServerComponent } from './cluster-details/server-metrics/server-metrics-ping-server/server-metrics-ping-server.component';
+import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/server-metrics-load/server-metrics-load.component';
 
 
 @NgModule({
@@ -118,7 +117,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     PoolServersComponent,
     ClusterCreateComponent,
     ServerPickerComponent,
-    ServerMetricsCpuComponent
+    ServerMetricsCpuComponent,
+    ServerMetricsMountPointsComponent,
+    ServerMetricsLoadComponent,
+    ServerMetricsPingServerComponent,
+    ServerMetricsPingDbComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

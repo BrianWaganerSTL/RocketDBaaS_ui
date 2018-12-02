@@ -6,7 +6,7 @@ import { Server } from '../../models/server.model';
 @Component({
   selector: 'app-cluster-servers',
   templateUrl: './cluster-servers.component.html',
-  styleUrls: ['./cluster-servers.component.css'],
+  styleUrls: [],
   providers: [ClusterServersService]
 })
 export class ClusterServersComponent implements OnInit {

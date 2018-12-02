@@ -228,6 +228,10 @@ input {
   border-radius: .2rem !important;
 }
 
+.btn-primary {
+  background-color: rgba(135, 183, 255, 0.90) !important;
+}
+
 /*.bg-clusters-header, .tab-content tr th  {*/
 /*background-color: rgb(220, 241, 255);*/
 /*color: black;*/

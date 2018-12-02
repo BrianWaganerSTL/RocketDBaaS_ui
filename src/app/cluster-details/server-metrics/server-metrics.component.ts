@@ -6,7 +6,7 @@ import { MetricsCpu } from '../../models/metricsCpu.model';
 @Component({
   selector: 'app-server-metrics',
   templateUrl: './server-metrics.component.html',
-  styleUrls: [ './server-metrics.component.css' ],
+  styleUrls: [],
   providers: [ ServerMetricsService ]
 })
 export class ServerMetricsComponent implements OnInit {
