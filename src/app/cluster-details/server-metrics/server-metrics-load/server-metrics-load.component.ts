@@ -14,18 +14,19 @@ export class ServerMetricsLoadComponent implements OnInit {
   @Input() serverId: number;
   metricsLoad: MetricsLoad[];
 
-  view: any[] = [ 580, 250 ];
+  view: any[] = [ , 200 ];
 
   // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
+  legendTitle = 'Server Load';
   showXAxisLabel = false;
   xAxisLabel = 'Time';
   showYAxisLabel = false;
   yAxisLabel = 'Load';
-  timeline = true;
+  timeline = false;
   autoScale = true;  // line, area
   // colorScheme = {
   //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]

@@ -1,18 +1,17 @@
-<ngx-charts-line-chart
+<ngx-charts-area-chart-stacked
   *ngIf="mountPointGraphData"
   [view]="view"
   [scheme]="colorScheme"
   [schemeType]="colorSchemeType"
   [results]="mountPointGraphData"
-  [autoScale]="autoScale"
   [gradient]="gradient"
   [xAxis]="showXAxis"
   [yAxis]="showYAxis"
   [legend]="showLegend"
+  [legendTitle]="legendTitle"
   [showXAxisLabel]="showXAxisLabel"
   [showYAxisLabel]="showYAxisLabel"
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
   (select)="onSelect($event)">
-</ngx-charts-line-chart>
+</ngx-charts-area-chart-stacked>

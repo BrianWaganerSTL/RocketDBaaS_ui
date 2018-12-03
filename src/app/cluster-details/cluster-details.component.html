@@ -39,10 +39,12 @@
     <div class="container">
       <tabset>
         <tab heading="Metrics">
-          <div class="row">
-            <div class="col" *ngFor="let s of servers">
-              {{ s.server_name }}
-              <app-server-metrics [serverId]="s.id"></app-server-metrics>
+          <div class="d-table">
+            <div class="d-table-row">
+              <div class="d-table-cell" *ngFor="let s of servers">
+                {{ s.server_name }}
+                <app-server-metrics [serverId]="s.id"></app-server-metrics>
+              </div>
             </div>
           </div>
         </tab>

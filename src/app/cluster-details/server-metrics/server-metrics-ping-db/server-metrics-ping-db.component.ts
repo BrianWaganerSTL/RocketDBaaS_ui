@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ServerMetricsPingDbService } from './server-metrics-ping-db.service';
 import { DataPoint } from '../../../models/graphs.obj';
-import * as moment from 'moment';
 import { MetricsPingDb } from '../../../models/metricsPingDb.model';
 
 @Component({
@@ -17,19 +16,20 @@ export class ServerMetricsPingDbComponent implements OnInit {
   single: any[];
   multi: any[];
 
-  view: any[] = [ 580, 250 ];
+  view: any[] = [ , 200 ];
 
   // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
+  legendTitle = 'Ping Db';
   showXAxisLabel = false;
   xAxisLabel = 'Time';
   showYAxisLabel = false;
   yAxisLabel = 'DB Response (ms)';
-  timeline = true;
-  autoScale = true;  // line, area
+  timeline = false;
+  autoScale = false;  // line, area
   // colorScheme = {
   //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
   // };
@@ -37,8 +37,8 @@ export class ServerMetricsPingDbComponent implements OnInit {
   colorSchemeType = 'ordinal';
 
 
-  dbPingStatusDP: DataPoint[] = [];
-  dbPingResponseMsDP: DataPoint[] = [];
+  pingDbStatusDP: DataPoint[] = [];
+  pingDbResponseMsDP: DataPoint[] = [];
   pingDbGraphData = [];
 
 
@@ -60,12 +60,12 @@ export class ServerMetricsPingDbComponent implements OnInit {
           // console.log('metricsCpus: ' + this.metricsCpus);
 
           for (const d of data) {
-            this.dbPingStatusDP.push({ name: moment(d.created_dttm).toDate(), value: ((d.ping_status === 'Critical') ? 1 : 0) });
-            this.dbPingResponseMsDP.push({ name: new Date(d.created_dttm), value: d.ping_response_ms });
+            // this.pingDbStatusDP.push({ name: moment(d.created_dttm).toDate(), value: ((d.ping_db_status === 'Critical') ? 1 : 0) });
+            this.pingDbResponseMsDP.push({ name: new Date(d.created_dttm), value: d.ping_db_response_ms });
           }
           this.pingDbGraphData = [
-            { name: 'User', series: this.dbPingStatusDP },
-            { name: 'System', series: this.dbPingResponseMsDP },
+            // { name: 'Status', series: this.pingDbStatusDP },
+            { name: 'DB Response (ms)', series: this.pingDbResponseMsDP },
           ];
           Object.assign(this, this.pingDbGraphData);
         }

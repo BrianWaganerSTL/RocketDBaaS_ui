@@ -15,18 +15,19 @@ export class ServerMetricsMountPointsComponent implements OnInit {
   @Input() serverId: number;
   metricsMountPoints: MetricsMountPoints[];
 
-  view: any[] = [ 580, 250 ];
+  view: any[] = [ , 200 ];
 
   // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
+  legendTitle = 'MountPoints';
   showXAxisLabel = false;
   xAxisLabel = 'Time';
   showYAxisLabel = false;
-  yAxisLabel = 'CPU %';
-  timeline = true;
+  yAxisLabel = 'GB';
+  timeline = false;
   autoScale = true;  // line, area
   // colorScheme = {
   //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
@@ -34,9 +35,9 @@ export class ServerMetricsMountPointsComponent implements OnInit {
   colorScheme = 'flame';
   colorSchemeType = 'ordinal';
 
-  cpuAllocatedGbDP: DataPoint[] = [];
-  cpuUsedGbDP: DataPoint[] = [];
-  cpuUsedPctDP: DataPoint[] = [];
+  allocatedGbDP: DataPoint[] = [];
+  usedGbDP: DataPoint[] = [];
+  UsedPctDP: DataPoint[] = [];
   mountPointGraphData = [];
 
 
@@ -56,14 +57,14 @@ export class ServerMetricsMountPointsComponent implements OnInit {
           this.metricsMountPoints = data;
 
           for (const d of data) {
-            this.cpuAllocatedGbDP.push({ name: moment(d.created_dttm).toDate(), value: d.allocated_gb });
-            this.cpuUsedGbDP.push({ name: new Date(d.created_dttm), value: d.used_gb });
-            this.cpuUsedPctDP.push({ name: new Date(d.created_dttm), value: (d.used_pct) / 100 });
+            this.allocatedGbDP.push({ name: moment(d.created_dttm).toDate(), value: d.allocated_gb });
+            this.usedGbDP.push({ name: moment(d.created_dttm).toDate(), value: d.used_gb });
+            // this.UsedPctDP.push({ name: new Date(d.created_dttm), value: (d.used_pct) / 100 });
           }
           this.mountPointGraphData = [
-            { name: 'Allocated (GB)', series: this.cpuAllocatedGbDP },
-            { name: 'Used (GB)', series: this.cpuUsedGbDP },
-            { name: 'Used %', series: this.cpuUsedPctDP },
+            { name: 'Allocated (GB)', series: this.allocatedGbDP },
+            { name: 'Used (GB)', series: this.usedGbDP },
+            // { name: 'Used %', series: this.UsedPctDP },
           ];
           Object.assign(this, this.mountPointGraphData);
         }

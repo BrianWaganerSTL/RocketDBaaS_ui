@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ServerMetricsPingServerService } from './server-metrics-ping-server.service';
 import { DataPoint } from '../../../models/graphs.obj';
-import * as moment from 'moment';
 import { MetricsPingServer } from '../../../models/metricsPingServer.model';
 
 @Component({
@@ -15,18 +14,19 @@ export class ServerMetricsPingServerComponent implements OnInit {
   @Input() serverId: number;
   metricsPingServer: MetricsPingServer[];
 
-  view: any[] = [ 580, 250 ];
+  view: any[] = [ , 200 ];
 
   // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
+  legendTitle = 'Ping Server';
   showXAxisLabel = false;
   xAxisLabel = 'Time';
   showYAxisLabel = false;
   yAxisLabel = 'CPU %';
-  timeline = true;
+  timeline = false;
   autoScale = true;  // line, area
   // colorScheme = {
   //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
@@ -52,12 +52,12 @@ export class ServerMetricsPingServerComponent implements OnInit {
     this.serverMetricsPingServerService.getMetricsPingServer(this.serverId)
       .subscribe((data: MetricsPingServer[]) => {
           for (const d of data) {
-            this.pingStatusDP.push({ name: moment(d.created_dttm).toDate(), value: ((d.ping_status === 'Critical') ? 1 : 0) });
+            // this.pingStatusDP.push({ name: moment(d.created_dttm).toDate(), value: ((d.ping_status === 'Critical') ? 1 : 0) });
             this.pingResponseMsDP.push({ name: new Date(d.created_dttm), value: d.ping_response_ms });
           }
           this.pingServerGraphData = [
-            { name: 'Status', series: this.pingStatusDP },
-            { name: 'Response (ms)', series: this.pingResponseMsDP },
+            // { name: 'Status', series: this.pingStatusDP },
+            { name: 'Server Response (ms)', series: this.pingResponseMsDP },
           ];
           Object.assign(this, this.pingServerGraphData);
         }

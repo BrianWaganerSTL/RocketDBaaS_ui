@@ -14,14 +14,13 @@ import * as moment from 'moment';
 export class ServerMetricsCpuComponent implements OnInit {
   @Input() serverId: number;
   metricsCpus: MetricsCpu[];
-  single: any[];
-  multi: any[];
 
-  view: any[] = [ 580, 250 ];
+  view: any[] = [ , 200 ];
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
+  legendTitle = 'CPU';
   showXAxisLabel = false;
   xAxisLabel = 'Time';
   showYAxisLabel = false;
