@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
-import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
-import {PoolServer} from '../../models/poolServer.model.ts';
+import { HandleError, HttpErrorHandler } from '../../http-error-handler.service';
+import { PoolServer } from '../../models/poolServer.model.ts';
+import { globals } from '../../../environments/environment';
 
 @Injectable()
 export class ServerPickerService {
-  poolServersUrl = 'http://localhost:8000/api/poolservers/';  // URL to web api
   private handleError: HandleError;
 
   constructor(
@@ -26,7 +26,7 @@ export class ServerPickerService {
     params = params.append('req_db_gb', filters.reqDbGb);
     params = params.append('status_in_pool', 'Available');
 
-    const url = `${this.poolServersUrl}`;
+    const url = `${globals.apiUrl}/poolservers/}`;
     console.log(url + '?' + params);
     return this.httpClient.get<PoolServer[]>(url, {params: params})
       .pipe(

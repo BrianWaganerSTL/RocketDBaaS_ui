@@ -13,7 +13,9 @@
     <td>{{ s.server_ip }}</td>
     <td>{{ s.node_role }}</td>
     <td class="bg-hover {{ getFgClass2(s.server_health) }}">{{ s.server_health }}</td>
-    <td>{{ s.pending_restart_sw }}</td>
+    <td>
+      <mat-checkbox [checked]="s.pending_restart_sw"></mat-checkbox>
+    </td>
   </tr>
 </table>
 

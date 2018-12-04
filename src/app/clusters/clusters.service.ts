@@ -1,12 +1,13 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 
-import {Observable} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import {Cluster} from '../models/cluster.model';
-import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
+import { Cluster } from '../models/cluster.model';
+import { HandleError, HttpErrorHandler } from '../http-error-handler.service';
+import { globals } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,10 +16,10 @@ const httpOptions = {
   })
 };
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ClustersService {
-  clustersUrl = 'http://localhost:8000/api/clusters/';  // URL to web api
   private handleError: HandleError;
+  url = `${globals.apiUrl}/clusters`;
 
   constructor(
     private http: HttpClient,
@@ -26,9 +27,9 @@ export class ClustersService {
     this.handleError = httpErrorHandler.createHandleError('ClustersService');
   }
 
-  /** GET clusters from the server */
   getClusters(): Observable<Cluster[]> {
-    return this.http.get<Cluster[]>(this.clustersUrl)
+    const url = `${globals.apiUrl}/clusters/`;
+    return this.http.get<Cluster[]>(this.url)
       .pipe(
         catchError(this.handleError('getClusters', []))
       );
@@ -40,9 +41,9 @@ export class ClustersService {
 
     // Add safe, URL encoded search parameter if there is a search term
     const options = term ?
-      {params: new HttpParams().set('cluster_name', term)} : {};
+      { params: new HttpParams().set('cluster_name', term) } : {};
     // return this.http.get<Cluster[]>(this.clustersUrl + '1/')
-    return this.http.get<Cluster[]>(this.clustersUrl, options)
+    return this.http.get<Cluster[]>(this.url, options)
       .pipe(
         catchError(this.handleError<Cluster[]>('searchClusters', []))
       );
@@ -52,7 +53,7 @@ export class ClustersService {
 
   /** POST: add a new cluster to the database */
   addCluster(cluster: Cluster): Observable<Cluster> {
-    return this.http.post<Cluster>(this.clustersUrl, cluster, httpOptions)
+    return this.http.post<Cluster>(this.url, cluster, httpOptions)
       .pipe(
         catchError(this.handleError('addCluster', cluster))
       );
@@ -60,7 +61,7 @@ export class ClustersService {
 
   /** DELETE: delete the cluster from the server */
   deleteCluster(id: number): Observable<{}> {
-    const url = `${this.clustersUrl}/${id}`; // DELETE api/clusters/42
+    const url = `${this.url}/${id}`; // DELETE api/clusters/42
     return this.http.delete(url, httpOptions)
       .pipe(
         catchError(this.handleError('deleteCluster'))
@@ -72,7 +73,7 @@ export class ClustersService {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'my-new-auth-token');
 
-    return this.http.put<Cluster>(this.clustersUrl, cluster, httpOptions)
+    return this.http.put<Cluster>(this.url, cluster, httpOptions)
       .pipe(
         catchError(this.handleError('updateCluster', cluster))
       );

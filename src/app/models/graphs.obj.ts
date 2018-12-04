@@ -4,7 +4,7 @@ export interface DataPoint {
 }
 
 export interface GraphSeries {
-  name: string;
+  name: Date;
   series: DataPoint[];
 }
 

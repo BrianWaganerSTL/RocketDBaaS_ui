@@ -2,23 +2,16 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
-
 import { RequestCache, RequestCacheWithMap } from './request-cache.service';
-
 import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
-import { ConfigComponent } from './config/config.component';
-import { DownloaderComponent } from './downloader/downloader.component';
-import { HeroesComponent } from './heroes/heroes.component';
 import { ClustersComponent } from './clusters/clusters.component';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 import { PackageSearchComponent } from './package-search/package-search.component';
-import { UploaderComponent } from './uploader/uploader.component';
 import { Router } from '@angular/router';
 import { httpInterceptorProviders } from './http-interceptors';
 import { ModalModule, TabsModule } from 'ngx-bootstrap';
@@ -96,13 +89,9 @@ import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/ser
   ],
   declarations: [
     AppComponent,
-    ConfigComponent,
-    DownloaderComponent,
-    HeroesComponent,
     ClustersComponent,
     ClusterDetailsComponent,
     MessagesComponent,
-    UploaderComponent,
     PackageSearchComponent,
     ServersComponent,
     PageNotFoundComponent,

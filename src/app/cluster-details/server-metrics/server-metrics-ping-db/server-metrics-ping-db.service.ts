@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HandleError, HttpErrorHandler } from '../../../http-error-handler.service';
 import { MetricsPingDb } from '../../../models/metricsPingDb.model';
+import { globals } from '../../../../environments/environment';
 
 @Injectable()
 export class ServerMetricsPingDbService {
-  metricsUrl = 'http://localhost:8000/api/servers';  // URL to web api
   private handleError: HandleError;
 
   constructor(
@@ -18,7 +18,7 @@ export class ServerMetricsPingDbService {
   }
 
   getMetricsPingDb(serverId: number): Observable<MetricsPingDb[]> {
-    const url = `${this.metricsUrl}/${serverId}/metrics/pingdb/`;
+    const url = `${globals.apiUrl}/servers/${serverId}/metrics/pingdb/`;
     return this.httpClient.get<MetricsPingDb[]>(url)
       .pipe(
         retry(3),  // retry a failed request up to 3 times

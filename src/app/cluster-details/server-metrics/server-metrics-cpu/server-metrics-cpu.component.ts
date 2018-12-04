@@ -27,12 +27,8 @@ export class ServerMetricsCpuComponent implements OnInit {
   yAxisLabel = 'CPU %';
   timeline = true;
   autoScale = true;  // line, area
-  // colorScheme = {
-  //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
-  // };
-  colorScheme = 'flame';
+  colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#a4d79c' ] };
   colorSchemeType = 'ordinal';
-
 
   cpuIdlePctDP: DataPoint[] = [];
   cpuUserPctDP: DataPoint[] = [];
@@ -55,14 +51,13 @@ export class ServerMetricsCpuComponent implements OnInit {
     console.log('Server: ' + this.serverId);
     this.serverMetricsCpuService.getMetricsCpu(this.serverId)
       .subscribe((data: MetricsCpu[]) => {
-        // this.metricsCpus = data;
 
           for (const d of data) {
             this.cpuIdlePctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_idle_pct) / 100 });
-            this.cpuUserPctDP.push({ name: new Date(d.created_dttm), value: (d.cpu_user_pct) / 100 });
-            this.cpuSystemPctDP.push({ name: new Date(d.created_dttm), value: (d.cpu_system_pct) / 100 });
-            this.cpuIoWaitPctDP.push({ name: new Date(d.created_dttm), value: (d.cpu_iowait_pct) / 100 });
-            this.cpuStealPctDP.push({ name: new Date(d.created_dttm), value: (d.cpu_steal_pct) / 100 });
+            this.cpuUserPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_user_pct) / 100 });
+            this.cpuSystemPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_system_pct) / 100 });
+            this.cpuIoWaitPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_iowait_pct) / 100 });
+            this.cpuStealPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_steal_pct) / 100 });
           }
         this.cpuGraphData = [
             { name: 'User', series: this.cpuUserPctDP },

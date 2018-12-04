@@ -62,14 +62,12 @@
   <div dropdown class="nav-item dropdown">
     <a id="RefreshRateDD" dropdownToggle class="btn button btn-primary btn-sm dropdown-toggle" aria-controls="RefreshRateMenu">Refresh Rate</a>
     <div id="RefreshRateMenu" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
-      <a class="dropdown-item" *ngFor="let r of refreshRateChoices">{{r.displayRate}}</a>
+      <a class="dropdown-item" *ngFor="let r of refreshRateChoices" (click)="setRefreshRate(r.seconds)">{{r.displayRate}}</a>
     </div>
   </div>
 </nav>
 <div class="bg-issueCritical text-center font-weight-bold" type="danger">1 Cluster has been DOWN for 5.3 minutes</div>
 
-<!--<app-clusters></app-clusters>-->
-<!--<app-cluster-details></app-cluster-details>-->
 <div class="container">
   <router-outlet></router-outlet>
 </div>

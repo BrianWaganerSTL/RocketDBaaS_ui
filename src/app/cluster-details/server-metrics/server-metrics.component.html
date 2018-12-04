@@ -1,5 +1,34 @@
-<app-server-metrics-cpu [serverId]="serverId" style="height: 200px"></app-server-metrics-cpu>
-<app-server-metrics-mount-points [serverId]="serverId" style="height: 200px"></app-server-metrics-mount-points>
-<app-server-metrics-load [serverId]="serverId" style="height: 200px"></app-server-metrics-load>
-<app-server-metrics-ping-db [serverId]="serverId" style="height: 200px"></app-server-metrics-ping-db>
-<app-server-metrics-ping-server [serverId]="serverId" style="height: 200px"></app-server-metrics-ping-server>
+<div class="card flex-column">
+  <span class="text-center">CPU Utilization</span>
+  <div class="card-body">
+    <app-server-metrics-cpu [serverId]="serverId" style="height: 200px"></app-server-metrics-cpu>
+  </div>
+</div>
+
+<div class="card flex-column">
+  <span class="text-center">CPU Load (1min, 5min, 15min)</span>
+  <div class="card-body">
+    <app-server-metrics-load [serverId]="serverId" style="height: 200px"></app-server-metrics-load>
+  </div>
+</div>
+
+<div class="card flex-column">
+  <span class="text-center">Mount Points Percent Used</span>
+  <div class="card-body">
+    <app-server-metrics-mount-points [serverId]="serverId" style="height: 200px"></app-server-metrics-mount-points>
+  </div>
+</div>
+
+<div class="card flex-column">
+  <span class="text-center">DB Connection Time (ms)</span>
+  <div class="card-body">
+    <app-server-metrics-ping-db [serverId]="serverId" style="height: 200px"></app-server-metrics-ping-db>
+  </div>
+</div>
+
+<div class="card flex-column">
+  <span class="text-center">Server Ping Response Time (ms)</span>
+  <div class="card-body">
+    <app-server-metrics-ping-server [serverId]="serverId" style="height: 200px"></app-server-metrics-ping-server>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ServerMetricsPingDbService } from './server-metrics-ping-db.service';
 import { DataPoint } from '../../../models/graphs.obj';
 import { MetricsPingDb } from '../../../models/metricsPingDb.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-server-metrics-ping-db',
@@ -13,34 +14,24 @@ import { MetricsPingDb } from '../../../models/metricsPingDb.model';
 export class ServerMetricsPingDbComponent implements OnInit {
   @Input() serverId: number;
   metricsPingDbs: MetricsPingDb[];
-  single: any[];
-  multi: any[];
 
   view: any[] = [ , 200 ];
-
-  // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
-  legendTitle = 'Ping Db';
+  showLegend = false;
+  legendTitle = '';
   showXAxisLabel = false;
-  xAxisLabel = 'Time';
+  xAxisLabel = '';
   showYAxisLabel = false;
-  yAxisLabel = 'DB Response (ms)';
+  yAxisLabel = '';
   timeline = false;
   autoScale = false;  // line, area
-  // colorScheme = {
-  //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
-  // };
-  colorScheme = 'flame';
+  colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ] };
   colorSchemeType = 'ordinal';
 
-
-  pingDbStatusDP: DataPoint[] = [];
   pingDbResponseMsDP: DataPoint[] = [];
   pingDbGraphData = [];
-
 
   constructor(private serverMetricsPingDbService: ServerMetricsPingDbService) {
   }
@@ -55,17 +46,11 @@ export class ServerMetricsPingDbComponent implements OnInit {
     console.log('Server: ' + this.serverId);
     this.serverMetricsPingDbService.getMetricsPingDb(this.serverId)
       .subscribe((data: MetricsPingDb[]) => {
-          this.metricsPingDbs = data;
-
-          // console.log('metricsCpus: ' + this.metricsCpus);
-
           for (const d of data) {
-            // this.pingDbStatusDP.push({ name: moment(d.created_dttm).toDate(), value: ((d.ping_db_status === 'Critical') ? 1 : 0) });
-            this.pingDbResponseMsDP.push({ name: new Date(d.created_dttm), value: d.ping_db_response_ms });
+            this.pingDbResponseMsDP.push({ name: moment(d.created_dttm).toDate(), value: d.ping_db_response_ms });
           }
           this.pingDbGraphData = [
-            // { name: 'Status', series: this.pingDbStatusDP },
-            { name: 'DB Response (ms)', series: this.pingDbResponseMsDP },
+            { name: 'DB (ms)', series: this.pingDbResponseMsDP },
           ];
           Object.assign(this, this.pingDbGraphData);
         }

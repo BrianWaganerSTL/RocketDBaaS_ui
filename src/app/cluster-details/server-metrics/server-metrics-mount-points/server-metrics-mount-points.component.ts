@@ -22,21 +22,19 @@ export class ServerMetricsMountPointsComponent implements OnInit {
   showYAxis = true;
   gradient = false;
   showLegend = true;
-  legendTitle = 'MountPoints';
+  legendTitle = '';
   showXAxisLabel = false;
-  xAxisLabel = 'Time';
-  showYAxisLabel = false;
-  yAxisLabel = 'GB';
+  xAxisLabel = '';
+  showYAxisLabel = true;
+  yAxisLabel = '% Used';
+  yScaleMin = 0;
+  yScaleMax = 100;
+  roundDomains = true;
   timeline = false;
-  autoScale = true;  // line, area
-  // colorScheme = {
-  //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
-  // };
-  colorScheme = 'flame';
+  autoScale = false;  // line, area
+  colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ] };
   colorSchemeType = 'ordinal';
 
-  allocatedGbDP: DataPoint[] = [];
-  usedGbDP: DataPoint[] = [];
   UsedPctDP: DataPoint[] = [];
   mountPointGraphData = [];
 
@@ -57,15 +55,9 @@ export class ServerMetricsMountPointsComponent implements OnInit {
           this.metricsMountPoints = data;
 
           for (const d of data) {
-            this.allocatedGbDP.push({ name: moment(d.created_dttm).toDate(), value: d.allocated_gb });
-            this.usedGbDP.push({ name: moment(d.created_dttm).toDate(), value: d.used_gb });
-            // this.UsedPctDP.push({ name: new Date(d.created_dttm), value: (d.used_pct) / 100 });
+            this.UsedPctDP.push({ name: moment(d.created_dttm).toDate(), value: d.used_pct });
+            this.mountPointGraphData = [ { name: d.mount_point, series: this.UsedPctDP } ];
           }
-          this.mountPointGraphData = [
-            { name: 'Allocated (GB)', series: this.allocatedGbDP },
-            { name: 'Used (GB)', series: this.usedGbDP },
-            // { name: 'Used %', series: this.UsedPctDP },
-          ];
           Object.assign(this, this.mountPointGraphData);
         }
       );

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ServerMetricsLoadService } from './server-metrics-load.service';
 import { DataPoint } from '../../../models/graphs.obj';
 import { MetricsLoad } from '../../../models/metricsLoad.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-server-metrics-load',
@@ -28,10 +29,8 @@ export class ServerMetricsLoadComponent implements OnInit {
   yAxisLabel = 'Load';
   timeline = false;
   autoScale = true;  // line, area
-  // colorScheme = {
-  //   domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ]
-  // };
-  colorScheme = 'flame';
+  colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ] };
+  // colorScheme = 'vivid';
   colorSchemeType = 'ordinal';
 
   load1MinDP: DataPoint[] = [];
@@ -54,9 +53,9 @@ export class ServerMetricsLoadComponent implements OnInit {
     this.serverMetricsLoadService.getMetricsLoad(this.serverId)
       .subscribe((data: MetricsLoad[]) => {
           for (const d of data) {
-            this.load1MinDP.push({ name: new Date(d.created_dttm), value: (d.load_1min) });
-            this.load5MinDP.push({ name: new Date(d.created_dttm), value: (d.load_5min) });
-            this.load15MinDP.push({ name: new Date(d.created_dttm), value: (d.load_15min) });
+            this.load1MinDP.push({ name: moment(d.created_dttm).toDate(), value: (d.load_1min) });
+            this.load5MinDP.push({ name: moment(d.created_dttm).toDate(), value: (d.load_5min) });
+            this.load15MinDP.push({ name: moment(d.created_dttm).toDate(), value: (d.load_15min) });
           }
           this.loadGraphData = [
             { name: '1 Min', series: this.load1MinDP },
