@@ -1,32 +1,63 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IssueModel} from '../../models/issue.model';
-import {ClusterIssuesService} from './cluster-issues.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { IssueTrackerModel } from '../../models/issueTrackerModel';
+import { ClusterIssuesService } from './cluster-issues.service';
+import { interval } from 'rxjs';
+import { ClusterDetailsComponent } from '../cluster-details.component';
 
 @Component({
   selector: 'app-cluster-issues',
   templateUrl: './cluster-issues.component.html',
-  styleUrls: ['./cluster-issues.css'],
-  providers: [ClusterIssuesService]
+  styleUrls: [ './cluster-issues.css' ],
+  providers: [ ClusterIssuesService, ClusterDetailsComponent ]
 })
-export class ClusterIssuesComponent implements OnInit {
+export class ClusterIssuesComponent implements OnInit, OnDestroy {
   @Input() serverId: number;
-  issues: IssueModel[];
+  issues: IssueTrackerModel[];
+  alive = true;
+  refreshTimer;
 
-  constructor(private clusterIssuesService: ClusterIssuesService) {
+  constructor(private clusterIssuesService: ClusterIssuesService,
+              private clusterDetailsComponent: ClusterDetailsComponent) {
   }
 
   ngOnInit() {
-    this.showIssues();
+    this.showData();
+    console.log('Initial ClusterIssues'); // Initial Load
+    this.refreshTimer = interval((15 * 1000))
+      .subscribe((value: number) => {
+        console.log('Refresh ClusterIssues,  cnt:' + value);
+        this.showData();
+        if (value === 60) {
+          this.refreshTimer.unsubscribe();
+        }
+      });
   }
 
-  showIssues(): void {
+  ngOnDestroy() {
+    this.refreshTimer.unsubscribe();
+  }
+
+  showData() {
+    console.log('this.clusterDetailsComponent.tabSelectedName=' + this.clusterDetailsComponent.tabSelectedName);
+    console.log('this.clusterDetailsComponent.getTab()=' + this.clusterDetailsComponent.getTab());
+    // if ( this.clusterDetailsComponent.tabSelectedName === 'Issues') {
     this.clusterIssuesService.getIssues(this.serverId)
-      .subscribe(issues => this.issues = issues);
+      .subscribe(data => this.issues = data);
+    // }
+  }
+
+  getIcon(a) {
+    if (a.closed_sw)
+      return 'assets/icons/Blue%20Tux(Transparent).png';
+    else if (a.current_status === 'Critical')
+      return 'assets/icons/TuxFire(Transparent).png';
+    else
+      return 'assets/icons/TuxGreen(Transparent).png';
   }
 
   getCssClass(a) {
     let cssClasses;
-    switch (a.note_color) {
+    switch (a.current_status) {
       case 'Normal':
         cssClasses = 'bg-issueNormal';
         break;

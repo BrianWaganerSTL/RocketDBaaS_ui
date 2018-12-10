@@ -16,6 +16,10 @@
     "max-line-length": [
       true,
       180
+    ],
+    "curly": [
+      false,
+      "next-line-single-line"
     ]
   }
 }

@@ -1,11 +1,18 @@
 <div id="issues">
   <div class="album">
-    <table class="table table-hover">
+    <table class="table table-hover" style="font-size: .75rem">
       <thead>
-      <tr>
-        <th scope="col">Issue</th>
+      <tr style="text-align: center">
+        <th></th>
         <th scope="col">Start</th>
-        <th scope="col">Stop</th>
+        <th scope="col">Last</th>
+        <th scope="col">Closed</th>
+        <th scope="col">Status</th>
+        <th scope="col">Metric Name</th>
+        <th scope="col">Metric Element</th>
+        <th scope="col">Element Details</th>
+        <th scope="col">Warning Check</th>
+        <th scope="col">Critical Check</th>
         <th scope="col">Note</th>
         <th scope="col">Note By</th>
         <th scope="col">Ticket</th>
@@ -14,9 +21,20 @@
       <tbody *ngIf="issues">
       <tr *ngFor="let a of issues"
           class="bg-hover {{ getCssClass(a) }}">
-        <td>{{ a.issue }}</td>
+        <td style="width:40px;padding:0px;">
+          <img src="{{ getIcon(a) }}" alt="Tux" style="width:100%">
+        </td>
         <td>{{ a.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
-        <td>{{ a.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ a.last_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>
+          <mat-checkbox [checked]=" a.closed_sw"></mat-checkbox>
+        </td>
+        <td>{{ a.current_status }}</td>
+        <td>{{ a.checker_threshold.checker_base_element.metric_name }}</td>
+        <td>{{ a.checker_threshold.checker_base_element.metric_element }}</td>
+        <td>{{ a.element_details }}</td>
+        <td> {{a.checker_threshold.warning_predicate_type + ' ' + a.checker_threshold.warning_value}}</td>
+        <td> {{a.checker_threshold.critical_predicate_type + ' ' + a.checker_threshold.critical_value}}</td>
         <td style="text-overflow: ellipsis">{{ a.note }}</td>
         <td>{{ a.note_by }}</td>
         <td>{{ a.ticket }}</td>

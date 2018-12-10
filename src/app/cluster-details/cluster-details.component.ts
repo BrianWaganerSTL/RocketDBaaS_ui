@@ -5,6 +5,7 @@ import { ClusterServersService } from './cluster-servers/cluster-servers.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { Server } from '../models/server.model';
+import { TabDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-cluster-details',
@@ -36,12 +37,11 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.showCluster();
-    // Refresh from database
-    this.refreshTimer = interval((120 * 1000))
+    this.refreshTimer = interval((60 * 1000))
       .subscribe((value: number) => {
         console.log('Refresh ClusterDetails,  cnt:' + value);
         this.showCluster();
-        if (value === 60) {
+        if (value >= 60) {
           this.refreshTimer.unsubscribe();
         }
       });
@@ -53,6 +53,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
 
 
   showCluster() {
+    console.log('ShowCLuster: this.tabSelectedName=' + this.tabSelectedName);
     this.id = parseInt(this.route.snapshot.paramMap.get('clusterId'));
     console.log('clusterId=' + this.id);
     this.clusterDetailsService.getCluster(this.id)
@@ -64,11 +65,14 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
       .subscribe(servers => this.servers = servers);
   }
 
-  setTab(value) {
-    this.tabSelectedName = value;
+  onSelect(data: TabDirective): void {
+    this.tabSelectedName = data.heading;
+    console.error('In onSelect: ' + this.tabSelectedName);
+    console.log('this.tabSelectedName=' + this.tabSelectedName);
   }
 
   getTab() {
+    console.log('return tabSelectedName=' + this.tabSelectedName);
     return this.tabSelectedName;
   }
 

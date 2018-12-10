@@ -9,7 +9,7 @@
         <th scope="col">Application</th>
         <th scope="col">CPU (GB)</th>
         <th scope="col">RAM (GB)</th>
-        <th scope="col">DB GB</th>
+        <th scope="col">DB (GB)</th>
         <th scope="col">Health</th>
         <th scope="col">R/W Port</th>
         <th scope="col">R/O Port</th>
@@ -38,7 +38,7 @@
 
     <div class="container">
       <tabset>
-        <tab heading="Metrics">
+        <tab heading="Metrics" [active]="true" (select)="onSelect($event)">
           <div class="d-table">
             <div class="d-table-row">
               <div class="d-table-cell" *ngFor="let s of servers">
@@ -48,29 +48,29 @@
             </div>
           </div>
         </tab>
-        <tab heading="Backups" [active]="true">
+        <tab heading="Backups" (select)="onSelect($event)">
           <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
           <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>
         </tab>
-        <tab heading="Restores">
+        <tab heading="Restores" (select)="onSelect($event)">
           <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
           <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
         </tab>
-        <tab heading="Activities">
+        <tab heading="Activities" (select)="onSelect($event)">
           <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
           <app-cluster-activities [clusterId]="cluster.id"></app-cluster-activities>
         </tab>
-        <tab heading="Issues">
+        <tab heading="Issues" (select)="onSelect($event)">
           <div class="row">
             <div class="col" *ngFor="let s of servers">
               <app-cluster-issues [serverId]="s.id"></app-cluster-issues>
             </div>
           </div>
         </tab>
-        <tab heading="Contacts">
+        <tab heading="Contacts" (select)="onSelect($event)">
           <app-application-contacts [applicationId]="cluster.application.id"></app-application-contacts>
         </tab>
-        <tab heading="Notes">
+        <tab heading="Notes" (select)="onSelect($event)">
           <app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>
         </tab>
       </tabset>
