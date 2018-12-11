@@ -1,31 +1,29 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IssueTrackerModel } from '../../models/issueTrackerModel';
-import { ClusterIssuesService } from './cluster-issues.service';
+import { ServerIssuesService } from './server-issues.service';
 import { interval } from 'rxjs';
-import { ClusterDetailsComponent } from '../cluster-details.component';
 
 @Component({
-  selector: 'app-cluster-issues',
-  templateUrl: './cluster-issues.component.html',
-  styleUrls: [ './cluster-issues.css' ],
-  providers: [ ClusterIssuesService, ClusterDetailsComponent ]
+  selector: 'app-server-issues',
+  templateUrl: './server-issues.component.html',
+  styleUrls: [],
+  providers: [ ServerIssuesService ]
 })
-export class ClusterIssuesComponent implements OnInit, OnDestroy {
+export class ServerIssuesComponent implements OnInit, OnDestroy {
   @Input() serverId: number;
   issues: IssueTrackerModel[];
   alive = true;
   refreshTimer;
 
-  constructor(private clusterIssuesService: ClusterIssuesService,
-              private clusterDetailsComponent: ClusterDetailsComponent) {
+  constructor(private serverIssuesService: ServerIssuesService) {
   }
 
   ngOnInit() {
     this.showData();
-    console.log('Initial ClusterIssues'); // Initial Load
-    this.refreshTimer = interval((15 * 1000))
+    console.log('Initial ServerIssues'); // Initial Load
+    this.refreshTimer = interval((15 * 1000)) // 15 seconds
       .subscribe((value: number) => {
-        console.log('Refresh ClusterIssues,  cnt:' + value);
+        console.log('Refresh ServerIssues,  cnt:' + value);
         this.showData();
         if (value === 60) {
           this.refreshTimer.unsubscribe();
@@ -38,10 +36,9 @@ export class ClusterIssuesComponent implements OnInit, OnDestroy {
   }
 
   showData() {
-    console.log('this.clusterDetailsComponent.tabSelectedName=' + this.clusterDetailsComponent.tabSelectedName);
-    console.log('this.clusterDetailsComponent.getTab()=' + this.clusterDetailsComponent.getTab());
+    console.log('GetIssues(server:' + this.serverId + ')');
     // if ( this.clusterDetailsComponent.tabSelectedName === 'Issues') {
-    this.clusterIssuesService.getIssues(this.serverId)
+    this.serverIssuesService.getIssues(this.serverId)
       .subscribe(data => this.issues = data);
     // }
   }

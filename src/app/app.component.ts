@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { globals } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  dbaasUrl = `${globals.dbaasUrl}`;
+  apiUrl = `${globals.apiUrl}`;
   refreshRate = 30;
   refreshRateChoices = [
     { 'seconds': 15, 'displayRate': '15 secs' },

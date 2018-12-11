@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ClusterNotesService} from './cluster-notes.service';
-import {Note} from '../../models/note.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ClusterNotesService } from './cluster-notes.service';
+import { Note } from '../../models/note.model';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -9,20 +10,35 @@ import {Note} from '../../models/note.model';
   styleUrls: ['./cluster-notes.component.css'],
   providers: [ClusterNotesService]
 })
-export class ClusterNotesComponent implements OnInit {
+export class ClusterNotesComponent implements OnInit, OnDestroy {
   @Input() clusterId: number;
   notes: Note[];
+  alive = true;
+  refreshTimer;
 
   constructor(private clusterNotesService: ClusterNotesService) {
   }
 
   ngOnInit() {
-    this.showNotes();
+    this.showData();
+    console.log('Initial ClusterNotes'); // Initial Load
+    this.refreshTimer = interval((15 * 1000)) // 15 seconds
+      .subscribe((value: number) => {
+        console.log('Refresh ClusterNotes,  cnt:' + value);
+        this.showData();
+        if (value === 60) {
+          this.refreshTimer.unsubscribe();
+        }
+      });
   }
 
-  showNotes(): void {
+  ngOnDestroy() {
+    this.refreshTimer.unsubscribe();
+  }
+
+  showData(): void {
     this.clusterNotesService.getNotes(this.clusterId)
-      .subscribe(notes => this.notes = notes);
+      .subscribe(data => this.notes = data);
   }
 
   getCssClass(a) {

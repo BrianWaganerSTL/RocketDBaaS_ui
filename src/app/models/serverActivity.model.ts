@@ -1,4 +1,4 @@
-import {Server} from './server.model';
+import { Server } from './server.model';
 
 export interface ServerActivity {
   server: Server[];
@@ -8,4 +8,5 @@ export interface ServerActivity {
   stop_dttm: string;
   created_dttm: string;
   updated_dttm: string;
+  activity_by: string;
 }

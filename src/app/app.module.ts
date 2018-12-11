@@ -27,10 +27,10 @@ import { ServerMetricsComponent } from './cluster-details/server-metrics/server-
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ClusterRestoresComponent } from './cluster-details/cluster-restores/cluster-restores.component';
 import { ClusterRestoresService } from './cluster-details/cluster-restores/cluster-restores.service';
-import { ClusterIssuesComponent } from './cluster-details/cluster-issues/cluster-issues.component';
-import { ClusterActivitiesComponent } from './cluster-details/cluster-activities/cluster-activities.component';
-import { ClusterActivitiesService } from './cluster-details/cluster-activities/cluster-activities.service';
-import { ClusterIssuesService } from './cluster-details/cluster-issues/cluster-issues.service';
+import { ServerIssuesComponent } from './cluster-details/server-issues/server-issues.component';
+import { ServerActivitiesComponent } from './cluster-details/server-activities/server-activities.component';
+import { ServerActivitiesService } from './cluster-details/server-activities/server-activities.service';
+import { ServerIssuesService } from './cluster-details/server-issues/server-issues.service';
 import { ClusterNotesService } from './cluster-details/cluster-notes/cluster-notes.service';
 import { ApplicationContactsService } from './cluster-details/application-contacts/application-contacts.service';
 import { ApplicationContactsComponent } from './cluster-details/application-contacts/application-contacts.component';
@@ -97,8 +97,8 @@ import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/ser
     PageNotFoundComponent,
     ClusterBackupsComponent,
     ClusterRestoresComponent,
-    ClusterActivitiesComponent,
-    ClusterIssuesComponent,
+    ServerActivitiesComponent,
+    ServerIssuesComponent,
     ApplicationContactsComponent,
     ClusterServersComponent,
     ServerMetricsComponent,
@@ -120,8 +120,8 @@ import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/ser
     ClusterDetailsService,
     ClusterBackupsService,
     ClusterRestoresService,
-    ClusterActivitiesService,
-    ClusterIssuesService,
+    ServerActivitiesService,
+    ServerIssuesService,
     ClusterNotesService,
     ClusterServersService,
     ApplicationContactsService,

@@ -8,17 +8,17 @@ import { ServerActivity } from '../../models/serverActivity.model';
 import { globals } from '../../../environments/environment';
 
 @Injectable()
-export class ClusterActivitiesService {
+export class ServerActivitiesService {
   private handleError: HandleError;
 
   constructor(
     private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('ClusterActivitiesService');
+    this.handleError = httpErrorHandler.createHandleError('ServerActivitiesService');
   }
 
-  getActivities(clusterId: number): Observable<ServerActivity[]> {
-    const url = `${globals.apiUrl}/clusters/${clusterId}/activities/`;
+  getActivities(serverId: number): Observable<ServerActivity[]> {
+    const url = `${globals.apiUrl}/servers/${serverId}/activities/`;
     return this.httpClient.get<ServerActivity[]>(url)
       .pipe(
         retry(3),  // retry a failed request up to 3 times

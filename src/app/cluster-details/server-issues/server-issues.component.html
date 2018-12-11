@@ -27,7 +27,7 @@
         <td>{{ a.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>{{ a.last_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>
-          <mat-checkbox [checked]=" a.closed_sw"></mat-checkbox>
+          <mat-checkbox [checked]=" a.closed_sw" disabled="true"></mat-checkbox>
         </td>
         <td>{{ a.current_status }}</td>
         <td>{{ a.checker_threshold.checker_base_element.metric_name }}</td>

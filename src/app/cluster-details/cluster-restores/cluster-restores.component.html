@@ -9,6 +9,8 @@
         <th scope="col">Status</th>
         <th scope="col">Started</th>
         <th scope="col">Stopped</th>
+        <th scope="col">By</th>
+        <th scope="col">Ticket</th>
         <!--<th scope="col">Duration</th>-->
       </tr>
       </thead>
@@ -21,6 +23,8 @@
         <td>{{ r.restore_status }}</td>
         <td>{{ r.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>{{ r.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ r.restore_by }}</td>
+        <td>{{ r.ticket }}</td>
         <!--<td></td>-->
       </tr>
       </tbody>

@@ -3,21 +3,21 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th scope="col">Server</th>
         <th scope="col">Activity</th>
         <th scope="col">Status</th>
         <th scope="col">Start</th>
         <th scope="col">Stop</th>
+        <th scope="col">By</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let sa of serverActivities"
           class="bg-hover {{ getCssClass(sa)}}">
-        <td>{{ sa.server.server_name }}</td>
         <td>{{ sa.server_activity }}</td>
         <td>{{ sa.activity_status }}</td>
         <td>{{ sa.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>{{ sa.stop_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ sa.activity_by}}</td>
       </tr>
       </tbody>
     </table>

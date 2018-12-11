@@ -264,7 +264,8 @@ input {
 .bg-BkupSuccessful,
 .bg-RestoreSuccessful,
 .bg-issueNormal,
-.bg-PoolServerAvailable {
+.bg-PoolServerAvailable,
+.bg-ActivitySuccessful {
   background-color: whitesmoke;
   color: black;
 }
@@ -291,6 +292,7 @@ input {
 }
 
 .bg-ServerDown,
+.bg-ActivityFailed,
 .bg-issueCritical {
   background-color: rgba(255, 151, 159, 0.71);
 }
@@ -298,6 +300,7 @@ input {
 .bg-ServerOnLineMaint,
 .bg-BkupRunning,
 .bg-RestoreRunning,
+.bg-ActivityProcessing,
 .bg-issueInfo {
   background-color: rgba(255, 237, 0, 0.3);
 }
@@ -433,7 +436,7 @@ input {
 
 @media (min-width: 992px) {
   .container {
-    max-width: 1300px !important;
+    max-width: 1500px !important;
     width: 100% !important;
   }
 }

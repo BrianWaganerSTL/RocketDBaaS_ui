@@ -28,8 +28,7 @@
         <td>{{ cluster.read_only_port.port }}</td>
       </tr>
       <tr>
-        <td colspan="100%"
-            style="padding-top:2rem;">
+        <td colspan="100%" style="padding-top:2rem;">
           <app-cluster-servers [clusterId]="cluster.id"></app-cluster-servers>
         </td>
       </tr>
@@ -39,10 +38,14 @@
     <div class="container">
       <tabset>
         <tab heading="Metrics" [active]="true" (select)="onSelect($event)">
-          <div class="d-table">
+          <div class="d-table w-100">
             <div class="d-table-row">
               <div class="d-table-cell" *ngFor="let s of servers">
-                {{ s.server_name }}
+                <mat-chip-list>
+                  <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
+                    {{ s.server_name }}
+                  </mat-chip>
+                </mat-chip-list>
                 <app-server-metrics [serverId]="s.id"></app-server-metrics>
               </div>
             </div>
@@ -57,13 +60,30 @@
           <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
         </tab>
         <tab heading="Activities" (select)="onSelect($event)">
-          <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
-          <app-cluster-activities [clusterId]="cluster.id"></app-cluster-activities>
+          <div class="d-table w-100">
+            <div class="d-table-row">
+              <div class="d-table-cell" *ngFor="let s of servers">
+                <mat-chip-list>
+                  <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
+                    {{ s.server_name }}
+                  </mat-chip>
+                </mat-chip-list>
+                <app-server-activities [serverId]="s.id"></app-server-activities>
+              </div>
+            </div>
+          </div>
         </tab>
         <tab heading="Issues" (select)="onSelect($event)">
-          <div class="row">
-            <div class="col" *ngFor="let s of servers">
-              <app-cluster-issues [serverId]="s.id"></app-cluster-issues>
+          <div class="d-table w-100">
+            <div class="d-table-row">
+              <div class="d-table-cell" *ngFor="let s of servers">
+                <mat-chip-list>
+                  <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
+                    {{ s.server_name }}
+                  </mat-chip>
+                </mat-chip-list>
+                <app-server-issues [serverId]="s.id"></app-server-issues>
+              </div>
             </div>
           </div>
         </tab>

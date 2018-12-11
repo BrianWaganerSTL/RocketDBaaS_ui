@@ -7,13 +7,13 @@ import { IssueTrackerModel } from '../../models/issueTrackerModel';
 import { globals } from '../../../environments/environment';
 
 @Injectable()
-export class ClusterIssuesService {
+export class ServerIssuesService {
   private handleError: HandleError;
 
   constructor(
     private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('ClusterIssuesService');
+    this.handleError = httpErrorHandler.createHandleError('ServerIssuesService');
   }
 
   getIssues(serverId: number): Observable<IssueTrackerModel[]> {

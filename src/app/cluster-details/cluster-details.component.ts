@@ -10,7 +10,7 @@ import { TabDirective } from 'ngx-bootstrap';
 @Component({
   selector: 'app-cluster-details',
   templateUrl: './cluster-details.component.html',
-  styleUrls: ['./cluster-details.component.css'],
+  styleUrls: [],
   providers: [ClusterDetailsService]
 })
 export class ClusterDetailsComponent implements OnInit, OnDestroy {
@@ -19,7 +19,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   cluster: Cluster;
   servers: Server[];
   tabSelectedName: string;
-  refreshTimer: any;
+  refreshTimer;
   tabLoadTimes: Date[] = [];
 
   getTimeLoaded(index: number) {
@@ -36,11 +36,11 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showCluster();
+    this.showData();
     this.refreshTimer = interval((60 * 1000))
       .subscribe((value: number) => {
         console.log('Refresh ClusterDetails,  cnt:' + value);
-        this.showCluster();
+        this.showData();
         if (value >= 60) {
           this.refreshTimer.unsubscribe();
         }
@@ -52,7 +52,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  showCluster() {
+  showData() {
     console.log('ShowCLuster: this.tabSelectedName=' + this.tabSelectedName);
     this.id = parseInt(this.route.snapshot.paramMap.get('clusterId'));
     console.log('clusterId=' + this.id);
