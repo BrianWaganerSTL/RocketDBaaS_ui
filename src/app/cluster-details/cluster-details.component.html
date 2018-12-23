@@ -34,66 +34,39 @@
       </tr>
       </tbody>
     </table>
+    <div class="text-center mw-100">{{ tabSelectedName }} - {{ selectedTabChange }}</div>
+    <!--<button [routerLink]="['/clusters',cluster.id,'Metrics']" routerLinkActive="active" class="mat-tab-nav-bar mat-tab-label">Metrics</button>-->
+    <!--<button [routerLink]="['/clusters',cluster.id,'Backups']" routerLinkActive="active">Backups</button>-->
+    <!--<button [routerLink]="['/clusters',cluster.id,'Restores']" routerLinkActive="active">Restores</button>-->
+    <!--<button [routerLink]="['/clusters',cluster.id,'Activities']" routerLinkActive="active">Activities</button>-->
+    <!--<button [routerLink]="['/clusters',cluster.id,'Issues']" routerLinkActive="active">Issues</button>-->
+    <!--<button [routerLink]="['/clusters',cluster.id,'Contacts']" routerLinkActive="active">Contacts</button>-->
+    <!--<button [routerLink]="['/clusters',cluster.id,'Notes']" routerLinkActive="active">Notes</button>-->
 
-    <div class="container">
-      <tabset>
-        <tab heading="Metrics" [active]="true" (select)="onSelect($event)">
-          <div class="d-table w-100">
-            <div class="d-table-row">
-              <div class="d-table-cell" *ngFor="let s of servers">
-                <mat-chip-list>
-                  <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
-                    {{ s.server_name }}
-                  </mat-chip>
-                </mat-chip-list>
-                <app-server-metrics [serverId]="s.id"></app-server-metrics>
-              </div>
-            </div>
-          </div>
-        </tab>
-        <tab heading="Backups" (select)="onSelect($event)">
-          <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
-          <app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>
-        </tab>
-        <tab heading="Restores" (select)="onSelect($event)">
-          <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
-          <app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>
-        </tab>
-        <tab heading="Activities" (select)="onSelect($event)">
-          <div class="d-table w-100">
-            <div class="d-table-row">
-              <div class="d-table-cell" *ngFor="let s of servers">
-                <mat-chip-list>
-                  <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
-                    {{ s.server_name }}
-                  </mat-chip>
-                </mat-chip-list>
-                <app-server-activities [serverId]="s.id"></app-server-activities>
-              </div>
-            </div>
-          </div>
-        </tab>
-        <tab heading="Issues" (select)="onSelect($event)">
-          <div class="d-table w-100">
-            <div class="d-table-row">
-              <div class="d-table-cell" *ngFor="let s of servers">
-                <mat-chip-list>
-                  <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
-                    {{ s.server_name }}
-                  </mat-chip>
-                </mat-chip-list>
-                <app-server-issues [serverId]="s.id"></app-server-issues>
-              </div>
-            </div>
-          </div>
-        </tab>
-        <tab heading="Contacts" (select)="onSelect($event)">
-          <app-application-contacts [applicationId]="cluster.application.id"></app-application-contacts>
-        </tab>
-        <tab heading="Notes" (select)="onSelect($event)">
-          <app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>
-        </tab>
-      </tabset>
+
+    <!--<nav mat-tab-nav-bar>-->
+    <!--<a mat-tab-link-->
+    <!--*ngFor="let link of links"-->
+    <!--[routerLink]="['/clusters', cluster.id, link]"-->
+    <!--routerLinkActive #rla="routerLinkActive">-->
+    <!--&lt;!&ndash;[active]="activeLink == link">&ndash;&gt;-->
+    <!--{{link}}-->
+    <!--</a>-->
+    <!--</nav>-->
+
+    <!--<mat-tab-group>-->
+    <!--<mat-tab label="Metrics" [routerLink]="['tab/Metrics']"  routerLinkActive>Metrics</mat-tab>-->
+    <!--<mat-tab label="Issues" [routerLink]="['tab/Issues']"  routerLinkActive>Issues</mat-tab>-->
+    <!--<mat-tab label="Backups" [routerLink]="['tab/Backups']"  routerLinkActive>Backups</mat-tab>-->
+    <!--</mat-tab-group>-->
+    <div class="panel-body">
+      <div class="wizard">
+        <a [routerLink]="['tab/Metrics']">Metrics</a><br>
+        <a [routerLink]="['tab/Issues']">Issues</a><br>
+        <a [routerLink]="['tab/Backups']">Backups</a><br>
+      </div>
     </div>
+    <app-cluster-tabs></app-cluster-tabs>
+
   </div>
-</div>
+

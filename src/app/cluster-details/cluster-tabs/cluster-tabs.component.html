@@ -1,0 +1,62 @@
+<div class="container">
+  <tabset>
+    <!--(select)="onSelect($event)"-->
+    <tab heading="Metrics" [routerLink]="['tab/Metrics']" routerLinkActive="active">
+      <div class="d-table w-100">
+        <div class="d-table-row">
+          <div class="d-table-cell" *ngFor="let s of servers">
+            <mat-chip-list>
+              <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
+                {{ s.server_name }}
+              </mat-chip>
+            </mat-chip-list>
+            <app-server-metrics [serverId]="s.id"></app-server-metrics>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <tab heading="Backups" [routerLink]="['tab/Backups']" routerLinkActive="active">
+      <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
+      <!--<app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>-->
+    </tab>
+    <tab heading="Restores" [routerLink]="['tab/Restores']">
+      <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
+      <!--<app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>-->
+    </tab>
+    <tab heading="Activities" [routerLink]="['tab/Activities']" routerLinkActive="active">
+      <div class="d-table w-100">
+        <div class="d-table-row">
+          <div class="d-table-cell" *ngFor="let s of servers">
+            <mat-chip-list>
+              <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
+                {{ s.server_name }}
+              </mat-chip>
+            </mat-chip-list>
+            <app-server-activities [serverId]="s.id"></app-server-activities>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <tab heading="Issues" [routerLink]="['tab/Issues']">
+      <div class="d-table w-100">
+        <div class="d-table-row">
+          <div class="d-table-cell" *ngFor="let s of servers">
+            <mat-chip-list>
+              <mat-chip class="theme-blue" aria-setsize="1rem" selected style="margin:8px;">
+                {{ s.server_name }}
+              </mat-chip>
+            </mat-chip-list>
+            <app-server-issues [serverId]="s.id"></app-server-issues>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <!--<tab heading="Contacts" (select)="onSelect($event)" [routerLink]="['/clusters',cluster.id,'Issues']">-->
+    <tab heading="Contacts" [routerLink]="['tab/Contacts']">
+      <!--<app-application-contacts [applicationId]="cluster.application.id"></app-application-contacts>-->
+    </tab>
+    <tab heading="Notes" [routerLink]="['tab/Notes']">
+      <!--<app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>-->
+    </tab>
+  </tabset>
+</div>

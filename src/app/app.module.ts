@@ -39,7 +39,7 @@ import { ClusterServersService } from './cluster-details/cluster-servers/cluster
 import { PoolServersComponent } from './pool-servers/pool-servers.component';
 import { ClusterCreateComponent } from './cluster-create/cluster-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatBadgeModule, MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatInputModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { ServerPickerComponent } from './cluster-create/server-picker/server-picker.component';
 import { ServerPickerService } from './cluster-create/server-picker/server-picker.service';
 import { ServerMetricsCpuComponent } from './cluster-details/server-metrics/server-metrics-cpu/server-metrics-cpu.component';
@@ -48,6 +48,7 @@ import { ServerMetricsMountPointsComponent } from './cluster-details/server-metr
 import { ServerMetricsPingDbComponent } from './cluster-details/server-metrics/server-metrics-ping-db/server-metrics-ping-db.component';
 import { ServerMetricsPingServerComponent } from './cluster-details/server-metrics/server-metrics-ping-server/server-metrics-ping-server.component';
 import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/server-metrics-load/server-metrics-load.component';
+import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tabs.component';
 
 
 @NgModule({
@@ -86,6 +87,9 @@ import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/ser
     MatCheckboxModule,
     MatChipsModule,
     MatDialogModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatTabsModule
   ],
   declarations: [
     AppComponent,
@@ -111,6 +115,7 @@ import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/ser
     ServerMetricsLoadComponent,
     ServerMetricsPingServerComponent,
     ServerMetricsPingDbComponent,
+    ClusterTabsComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

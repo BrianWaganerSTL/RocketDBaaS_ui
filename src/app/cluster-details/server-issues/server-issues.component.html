@@ -7,7 +7,6 @@
         <th scope="col">Start</th>
         <th scope="col">Last</th>
         <th scope="col">Closed</th>
-        <th scope="col">Status</th>
         <th scope="col">Metric Name</th>
         <th scope="col">Metric Element</th>
         <th scope="col">Element Details</th>
@@ -29,7 +28,6 @@
         <td>
           <mat-checkbox [checked]=" a.closed_sw" disabled="true"></mat-checkbox>
         </td>
-        <td>{{ a.current_status }}</td>
         <td>{{ a.checker_threshold.checker_base_element.metric_name }}</td>
         <td>{{ a.checker_threshold.checker_base_element.metric_element }}</td>
         <td>{{ a.element_details }}</td>

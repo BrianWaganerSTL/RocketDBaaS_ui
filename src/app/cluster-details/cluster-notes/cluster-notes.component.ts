@@ -33,7 +33,9 @@ export class ClusterNotesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.refreshTimer.unsubscribe();
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showData(): void {
