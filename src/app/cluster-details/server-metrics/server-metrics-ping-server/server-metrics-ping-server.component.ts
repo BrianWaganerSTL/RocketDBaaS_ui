@@ -17,7 +17,7 @@ export class ServerMetricsPingServerComponent implements OnInit {
   view: any[] = [ , 200 ];
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  gradient = true;
   showLegend = false;
   legendTitle = '';
   showXAxisLabel = false;

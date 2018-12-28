@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServerMetricsService } from './server-metrics.service';
-import { MetricsCpu } from '../../models/metricsCpu.model';
 
 
 @Component({
@@ -11,20 +10,11 @@ import { MetricsCpu } from '../../models/metricsCpu.model';
 })
 export class ServerMetricsComponent implements OnInit {
   @Input() serverId: number;
-  metricsCpus: MetricsCpu[];
+  @Input() serverCpus: number;
 
-  constructor(private serverMetricsService: ServerMetricsService) {
-  }
+  constructor() {}
 
-  ngOnInit() {
-    this.showMetricsCpu();
-  }
-
-  showMetricsCpu(): void {
-    console.log('Server: ' + this.serverId);
-    this.serverMetricsService.getMetricsCpu(this.serverId)
-      .subscribe(metricsCpus => this.metricsCpus = metricsCpus);
-  }
+  ngOnInit() { }
 
   getCssClass(a) {
     let cssClasses;

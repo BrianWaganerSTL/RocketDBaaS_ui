@@ -59,12 +59,16 @@
     </li>
     <!--========================================================================-->
   </ul>
-  <div dropdown class="nav-item dropdown">
-    <a id="RefreshRateDD" dropdownToggle class="btn button btn-primary btn-sm dropdown-toggle" aria-controls="RefreshRateMenu">Refresh Rate</a>
-    <div id="RefreshRateMenu" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
-      <a class="dropdown-item" *ngFor="let r of refreshRateChoices" (click)="setRefreshRate(r.seconds)">{{r.displayRate}}</a>
-    </div>
-  </div>
+  <ngx-toggle id="refreshToggle"
+              onColor="{{model.onColor}}"
+              onText="{{model.onText}}"
+              offColor="{{model.offColor}}"
+              offText="{{model.offText}}"
+              [disabled]="model.disabled"
+              [size]="model.size"
+              [(ngModel)]="model.value"
+              (click)="setRefreshToggle(model.value)">
+  </ngx-toggle>
 </nav>
 <div class="bg-issueCritical text-center font-weight-bold" type="danger">1 Cluster has been DOWN for 5.3 minutes</div>
 

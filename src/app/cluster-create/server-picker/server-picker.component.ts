@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MAT_DIALOG_DATA} from '@angular/material';
-import {PoolServer} from '../../models/poolServer.model.ts';
-import {ServerPickerService} from './server-picker.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { PoolServer } from '../../models/poolServer.model.ts';
+import { ServerPickerService } from './server-picker.service';
 
 @Component({
   selector: 'app-server-picker',
@@ -14,7 +14,8 @@ export class ServerPickerComponent implements OnInit {
   pickServerForm: FormGroup;
   dcChoices: string[] = ['CH', 'PA'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(@Inject(MAT_DIALOG_DATA)
+              public data: any,
               private fb: FormBuilder,
               private serverPickerService: ServerPickerService) {
   }

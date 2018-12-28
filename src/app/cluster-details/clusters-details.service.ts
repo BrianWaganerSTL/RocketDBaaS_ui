@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HandleError, HttpErrorHandler } from '../http-error-handler.service';
 import { Cluster } from '../models/cluster.model';
@@ -8,7 +8,6 @@ import { globals } from '../../environments/environment';
 
 @Injectable()
 export class ClusterDetailsService {
-  clusterChanged = new Subject<Cluster[]>();
   private handleError: HandleError;
 
   constructor(

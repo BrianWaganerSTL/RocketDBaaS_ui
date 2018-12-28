@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Cluster } from '../models/cluster.model';
 import { ClusterDetailsService } from './clusters-details.service';
 import { ClusterServersService } from './cluster-servers/cluster-servers.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Server } from '../models/server.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -18,11 +19,13 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router) {
   }
+
+  clusterDtl: { clusterId: number, tab: string };
+  paramsSubscription: Subscription;
   private id: number;
   error: any;
   cluster: Cluster;
   servers: Server[];
-  // paramsSubscription: Subscription;
   tabSelectedName: string;
   tab: string;
   // refreshTimer;
@@ -50,16 +53,21 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.showData();
-    // this.refreshTimer = interval((60 * 1000))
-    //   .subscribe((value: number) => {
-    //     console.log('Refresh ClusterDetails,  cnt:' + value);
-    //     this.showData();
-    //     if (value >= 60) {
-    //       this.refreshTimer.unsubscribe();
-    //     }
-    //   });
-    //
+    this.clusterDtl = {
+      clusterId: +this.route.snapshot.paramMap.get('clusterId'),
+      tab: this.route.snapshot.paramMap.get('tab')
+    };
+    this.paramsSubscription = this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.clusterDtl.clusterId = params[ 'clusterId' ];
+          this.clusterDtl.tab = params[ 'tab' ];
+          // console.log('In Cluster-Details.Component  (init) clusterId' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab);
+          this.showData();
+        }
+      );
+
+
     //   this.paramsSubscription = this.route.data
     //     .subscribe(
     //       (params) => {
@@ -86,24 +94,22 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // this.refreshTimer.unsubscribe();
-    //this.paramsSubscription.unsubscribe();
+    this.paramsSubscription.unsubscribe();
     // this.sub.unsubscribe();
   }
 
 
 
   showData() {
-    // console.log('ShowCLuster: this.tabSelectedName=' + this.tabSelectedName);
-    this.id = parseInt(this.route.snapshot.paramMap.get('clusterId'));
-    console.log('clusterId=' + this.id);
-    this.tab = this.route.snapshot.paramMap.get('tab');
-    console.log('tab=' + this.tab);
-    this.clusterDetailsService.getCluster(this.id)
+    this.clusterDetailsService.getCluster(this.clusterDtl.clusterId)
       .subscribe(
-        (data: Cluster) => this.cluster = {...data}, // success path
-        error => this.error = error // error path
+        (data: Cluster) => {
+          this.cluster = { ...data };
+          console.log('In Cluster-Details.Component  (ShowData) clusterId=' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab);
+        },
+        error => this.error = error// error path
       );
-    this.clusterServersService.getServers(this.id)
+    this.clusterServersService.getServers(this.clusterDtl.clusterId)
       .subscribe(servers => this.servers = servers);
   }
 

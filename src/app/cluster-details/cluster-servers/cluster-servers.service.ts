@@ -6,6 +6,7 @@ import { HandleError, HttpErrorHandler } from '../../http-error-handler.service'
 import { Server } from '../../models/server.model';
 import { globals } from '../../../environments/environment';
 
+
 @Injectable()
 export class ClusterServersService {
   private handleError: HandleError;
@@ -18,6 +19,7 @@ export class ClusterServersService {
 
   /** GET servers from the server */
   getServers(clusterId: number): Observable<Server[]> {
+    console.log('In Cluster-Servers.service clusterId=' + clusterId);
     const url = `${globals.apiUrl}/clusters/${clusterId}/servers/`;
     return this.httpClient.get<Server[]>(url)
       .pipe(

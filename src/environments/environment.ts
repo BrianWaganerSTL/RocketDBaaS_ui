@@ -7,6 +7,8 @@ export const environment = {
 };
 
 export const globals = {
+  // apiUrl: 'http://ch3xr908389:8080/api',
+  // dbaasUrl: 'http://ch3xr908389:8080/dbaas'
   apiUrl: 'http://localhost:8000/api',
   dbaasUrl: 'http://localhost:8000/dbaas'
 };

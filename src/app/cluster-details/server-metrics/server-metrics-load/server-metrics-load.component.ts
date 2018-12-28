@@ -13,6 +13,7 @@ import * as moment from 'moment';
 })
 export class ServerMetricsLoadComponent implements OnInit {
   @Input() serverId: number;
+  @Input() serverCpus: number;
   metricsLoad: MetricsLoad[];
 
   view: any[] = [ , 200 ];
@@ -20,7 +21,10 @@ export class ServerMetricsLoadComponent implements OnInit {
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  autoscale = true;
+  yScaleMin = 0;
+  yScaleMax = 0;
+  gradient = true;
   showLegend = true;
   legendTitle = 'Server Load';
   showXAxisLabel = false;
@@ -32,6 +36,9 @@ export class ServerMetricsLoadComponent implements OnInit {
   colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ] };
   // colorScheme = 'vivid';
   colorSchemeType = 'ordinal';
+  showRefLines = true;
+  showRefLabels = true;
+  referenceLines = [];
 
   load1MinDP: DataPoint[] = [];
   load5MinDP: DataPoint[] = [];
@@ -63,6 +70,11 @@ export class ServerMetricsLoadComponent implements OnInit {
             { name: '15 Min', series: this.load15MinDP },
           ];
           Object.assign(this, this.loadGraphData);
+
+        this.autoScale = false;
+        this.yScaleMax = (this.serverCpus * 10);
+        this.referenceLines = [ { name: 'Warning', value: (this.serverCpus * 5) }, { name: 'Critical', value: (this.serverCpus * 10) } ];
+        console.log('this.serverCpus=' + this.serverCpus);
         }
       );
   }

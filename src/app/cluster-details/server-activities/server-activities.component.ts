@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ServerActivity } from '../../models/serverActivity.model';
 import { ServerActivitiesService } from './server-activities.service';
 import { interval } from 'rxjs';
+import { AppComponent } from '../../app.component';
+import { GlobalVarsService } from '../../global-vars.service';
 
 @Component({
   selector: 'app-server-activities',
@@ -15,24 +17,30 @@ export class ServerActivitiesComponent implements OnInit, OnDestroy {
   alive = true;
   refreshTimer;
 
-  constructor(private serverActivitiesService: ServerActivitiesService) {
+  constructor(private serverActivitiesService: ServerActivitiesService,
+              private appComponent: AppComponent,
+              private globalVarsService: GlobalVarsService) {
   }
 
   ngOnInit() {
-    this.showData();
-    console.log('Initial ServerActivities'); // Initial Load
+    this.showData(); // Initial Load
+    console.log('Initial ServerActivities');
     this.refreshTimer = interval((15 * 1000)) // 15 seconds
       .subscribe((value: number) => {
-        console.log('Refresh ServerActivities,  cnt:' + value);
-        this.showData();
-        if (value === 60) {
-          this.refreshTimer.unsubscribe();
+        if (this.globalVarsService.getGRefreshSw()) {
+          console.log('Refresh ServerActivities,  cnt:' + value);
+          this.showData();
+          if (value === 60) {
+            this.refreshTimer.unsubscribe();
+          }
         }
       });
   }
 
   ngOnDestroy() {
-    this.refreshTimer.unsubscribe();
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showData(): void {

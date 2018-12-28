@@ -2,11 +2,13 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IssueTrackerModel } from '../../models/issueTrackerModel';
 import { ServerIssuesService } from './server-issues.service';
 import { interval } from 'rxjs';
+import { AppComponent } from '../../app.component';
+import { GlobalVarsService } from '../../global-vars.service';
 
 @Component({
   selector: 'app-server-issues',
   templateUrl: './server-issues.component.html',
-  styleUrls: [],
+  styleUrls: [ './server-issues.component.css' ],
   providers: [ ServerIssuesService ]
 })
 export class ServerIssuesComponent implements OnInit, OnDestroy {
@@ -15,24 +17,30 @@ export class ServerIssuesComponent implements OnInit, OnDestroy {
   alive = true;
   refreshTimer;
 
-  constructor(private serverIssuesService: ServerIssuesService) {
+  constructor(private serverIssuesService: ServerIssuesService,
+              private appComponent: AppComponent,
+              private globalVarsService: GlobalVarsService) {
   }
 
   ngOnInit() {
-    this.showData();
-    console.log('Initial ServerIssues'); // Initial Load
-    this.refreshTimer = interval((15 * 1000)) // 15 seconds
+    this.showData();   // Initial Load
+    console.log('Initial ServerIssues');
+    this.refreshTimer = interval((20 * 1000)) // 20 seconds
       .subscribe((value: number) => {
-        console.log('Refresh ServerIssues,  cnt:' + value);
-        this.showData();
-        if (value === 60) {
-          this.refreshTimer.unsubscribe();
+        if (this.globalVarsService.getGRefreshSw()) {
+          console.log('Refresh ServerIssues,  cnt:' + value);
+          this.showData();
+          if (value === 60) {
+            this.refreshTimer.unsubscribe();
+          }
         }
       });
   }
 
   ngOnDestroy() {
-    this.refreshTimer.unsubscribe();
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showData() {
@@ -45,7 +53,7 @@ export class ServerIssuesComponent implements OnInit, OnDestroy {
 
   getIcon(a) {
     if (a.closed_sw)
-      return 'assets/icons/Blue%20Tux(Transparent).png';
+      return 'assets/icons/TuxBlue(Transparent).png';
     else if (a.current_status === 'Critical')
       return 'assets/icons/TuxFire(Transparent).png';
     else

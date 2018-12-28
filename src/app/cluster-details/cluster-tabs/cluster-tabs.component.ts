@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
@@ -7,8 +7,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: [ './cluster-tabs.component.css' ]
 })
 export class ClusterTabsComponent implements OnInit, OnDestroy {
-  clusterDtl: { clusterId: number, tab: number };
-  tab;
+  @Input() clusterDtl: { clusterId: number, tab: string };
+
+  // tab;
   paramsSubscription;
   tabSelectedName;
 
@@ -24,35 +25,49 @@ export class ClusterTabsComponent implements OnInit, OnDestroy {
   // this.router.navigate([Backups], {relativeTo: this.route});
 
   ngOnInit() {
-    console.log('flag4:' + this.route.snapshot.queryParams);
-    console.log('flag5:' + this.route.snapshot.fragment);
-    this.route.queryParams
-      .subscribe(
-        (queryParams: Params) => {
-          this.tab = queryParams[ 'tab' ];
-          console.log('In ClusterTabsComponent: ============== (INITIAL) tab:' + this.tab + ' ==============');
-        }
-      );
-
-    this.clusterDtl = {
-      clusterId: this.route.snapshot.params[ 'id' ],
-      tab: this.route.snapshot.params[ 'tab' ]
-    };
-    console.log('In ClusterTabsComponent: <<<<<< (INITIAL)  ClusterId:' + this.clusterDtl.clusterId + ', tab:' + this.clusterDtl.tab + '  >>>>>>>>>');
+    // console.log('In Cluster-Tab.Component   (Pre) ClusterId=' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab );
+    // this.clusterDtl = {
+    //   clusterId: +this.route.snapshot.paramMap.get('clusterId'),
+    //   tab: this.route.snapshot.paramMap.get('tab')
+    // };
+    // console.log('In Cluster-Tab.Component  (snapshot) ClusterId=' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab );
     this.paramsSubscription = this.route.params
       .subscribe(
         (params: Params) => {
-          console.log('Params:' + params);
-          this.clusterDtl.clusterId = params[ 'id' ];
+          this.clusterDtl.clusterId = params[ 'clusterId' ];
           this.clusterDtl.tab = params[ 'tab' ];
-          console.log('In ClusterTabsComponent: <<<<<<(CHANGES)  ClusterId:' + this.clusterDtl.clusterId + ', tab:' + this.clusterDtl.tab + '  >>>>>>>>>');
+          console.log('In Cluster-Tab.Component  (subscribe) clusterId' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab);
+          // this.showData();
         }
       );
+    // console.log('\'In Cluster-Tab.Component (post) ClusterId=' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab );
+    // this.route.queryParams
+    //   .subscribe(
+    //     (queryParams: Params) => {
+    //       this.tab = queryParams[ 'tab' ];
+    //       console.log('In ClusterTabsComponent: ============== (INITIAL) tab:' + this.tab + ' ==============');
+    //     }
+    //   );
+    //
+    // this.clusterDtl = {
+    //   clusterId: this.route.snapshot.params[ 'id' ],
+    //   tab: this.route.snapshot.params[ 'tab' ]
+    // };
+    // console.log('In ClusterTabsComponent: <<<<<< (INITIAL)  ClusterId:' + this.clusterDtl.clusterId + ', tab:' + this.clusterDtl.tab + '  >>>>>>>>>');
+    // this.paramsSubscription = this.route.params
+    //   .subscribe(
+    //     (params: Params) => {
+    //       console.log('Params:' + params);
+    //       this.clusterDtl.clusterId = params[ 'id' ];
+    //       this.clusterDtl.tab = params[ 'tab' ];
+    //       console.log('In ClusterTabsComponent: <<<<<<(CHANGES)  ClusterId:' + this.clusterDtl.clusterId + ', tab:' + this.clusterDtl.tab + '  >>>>>>>>>');
+    //     }
+    //   );
   }
 
   ngOnDestroy() {
     // this.refreshTimer.unsubscribe();
-    this.paramsSubscription.unsubscribe();
+    // this.paramsSubscription.unsubscribe();
     // this.sub.unsubscribe();
   }
 }

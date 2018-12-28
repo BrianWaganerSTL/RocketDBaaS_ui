@@ -4,6 +4,11 @@
     <th>Server Name</th>
     <th>Server IP</th>
     <th>Node Role</th>
+    <th>CPU</th>
+    <th>RAM (gb)</th>
+    <th>DB (gb)</th>
+    <th>OS Ver</th>
+    <th>DB Ver</th>
     <th>Health</th>
     <th>Pending Restart</th>
   </tr>
@@ -12,6 +17,11 @@
     <td>{{ s.server_name }}</td>
     <td>{{ s.server_ip }}</td>
     <td>{{ s.node_role }}</td>
+    <td>{{ s.cpu }}</td>
+    <td>{{ s.ram_gb }}</td>
+    <td>{{ s.db_gb }}</td>
+    <td>{{ s.os_version }}</td>
+    <td>{{ s.db_version }}</td>
     <td class="bg-hover {{ getFgClass2(s.server_health) }}">{{ s.server_health }}</td>
     <td>
       <mat-checkbox [checked]="s.pending_restart_sw" disabled="true"></mat-checkbox>

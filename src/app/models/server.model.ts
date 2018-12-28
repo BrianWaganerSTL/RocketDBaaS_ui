@@ -1,5 +1,8 @@
+import { Environment } from './environment.model';
+
 export interface Server {
   cluster: number;
+  environment: Environment;
   server_name: string;
   server_ip: string;
   cpu: number;

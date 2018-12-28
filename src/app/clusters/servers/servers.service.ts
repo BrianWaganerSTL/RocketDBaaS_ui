@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
-import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
-import {Server} from '../../models/server.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { HandleError, HttpErrorHandler } from '../../http-error-handler.service';
+import { Server } from '../../models/server.model';
+import { globals } from '../../../environments/environment';
 
 @Injectable()
 export class ServersService {
-  serversUrl = 'http://localhost:8000/api/clusters';  // URL to web api
   private handleError: HandleError;
 
   constructor(
@@ -18,7 +18,7 @@ export class ServersService {
 
   /** GET servers from the server */
   getServers(clusterId: number): Observable<Server[]> {
-    const url = `${this.serversUrl}/${clusterId}/servers/`;
+    const url = `${globals.apiUrl}/clusters/${clusterId}/servers/`;
     return this.http.get<Server[]>(url)
       .pipe(
         retry(3),  // retry a failed request up to 3 times

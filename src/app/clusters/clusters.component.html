@@ -1,9 +1,6 @@
 <div style="margin: 1rem">
   <div style="color:dodgerblue; font-weight: bold">
-    <label>Cluster filter: <input #clusterName/></label>
-    <button (click)="search(clusterName.value)"
-            style="background-color: dodgerblue; color:whitesmoke;">search
-    </button>
+    <label>Cluster filter: <input #clusterNmSearch (keyup)="onKey(clusterNmSearch.value)"/></label>
   </div>
 </div>
 
@@ -21,7 +18,7 @@
     <th scope="col">R/O Port</th>
   </tr>
   </thead>
-  <tbody *ngFor="let c of clusters; index as idx; ">
+  <tbody *ngFor="let c of clusters; index as idx;">
   <tr class="bg-clusters bg-hover">
     <th>
       <button (click)="toggle[c.id]= !toggle[c.id]"
@@ -42,7 +39,7 @@
     <td>{{ c.read_only_port.port }}</td>
   </tr>
   <tr *ngIf="toggle[c.id]">
-    <td colspan="100%" style="border-top: 0px none; padding: 0px;">
+    <td colspan="100%" style="border-top: 0 none; padding: 0;">
       <app-servers [clusterId]="c.id"></app-servers>
     </td>
   </tr>

@@ -1,6 +1,8 @@
+import { Environment } from './environment.model';
+
 export interface PoolServer {
   id: number;
-  environment: string;
+  environment: Environment;
   server_name: string;
   server_ip: string;
   dbms_type: string;

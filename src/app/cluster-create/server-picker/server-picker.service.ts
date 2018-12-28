@@ -26,7 +26,7 @@ export class ServerPickerService {
     params = params.append('req_db_gb', filters.reqDbGb);
     params = params.append('status_in_pool', 'Available');
 
-    const url = `${globals.apiUrl}/poolservers/}`;
+    const url = `${globals.apiUrl}/poolservers/`;
     console.log(url + '?' + params);
     return this.httpClient.get<PoolServer[]>(url, {params: params})
       .pipe(

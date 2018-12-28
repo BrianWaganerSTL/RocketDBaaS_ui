@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td colspan="100%" style="padding-top:2rem;">
-          <app-cluster-servers [clusterId]="cluster.id"></app-cluster-servers>
+          <app-cluster-servers [clusterId]="clusterDtl.clusterId"></app-cluster-servers>
         </td>
       </tr>
       </tbody>
@@ -61,12 +61,10 @@
     <!--</mat-tab-group>-->
     <div class="panel-body">
       <div class="wizard">
-        <a [routerLink]="['tab/Metrics']">Metrics</a><br>
-        <a [routerLink]="['tab/Issues']">Issues</a><br>
-        <a [routerLink]="['tab/Backups']">Backups</a><br>
+        <a [routerLink]="['/clusters', clusterDtl.clusterId, 'metrics']">Metrics</a><br>
+        <a [routerLink]="['/clusters', clusterDtl.clusterId, 'issues']">Issues</a><br>
+        <a [routerLink]="['/clusters', clusterDtl.clusterId, 'backups']">Backups</a><br>
       </div>
     </div>
-    <app-cluster-tabs></app-cluster-tabs>
-
+    <app-cluster-tabs [clusterDtl]="clusterDtl"></app-cluster-tabs>
   </div>
-

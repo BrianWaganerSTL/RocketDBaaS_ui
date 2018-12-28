@@ -9,4 +9,4 @@
 //     console.log('In ClusterTabsResolver: ' + route.paramMap.get('tab'));
 //     return route.params['tab'];
 //   }
-}
+// }

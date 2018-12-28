@@ -2,8 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { RequestCache, RequestCacheWithMap } from './request-cache.service';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
@@ -49,6 +47,8 @@ import { ServerMetricsPingDbComponent } from './cluster-details/server-metrics/s
 import { ServerMetricsPingServerComponent } from './cluster-details/server-metrics/server-metrics-ping-server/server-metrics-ping-server.component';
 import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/server-metrics-load/server-metrics-load.component';
 import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tabs.component';
+import { NgxToggleModule } from 'ngx-toggle';
+import { GlobalVarsService } from './global-vars.service';
 
 
 @NgModule({
@@ -61,18 +61,8 @@ import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tab
       headerName: 'My-Xsrf-Header',
     }),
     NgxChartsModule,
+    NgxToggleModule,
     BrowserAnimationsModule,
-
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {
-        dataEncapsulation: false,
-        passThruUnknownUrl: true,
-        put204: false // return entity after PUT/update
-      }
-    ),
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -131,6 +121,7 @@ import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tab
     ClusterServersService,
     ApplicationContactsService,
     ServerPickerService,
+    GlobalVarsService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],

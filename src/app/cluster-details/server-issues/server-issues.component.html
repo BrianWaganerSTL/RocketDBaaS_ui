@@ -20,8 +20,8 @@
       <tbody *ngIf="issues">
       <tr *ngFor="let a of issues"
           class="bg-hover {{ getCssClass(a) }}">
-        <td style="width:40px;padding:0px;">
-          <img src="{{ getIcon(a) }}" alt="Tux" style="width:100%">
+        <td style="width:100px;padding:0px;">
+          <img src="{{ getIcon(a) }}" alt="Tux" width="45px">
         </td>
         <td>{{ a.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
         <td>{{ a.last_dttm | date: 'd-MMM HH:mm:ss' }}</td>

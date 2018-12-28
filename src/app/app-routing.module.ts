@@ -7,31 +7,15 @@ import { ClusterDetailsComponent } from './cluster-details/cluster-details.compo
 import { ClustersComponent } from './clusters/clusters.component';
 import { PoolServersComponent } from './pool-servers/pool-servers.component';
 import { ClusterCreateComponent } from './cluster-create/cluster-create.component';
-import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tabs.component';
-import { ClusterTabsResolver } from './cluster-details/cluster-tabs/cluster-tabs-resolver.service';
+
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/clusters', pathMatch: 'full' },
   { path: 'overview', redirectTo: '/clusters', pathMatch: 'full' },
-  {
-    path: 'clusters',
-    component: ClustersComponent,
-    pathMatch: 'full',
-    data: { title: 'RocketDBaaS - Overview' }
-  },
-  {
-    path: 'clusters/:clusterId',
-    component: ClusterDetailsComponent,
-    // resolver: { clusterId: ClusterResolver },
-    children: [
-      {
-        path: '', redirectTo: 'tab/Restores', pathMatch: 'full'
-      },
-      {
-        path: 'tab/:tab', component: ClusterTabsComponent
-      }
-    ]
-  },
+  { path: 'clusters', component: ClustersComponent, pathMatch: 'full', data: { title: 'RocketDBaaS - Overview' } },
+  { path: 'clusters/:clusterId', component: ClusterDetailsComponent },
+  { path: 'clusters/:clusterId', component: ClusterDetailsComponent },
+  { path: 'clusters/:clusterId/:tab', component: ClusterDetailsComponent },
   { path: 'clusters/:clusterId', component: ClusterDetailsComponent },
   { path: 'poolservers', component: PoolServersComponent },
   { path: 'cluster/create', component: ClusterCreateComponent },

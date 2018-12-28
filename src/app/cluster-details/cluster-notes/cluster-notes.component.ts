@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ClusterNotesService } from './cluster-notes.service';
 import { Note } from '../../models/note.model';
 import { interval } from 'rxjs';
+import { AppComponent } from '../../app.component';
+import { GlobalVarsService } from '../../global-vars.service';
 
 
 @Component({
@@ -16,18 +18,22 @@ export class ClusterNotesComponent implements OnInit, OnDestroy {
   alive = true;
   refreshTimer;
 
-  constructor(private clusterNotesService: ClusterNotesService) {
+  constructor(private clusterNotesService: ClusterNotesService,
+              private appComponent: AppComponent,
+              private globalVarsService: GlobalVarsService) {
   }
 
   ngOnInit() {
-    this.showData();
-    console.log('Initial ClusterNotes'); // Initial Load
+    this.showData(); // Initial Load
+    console.log('Initial ClusterNotes');
     this.refreshTimer = interval((15 * 1000)) // 15 seconds
       .subscribe((value: number) => {
-        console.log('Refresh ClusterNotes,  cnt:' + value);
-        this.showData();
-        if (value === 60) {
-          this.refreshTimer.unsubscribe();
+        if (this.globalVarsService.getGRefreshSw()) {
+          console.log('Refresh ClusterNotes,  cnt:' + value);
+          this.showData();
+          if (value === 60) {
+            this.refreshTimer.unsubscribe();
+          }
         }
       });
   }
