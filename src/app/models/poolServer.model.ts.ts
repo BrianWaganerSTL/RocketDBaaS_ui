@@ -1,4 +1,5 @@
 import { Environment } from './environment.model';
+import { Datacenter } from './datacenter.model';
 
 export interface PoolServer {
   id: number;
@@ -9,8 +10,11 @@ export interface PoolServer {
   cpu: number;
   ram_gb: number;
   db_gb: number;
-  data_center: string;
-  status_in_pool: string;
+  datacenter: Datacenter;
+  server_health: string;
+  last_reboot: Date;
+  os_version: string;
+  db_version: string;
   created_dttm: string;
   updated_dttm: string;
 }

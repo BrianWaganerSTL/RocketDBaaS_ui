@@ -1,3 +1,3 @@
 export interface Environment {
-  env: string;
+  env_name: string;
 }

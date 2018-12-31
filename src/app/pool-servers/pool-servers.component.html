@@ -10,21 +10,27 @@
       <th scope="col">RAM (GB)</th>
       <th scope="col">DB GB</th>
       <th scope="col">DC</th>
-      <th scope="col">Status</th>
+      <th scope="col">Health</th>
+      <th scope="col">Last Reboot</th>
+      <th scope="col">OS Version</th>
+      <th scope="col">DB Version</th>
       <th scope="col">Created</th>
     </tr>
     </thead>
     <tbody *ngFor="let ps of poolServers">
     <tr class="bg-hover {{ getCssClass(ps) }}">
-      <td>{{ ps.environment }}</td>
+      <td>{{ ps.environment.env_name }}</td>
       <td>{{ ps.server_name }}</td>
       <td>{{ ps.server_ip }}</td>
       <td>{{ ps.dbms_type }}</td>
       <td>{{ ps.cpu }}</td>
       <td>{{ ps.ram_gb }}</td>
       <td>{{ ps.db_gb }}</td>
-      <td>{{ ps.data_center }}</td>
-      <td>{{ ps.status_in_pool }}</td>
+      <td>{{ ps.datacenter.datacenter }}</td>
+      <td>{{ ps.server_health }}</td>
+      <td>{{ ps.last_reboot }}</td>
+      <td>{{ ps.os_version }}</td>
+      <td>{{ ps.db_version }}</td>
       <td>{{ ps.created_dttm | date: 'd-MMM HH:mm:ss' }}</td>
     </tr>
     </tbody>
