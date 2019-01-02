@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { PoolServer } from '../../models/poolServer.model.ts';
 import { ServerPickerService } from './server-picker.service';
+import { Server } from '../../models/server.model';
 
 @Component({
   selector: 'app-server-picker',
@@ -10,7 +10,7 @@ import { ServerPickerService } from './server-picker.service';
   styleUrls: ['./server-picker.component.css']
 })
 export class ServerPickerComponent implements OnInit {
-  poolServers: PoolServer[];
+  servers: Server[];
   pickServerForm: FormGroup;
   dcChoices: string[] = ['CH', 'PA'];
 
@@ -52,20 +52,17 @@ export class ServerPickerComponent implements OnInit {
 
   showPoolServers(filters): void {
     this.serverPickerService.getPoolServers(filters)
-      .subscribe(poolServers => this.poolServers = poolServers);
+      .subscribe(servers => this.servers = servers);
   }
 
   getCssClass(a) {
     let cssClasses;
-    switch (a.status_in_pool) {
+    switch (a.node_role) {
       case 'Available':
         cssClasses = 'bg-PoolServerAvailable';
         break;
       case 'Locked':
         cssClasses = 'bg-PoolServerLocked';
-        break;
-      case 'Used':
-        cssClasses = 'bg-PoolServerUsed';
         break;
     }
     return cssClasses;

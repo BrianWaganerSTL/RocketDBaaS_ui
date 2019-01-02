@@ -2,13 +2,13 @@
   <table class="table table-hover" style="background-color: #eaf8ff">
     <thead>
     <tr style="background-color: #79aec8">
-      <th scope="col">Environment</th>
+      <th scope="col">Env</th>
       <th scope="col">Server Name</th>
       <th scope="col">Server IP</th>
       <th scope="col">DBMS</th>
-      <th scope="col">CPU (GB)</th>
-      <th scope="col">RAM (GB)</th>
-      <th scope="col">DB GB</th>
+      <th scope="col">CPU<br><span style="font-size: smaller">(GB)</span></th>
+      <th scope="col">RAM<br><span style="font-size: smaller">(GB)</span></th>
+      <th scope="col">DB<br><span style="font-size: smaller">(GB)</span></th>
       <th scope="col">DC</th>
       <th scope="col">Health</th>
       <th scope="col">Last Reboot</th>
@@ -17,21 +17,22 @@
       <th scope="col">Created</th>
     </tr>
     </thead>
-    <tbody *ngFor="let ps of poolServers">
+    <tbody *ngFor="let ps of servers">
     <tr class="bg-hover {{ getCssClass(ps) }}">
       <td>{{ ps.environment.env_name }}</td>
       <td>{{ ps.server_name }}</td>
       <td>{{ ps.server_ip }}</td>
       <td>{{ ps.dbms_type }}</td>
-      <td>{{ ps.cpu }}</td>
-      <td>{{ ps.ram_gb }}</td>
-      <td>{{ ps.db_gb }}</td>
+      <td>{{ ps.cpu| number:'1.0-0' }}</td>
+      <td>{{ ps.ram_gb | number:'1.0-0' }}</td>
+      <td>{{ ps.db_gb | number:'1.1-1'}}</td>
       <td>{{ ps.datacenter.datacenter }}</td>
       <td>{{ ps.server_health }}</td>
-      <td>{{ ps.last_reboot }}</td>
+      <td>{{ ps.last_reboot | date: 'd-MMM HH:mm' }}</td>
       <td>{{ ps.os_version }}</td>
       <td>{{ ps.db_version }}</td>
-      <td>{{ ps.created_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+      <!--<td>{{ ps.metrics_sw }}</td>-->
+      <td>{{ ps.created_dttm | date: 'd-MMM HH:mm' }}</td>
     </tr>
     </tbody>
   </table>

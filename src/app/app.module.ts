@@ -49,6 +49,7 @@ import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/ser
 import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tabs.component';
 import { NgxToggleModule } from 'ngx-toggle';
 import { GlobalVarsService } from './global-vars.service';
+import { ClusterCreateService } from './cluster-create/cluster-create.service';
 
 
 @NgModule({
@@ -120,6 +121,7 @@ import { GlobalVarsService } from './global-vars.service';
     ClusterNotesService,
     ClusterServersService,
     ApplicationContactsService,
+    ClusterCreateService,
     ServerPickerService,
     GlobalVarsService,
     {provide: RequestCache, useClass: RequestCacheWithMap},

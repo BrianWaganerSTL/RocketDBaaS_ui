@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
-import {ServerPickerComponent} from './server-picker/server-picker.component';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ServerPickerComponent } from './server-picker/server-picker.component';
+import { ClusterCreateService } from './cluster-create.service';
+import { DbmsType } from '../models/dbmsType.model';
 
 @Component({
   selector: 'app-cluster-create',
@@ -11,11 +13,12 @@ import {ServerPickerComponent} from './server-picker/server-picker.component';
 export class ClusterCreateComponent implements OnInit {
   createForm: FormGroup;
   servers: FormArray;
-  dbmsChoices: string[] = ['PostgreSQL', 'MongoDB'];
-  envChoices: string[] = ['SBX', 'DEV', 'QA', 'UAT', 'PRD', 'PPD'];
+  dbmsTypeChoices: DbmsType[];
+  envChoices: string[] = [ 'Sbx', 'Dev', 'QA', 'UAT', 'Prod' ];
 
   constructor(private fb: FormBuilder,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private clusterCreateService: ClusterCreateService) {
   }
 
   addServer(poolServer) {
@@ -26,7 +29,7 @@ export class ClusterCreateComponent implements OnInit {
       cpu: poolServer.cpu,
       ram_gb: poolServer.ram_gb,
       db_gb: poolServer.db_gb,
-      data_center: poolServer.data_center,
+      datacenter: poolServer.datacenter,
       node_role: '',
       server_health: 'ServerConfig',
       os_version: '',
@@ -52,7 +55,7 @@ export class ClusterCreateComponent implements OnInit {
       cluster_name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       dbms_type: ['PostgreSQL', [Validators.required]],
       // application: applicationModel,
-      environment: ['SBX', [Validators.required]],
+      environment: [ '', [ Validators.required ] ],
       requested_cpu: ['2', [Validators.required, Validators.min(1), Validators.max(14), Validators.pattern('^[0-9]*$')]],
       requested_ram_gb: ['4', [Validators.required, Validators.min(2), Validators.max(36)]],
       requested_db_gb: ['10', [Validators.required, Validators.min(0), Validators.max(1024)]],
@@ -69,6 +72,12 @@ export class ClusterCreateComponent implements OnInit {
       servers: this.fb.array([])
     });
     this.createForm.valueChanges.subscribe(console.log);
+    this.getDbmsTypesChoices();
+  }
+
+  getDbmsTypesChoices(): void {
+    this.clusterCreateService.getDbmsTypes()
+      .subscribe(dbmsType => this.dbmsTypeChoices = dbmsType);
   }
 
   openDialog() {

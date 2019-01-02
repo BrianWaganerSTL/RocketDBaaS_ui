@@ -1,4 +1,5 @@
 import { Environment } from './environment.model';
+import { Datacenter } from './datacenter.model';
 
 export interface Server {
   cluster: number;
@@ -8,13 +9,15 @@ export interface Server {
   cpu: number;
   ram_gb: number;
   db_gb: number;
-  data_center: string;
+  datacenter: Datacenter;
   node_role: string;
   server_health: string;
+  last_reboot: Date;
   os_version: string;
   db_version: string;
   pending_restart_sw: string;
+  metrics_sw: boolean;
   active_sw: string;
-  created_dttm: string;
-  updated_dttm: string;
+  created_dttm: Date;
+  updated_dttm: Date;
 }

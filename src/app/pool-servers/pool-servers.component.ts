@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {PoolServer} from '../models/poolServer.model.ts';
-import {PoolServersService} from './pool-servers.service';
+import { Component, OnInit } from '@angular/core';
+import { PoolServersService } from './pool-servers.service';
+import { Server } from '../models/server.model';
 
 @Component({
   selector: 'app-pool-servers',
@@ -9,7 +9,7 @@ import {PoolServersService} from './pool-servers.service';
   providers: [PoolServersService]
 })
 export class PoolServersComponent implements OnInit {
-  poolServers: PoolServer[];
+  servers: Server[];
 
   constructor(private poolServersService: PoolServersService) {
   }
@@ -20,20 +20,17 @@ export class PoolServersComponent implements OnInit {
 
   showPoolServers(): void {
     this.poolServersService.getPoolServers()
-      .subscribe(poolServers => this.poolServers = poolServers);
+      .subscribe(servers => this.servers = servers);
   }
 
   getCssClass(a) {
     let cssClasses;
-    switch (a.status_in_pool) {
+    switch (a.node_role) {
       case 'Available':
         cssClasses = 'bg-PoolServerAvailable';
         break;
       case 'Locked':
         cssClasses = 'bg-PoolServerLocked';
-        break;
-      case 'Used':
-        cssClasses = 'bg-PoolServerUsed';
         break;
     }
     return cssClasses;
