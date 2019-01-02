@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { ServerPickerComponent } from './server-picker/server-picker.component';
 import { ClusterCreateService } from './cluster-create.service';
 import { DbmsType } from '../models/dbmsType.model';
+import { Environment } from '../models/environment.model';
 
 @Component({
   selector: 'app-cluster-create',
@@ -14,6 +15,7 @@ export class ClusterCreateComponent implements OnInit {
   createForm: FormGroup;
   servers: FormArray;
   dbmsTypeChoices: DbmsType[];
+  environmentChoices: Environment[];
   envChoices: string[] = [ 'Sbx', 'Dev', 'QA', 'UAT', 'Prod' ];
 
   constructor(private fb: FormBuilder,
@@ -29,6 +31,7 @@ export class ClusterCreateComponent implements OnInit {
       cpu: poolServer.cpu,
       ram_gb: poolServer.ram_gb,
       db_gb: poolServer.db_gb,
+      environment: poolServer.environment,
       datacenter: poolServer.datacenter,
       node_role: '',
       server_health: 'ServerConfig',
@@ -53,7 +56,7 @@ export class ClusterCreateComponent implements OnInit {
   ngOnInit() {
     this.createForm = this.fb.group({
       cluster_name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      dbms_type: ['PostgreSQL', [Validators.required]],
+      dbms_type: [ '', [ Validators.required ] ],
       // application: applicationModel,
       environment: [ '', [ Validators.required ] ],
       requested_cpu: ['2', [Validators.required, Validators.min(1), Validators.max(14), Validators.pattern('^[0-9]*$')]],
@@ -73,11 +76,17 @@ export class ClusterCreateComponent implements OnInit {
     });
     this.createForm.valueChanges.subscribe(console.log);
     this.getDbmsTypesChoices();
+    this.getEnvironmentChoices();
   }
 
   getDbmsTypesChoices(): void {
     this.clusterCreateService.getDbmsTypes()
       .subscribe(dbmsType => this.dbmsTypeChoices = dbmsType);
+  }
+
+  getEnvironmentChoices(): void {
+    this.clusterCreateService.getEnvironments()
+      .subscribe(environment => this.environmentChoices = environment);
   }
 
   openDialog() {

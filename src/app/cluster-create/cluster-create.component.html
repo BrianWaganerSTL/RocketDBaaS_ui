@@ -22,7 +22,7 @@
     <mat-form-field>
       <mat-select placeholder="Environment" formControlName="environment" [errorStateMatcher]="matcher">
         <mat-option>Clear</mat-option>
-        <mat-option *ngFor="let envChoice of envChoices" [value]="envChoice">{{envChoice}}</mat-option>
+        <mat-option *ngFor="let envChoice of environmentChoices" [value]="envChoice.env_name">{{envChoice.env_name}}</mat-option>
       </mat-select>
       <mat-error *ngIf="f.environment.invalid">You must make a selection</mat-error>
     </mat-form-field>
@@ -69,6 +69,7 @@
     <table class="table">
       <thead>
       <tr class="bg-clusters-header">
+        <th scope="col">Env</th>
         <th scope="col">DataCenter</th>
         <th scope="col">Server Name</th>
         <th scope="col">Server IP</th>
@@ -80,6 +81,7 @@
       </thead>
       <tbody *ngFor="let s of serverFA.controls; let i = index;">
       <tr class="bg-clusters bg-hover">
+        <td>{{ s.value.environment.env_name }}</td>
         <td>{{ s.value.datacenter.datacenter }}</td>
         <td>{{ s.value.server_name }}</td>
         <td>{{ s.value.server_ip }}</td>

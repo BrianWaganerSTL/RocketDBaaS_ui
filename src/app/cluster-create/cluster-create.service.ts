@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { HandleError, HttpErrorHandler } from '../http-error-handler.service';
 import { globals } from '../../environments/environment';
 import { DbmsType } from '../models/dbmsType.model';
+import { Environment } from '../models/environment.model';
 
 @Injectable()
 export class ClusterCreateService {
@@ -23,6 +24,15 @@ export class ClusterCreateService {
       .pipe(
         retry(3),  // retry a failed request up to 3 times
         catchError(this.handleError<DbmsType[]>('getDbmsTypes'))
+      );
+  }
+
+  getEnvironments(): Observable<Environment[]> {
+    const url = `${globals.apiUrl}/environments/`;
+    return this.httpClient.get<Environment[]>(url)
+      .pipe(
+        retry(3),  // retry a failed request up to 3 times
+        catchError(this.handleError<Environment[]>('getEnvironments'))
       );
   }
 }
