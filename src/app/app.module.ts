@@ -50,8 +50,6 @@ import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tab
 import { NgxToggleModule } from 'ngx-toggle';
 import { GlobalVarsService } from './global-vars.service';
 import { ClusterCreateService } from './cluster-create/cluster-create.service';
-import { ApplicationAddComponent } from './cluster-create/application-create/application-add.component';
-import { ApplicationAddService } from './cluster-create/application-create/application-add.service';
 
 
 @NgModule({
@@ -60,8 +58,8 @@ import { ApplicationAddService } from './cluster-create/application-create/appli
     FormsModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
-      cookieName: 'My-Xsrf-Cookie',
-      headerName: 'My-Xsrf-Header',
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken',
     }),
     NgxChartsModule,
     NgxToggleModule,
@@ -103,7 +101,6 @@ import { ApplicationAddService } from './cluster-create/application-create/appli
     PoolServersComponent,
     ClusterCreateComponent,
     ServerPickerComponent,
-    ApplicationAddComponent,
     ServerMetricsCpuComponent,
     ServerMetricsMountPointsComponent,
     ServerMetricsLoadComponent,
@@ -126,13 +123,12 @@ import { ApplicationAddService } from './cluster-create/application-create/appli
     ApplicationContactsService,
     ClusterCreateService,
     ServerPickerService,
-    ApplicationAddService,
     GlobalVarsService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ ServerPickerComponent, ApplicationAddComponent ]
+  entryComponents: [ ServerPickerComponent ]
 })
 export class AppModule {
   // Diagnostic only: inspect router configuration

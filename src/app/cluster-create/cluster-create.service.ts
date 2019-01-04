@@ -18,7 +18,7 @@ export class ClusterCreateService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
+      'Authorization': '6289e86c56ffe922bf93addad01108cb6683c0bd',
     })
   };
 
@@ -56,7 +56,7 @@ export class ClusterCreateService {
   }
 
   addClusterToDB(cluster: Cluster): Observable<Cluster> {
-    const url = `${globals.apiUrl}/clusters/`;
+    const url = `${globals.apiUrl}/create_cluster/`;
 
     return this.httpClient.post<Cluster>(url, cluster, this.httpOptions)
       .pipe(

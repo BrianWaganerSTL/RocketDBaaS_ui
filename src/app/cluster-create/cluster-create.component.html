@@ -1,27 +1,35 @@
+<div class="row">
+  <h3>Application</h3>&nbsp;&nbsp;&nbsp;
+  <ngx-toggle id="newAppToggle"
+              onColor="{{newAppToggleModel.onColor}}"
+              onText="{{newAppToggleModel.onText}}"
+              offColor="{{newAppToggleModel.offColor}}"
+              offText="{{newAppToggleModel.offText}}"
+              [disabled]="newAppToggleModel.disabled"
+              [size]="newAppToggleModel.size"
+              [(ngModel)]="newAppToggleModel.value"
+              (click)="setNewAppToggle(newAppToggleModel.value)">
+  </ngx-toggle>
+</div>
+
 <form [formGroup]="serverFormGroup">
   <!--For Testing: {{ serverFormGroup.value | json }}-->
-
-  <!--<hr>-->
-  <h3>Application</h3>
   <div class="row">
-    <mat-form-field>
-      <mat-select placeholder="Appl Name" formControlName="application_name" [errorStateMatcher]="matcher">
+
+    <mat-form-field *ngIf="newAppToggleSw === false">
+      <mat-select placeholder="Application Name" formControlName="application_name" [errorStateMatcher]="matcher">
         <mat-option>Clear</mat-option>
         <mat-option *ngFor="let app of applicationChoices" [value]="app.application_name">{{app.application_name}}</mat-option>
       </mat-select>
       <mat-error *ngIf="f.application_name.invalid">You must make a selection</mat-error>
     </mat-form-field>
-    <button mat-button class="mat-raised-button justify-content-end col col-lg-2" color="primary" (click)="openApplicationDialog()">
-      Create New Application
-    </button>
-    <!--<mat-form-field appearance="outline">-->
-    <!--<mat-label>Application Name</mat-label>-->
-    <!--<input matInput placeholder="Not To Big, Not to small"-->
-    <!--formControlName="new_app_name" type="text">-->
-    <!--<mat-error *ngIf="new_app_name.invalid && new_app_name.touched">-->
-    <!--Name is too short or too long-->
-    <!--</mat-error>-->
-    <!--</mat-form-field>-->
+
+    <mat-form-field *ngIf="newAppToggleSw === true">
+      <input matInput placeholder="Application Name" formControlName="application_name" type="text">
+      <mat-error *ngIf="f.application_name.invalid && f.application_name.touched">
+        Name is too short or too long
+      </mat-error>
+    </mat-form-field>
   </div>
 
   <h3>Cluster</h3>
