@@ -1,0 +1,22 @@
+<h3>Application</h3>
+<mat-dialog-content class="mat-typography">
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Application Name</mat-label>
+      <input matInput placeholder="enter a name"
+             formControlName="new_application_name" type="text">
+      <!--<mat-error *ngIf="new_application_name.invalid && new_application_name.touched">-->
+      <!--Name is too short or too long-->
+      <!--</mat-error>-->
+    </mat-form-field>
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button>No Thanks</button>
+  <button mat-button [mat-dialog-close]="new_application_name" cdkFocusInitial>Ok</button>
+  <!--<button mat-button mat-dialog-close>Cancel</button>-->
+  <!--<button mat-button (click)="addApplication(data.application_name)">Add</button>-->
+  <!--<button mat-button class="mat-raised-button" color="primary" [mat-dialog-close]="ps">Add</button>-->
+</mat-dialog-actions>
+

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -7,15 +7,34 @@ import { HandleError, HttpErrorHandler } from '../http-error-handler.service';
 import { globals } from '../../environments/environment';
 import { DbmsType } from '../models/dbmsType.model';
 import { Environment } from '../models/environment.model';
+import { Cluster } from '../models/cluster.model';
+import { Application } from '../models/application.model';
 
 @Injectable()
 export class ClusterCreateService {
   private handleError: HandleError;
 
+  const;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'my-auth-token'
+    })
+  };
+
   constructor(
     private httpClient: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
     this.handleError = httpErrorHandler.createHandleError('ClusterCreateService');
+  }
+
+  getApplications(): Observable<Application[]> {
+    const url = `${globals.apiUrl}/applications/`;
+    return this.httpClient.get<Application[]>(url)
+      .pipe(
+        retry(3),  // retry a failed request up to 3 times
+        catchError(this.handleError<Application[]>('getApplications'))
+      );
   }
 
   getDbmsTypes(): Observable<DbmsType[]> {
@@ -33,6 +52,16 @@ export class ClusterCreateService {
       .pipe(
         retry(3),  // retry a failed request up to 3 times
         catchError(this.handleError<Environment[]>('getEnvironments'))
+      );
+  }
+
+  addClusterToDB(cluster: Cluster): Observable<Cluster> {
+    const url = `${globals.apiUrl}/clusters/`;
+
+    return this.httpClient.post<Cluster>(url, cluster, this.httpOptions)
+      .pipe(
+        retry(3),  // retry a failed request up to 3 times
+        catchError(this.handleError<Cluster>('addClusterToDB'))
       );
   }
 }

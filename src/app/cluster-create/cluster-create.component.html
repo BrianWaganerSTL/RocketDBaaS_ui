@@ -1,7 +1,29 @@
-<form [formGroup]="createForm">
-  <!--For Testing: {{ createForm.value | json }}-->
+<form [formGroup]="serverFormGroup">
+  <!--For Testing: {{ serverFormGroup.value | json }}-->
 
   <!--<hr>-->
+  <h3>Application</h3>
+  <div class="row">
+    <mat-form-field>
+      <mat-select placeholder="Appl Name" formControlName="application_name" [errorStateMatcher]="matcher">
+        <mat-option>Clear</mat-option>
+        <mat-option *ngFor="let app of applicationChoices" [value]="app.application_name">{{app.application_name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.application_name.invalid">You must make a selection</mat-error>
+    </mat-form-field>
+    <button mat-button class="mat-raised-button justify-content-end col col-lg-2" color="primary" (click)="openApplicationDialog()">
+      Create New Application
+    </button>
+    <!--<mat-form-field appearance="outline">-->
+    <!--<mat-label>Application Name</mat-label>-->
+    <!--<input matInput placeholder="Not To Big, Not to small"-->
+    <!--formControlName="new_app_name" type="text">-->
+    <!--<mat-error *ngIf="new_app_name.invalid && new_app_name.touched">-->
+    <!--Name is too short or too long-->
+    <!--</mat-error>-->
+    <!--</mat-form-field>-->
+  </div>
+
   <h3>Cluster</h3>
   <div class="row">
     <mat-form-field>
@@ -42,17 +64,17 @@
   <h6>Requested Resources</h6>
   <div class="row">
     <mat-form-field>
-      <input matInput placeholder="Requested CPUs" formControlName="requested_cpu" type="number">
+      <input matInput placeholder="CPUs" formControlName="requested_cpu" type="number">
       <mat-error *ngIf="f.requested_cpu.invalid">CPUs must be from 1-14</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Requested RAM (GB)" formControlName="requested_ram_gb" type="number">
+      <input matInput placeholder="RAM (GB)" formControlName="requested_ram_gb" type="number">
       <mat-error *ngIf="f.requested_ram_gb.invalid">RAM must be from 2-36 GiB</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Requested DB (GB)" formControlName="requested_db_gb" type="number">
+      <input matInput placeholder="DB (GB)" formControlName="requested_db_gb" type="number">
       <mat-error *ngIf="f.requested_db_gb.invalid">DB must be from 0-1024 GiB</mat-error>
     </mat-form-field>
   </div>
@@ -61,7 +83,7 @@
     <div class="row">
       <h3 class="col">Servers</h3>
       <div class="col-md-auto"></div>
-      <button mat-button class="mat-raised-button justify-content-end col col-lg-2" color="primary" (click)="openDialog()">
+      <button mat-button class="mat-raised-button justify-content-end col col-lg-2" color="primary" (click)="openServerDialog()">
         Add New Server
       </button>
 
@@ -80,7 +102,7 @@
       </tr>
       </thead>
       <tbody *ngFor="let s of serverFA.controls; let i = index;">
-      <tr class="bg-clusters bg-hover">
+      <tr *ngIf="s" class="bg-clusters bg-hover">
         <td>{{ s.value.environment.env_name }}</td>
         <td>{{ s.value.datacenter.datacenter }}</td>
         <td>{{ s.value.server_name }}</td>
@@ -111,5 +133,6 @@
   <!--</div>-->
 
   <!--<button mat-raised-button color="primary" (click)="addPhone()">Add Phone Number</button>-->
-  <button mat-raised-button [disabled]="createForm.invalid" color="primary">Let's do this!</button>
+  <button mat-raised-button [disabled]="serverFormGroup.invalid" color="primary" (click)="addClusterToDB()">Just Add to DB</button>
+  <button mat-raised-button [disabled]="serverFormGroup.invalid" color="primary" (click)="createCluster()" disabled>Create a Cluster</button>
 </form>

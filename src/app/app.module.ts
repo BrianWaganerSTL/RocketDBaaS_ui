@@ -50,6 +50,8 @@ import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tab
 import { NgxToggleModule } from 'ngx-toggle';
 import { GlobalVarsService } from './global-vars.service';
 import { ClusterCreateService } from './cluster-create/cluster-create.service';
+import { ApplicationAddComponent } from './cluster-create/application-create/application-add.component';
+import { ApplicationAddService } from './cluster-create/application-create/application-add.service';
 
 
 @NgModule({
@@ -101,6 +103,7 @@ import { ClusterCreateService } from './cluster-create/cluster-create.service';
     PoolServersComponent,
     ClusterCreateComponent,
     ServerPickerComponent,
+    ApplicationAddComponent,
     ServerMetricsCpuComponent,
     ServerMetricsMountPointsComponent,
     ServerMetricsLoadComponent,
@@ -123,12 +126,13 @@ import { ClusterCreateService } from './cluster-create/cluster-create.service';
     ApplicationContactsService,
     ClusterCreateService,
     ServerPickerService,
+    ApplicationAddService,
     GlobalVarsService,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ServerPickerComponent]
+  entryComponents: [ ServerPickerComponent, ApplicationAddComponent ]
 })
 export class AppModule {
   // Diagnostic only: inspect router configuration

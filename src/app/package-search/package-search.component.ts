@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {Observable, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-import {NpmPackageInfo, PackageSearchService} from './package-search.service';
+import { NpmPackageInfo, PackageSearchService } from './package-search.service';
 
 @Component({
   selector: 'app-package-search',
@@ -30,7 +30,6 @@ export class PackageSearchComponent implements OnInit {
 
   constructor(private searchService: PackageSearchService) {
   }
-
 
   toggleRefresh() {
     this.withRefresh = !this.withRefresh;
