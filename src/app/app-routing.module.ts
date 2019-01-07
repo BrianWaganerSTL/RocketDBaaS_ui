@@ -7,10 +7,12 @@ import { ClusterDetailsComponent } from './cluster-details/cluster-details.compo
 import { ClustersComponent } from './clusters/clusters.component';
 import { PoolServersComponent } from './pool-servers/pool-servers.component';
 import { ClusterCreateComponent } from './cluster-create/cluster-create.component';
+import { LoginComponent } from './login/login.component';
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/clusters', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'overview', redirectTo: '/clusters', pathMatch: 'full' },
   { path: 'clusters', component: ClustersComponent, pathMatch: 'full', data: { title: 'RocketDBaaS - Overview' } },
   { path: 'clusters/:clusterId', component: ClusterDetailsComponent },
