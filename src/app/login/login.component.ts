@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { User } from '../models/user.obj';
 import { stringify } from 'querystring';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,35 +11,25 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
-              private loginService: LoginService) { }
+              private loginService: LoginService,
+              private router: Router) { }
 
-  // user: User;
   username: string;
   password: string;
 
-  ngOnInit() {
-    this.authService.user;
-  :
-    User;
-  }
+  ngOnInit() { }
 
   login() {
     console.log('In login:');
-    // this.user = {
-    //     username: this.username,
-    //     password: this.password,
-    //     email: '',
-    //     token: ''
-    //   };
-    // user.username = this.username;
-    this.authService.user.username = this.username;
-    this.authService.user.password = this.password;
+    this.authService.loggedInUser.username = this.username;
+    this.authService.loggedInUser.password = this.password;
 
     this.loginService.login(this.username, this.password)
       .subscribe(token => {
-        this.authService.user.token = token.token;
+        this.authService.loggedInUser.token = token.token;
         console.log('Token: ' + token.token);
-        console.log(stringify(this.authService._user));
+        console.log(stringify(this.authService.loggedInUser));
+        this.router.navigateByUrl('overview');
       });
   }
 }

@@ -14,9 +14,7 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  private handleError: HandleError;
-  // private token: string;
-  // user: User;
+  private readonly handleError: HandleError;
 
   constructor(
     private http: HttpClient,

@@ -1,20 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from './models/user.obj';
 
 /** Mock client-side authentication/authorization service */
 @Injectable()
-export class AuthService {
-  _user: User;
+export class AuthService implements OnDestroy {
+  private _loggedInUser: User;
 
-  get user(): { username: string; password: string; email: string; token: string } {
-    return this._user;
+
+  get loggedInUser(): { username: string; password: string; email: string; token: string } {
+    return this._loggedInUser;
   }
 
-  set user(value: { username: string; password: string; email: string; token: string }) {
-    this._user = value;
+  set loggedInUser(value: { username: string; password: string; email: string; token: string }) {
+    this._loggedInUser = value;
   }
 
-  getAuthorizationToken() {
-    return this._user.token;
+  constructor() {
+    this._loggedInUser = { username: '', password: '', email: '', token: '' };
+    console.log('+++ Service AuthService created');
+    // this._loggedInUser = this._loggedInUser({'', '','',''});
+
+  }
+
+  ngOnDestroy(): void {
+    console.log('--- Service AuthService destroyed');
   }
 }

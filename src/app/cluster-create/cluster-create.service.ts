@@ -17,8 +17,8 @@ export class ClusterCreateService {
   const;
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': '6289e86c56ffe922bf93addad01108cb6683c0bd',
+      'Content-Type': 'application/json'
+      // 'Authorization': '6289e86c56ffe922bf93addad01108cb6683c0bd',
     })
   };
 
