@@ -94,8 +94,8 @@
       <button mat-button class="mat-raised-button justify-content-end col col-lg-2" color="primary" (click)="openServerDialog()">
         Pick a Pool-Server
       </button>
-
     </div>
+
     <table class="table">
       <thead>
       <tr class="bg-clusters-header">
@@ -109,16 +109,16 @@
         <th scope="col">Node Role</th>
       </tr>
       </thead>
-      <tbody *ngFor="let s of serverFA.controls; let i = index;">
+      <tbody *ngFor="let s of servers">
       <tr *ngIf="s" class="bg-clusters bg-hover">
-        <td>{{ s.value.environment.env_name }}</td>
-        <td>{{ s.value.datacenter.datacenter }}</td>
-        <td>{{ s.value.server_name }}</td>
-        <td>{{ s.value.server_ip }}</td>
-        <td>{{ s.value.cpu }}</td>
-        <td>{{ s.value.ram_gb }}</td>
-        <td>{{ s.value.db_gb }}</td>
-        <td>{{ s.value.node_role }}</td>
+        <td>{{ s.environment.env_name }}</td>
+        <td>{{ s.datacenter.datacenter }}</td>
+        <td>{{ s.server_name }}</td>
+        <td>{{ s.server_ip }}</td>
+        <td>{{ s.cpu }}</td>
+        <td>{{ s.ram_gb }}</td>
+        <td>{{ s.db_gb }}</td>
+        <td>{{ s.node_role }}</td>
       </tr>
       </tbody>
     </table>
@@ -141,6 +141,6 @@
   <!--</div>-->
 
   <!--<button mat-raised-button color="primary" (click)="addPhone()">Add Phone Number</button>-->
-  <button mat-raised-button [disabled]="serverFormGroup.invalid" color="primary" (click)="addClusterToDB()">Just Add to DB</button>
-  <button mat-raised-button [disabled]="serverFormGroup.invalid" color="primary" (click)="createCluster()" disabled>Create a Cluster</button>
+  <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0" color="primary" (click)="addClusterToDB()">Just Add to DB</button>
+  <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0" color="primary" (click)="createCluster()" disabled>Create a Cluster</button>
 </form>

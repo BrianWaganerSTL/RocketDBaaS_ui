@@ -4,28 +4,26 @@
     <table class="table">
       <thead>
       <tr class="bg-clusters-header">
-        <th scope="col">Cluster{{ cluster_name }}</th>
+        <th scope="col">Cluster</th>
+        <th scope="col">Env</th>
         <th scope="col">DBMS</th>
         <th scope="col">Application</th>
-        <th scope="col">CPU (GB)</th>
-        <th scope="col">RAM (GB)</th>
-        <th scope="col">DB (GB)</th>
         <th scope="col">Health</th>
         <th scope="col">R/W Port</th>
         <th scope="col">R/O Port</th>
+        <th scope="col">TLS</th>
       </tr>
       </thead>
       <tbody>
       <tr class="bg-clusters bg-hover">
         <th>{{ cluster.cluster_name }} {{ cluster.id }}</th>
+        <td>{{ cluster.environment }}</td>
         <td>{{ cluster.dbms_type }}</td>
         <td>{{ cluster.application.application_name }}</td>
-        <td>{{ cluster.requested_cpu }}</td>
-        <td>{{ cluster.requested_ram_gb }}</td>
-        <td>{{ cluster.requested_db_gb }}</td>
         <td class="{{ getFgClass(cluster.cluster_health) }}">{{ cluster.cluster_health }}</td>
         <td>{{ cluster.read_write_port.port }}</td>
         <td>{{ cluster.read_only_port.port }}</td>
+        <td>{{ cluster.tls_enabled_sw }}</td>
       </tr>
       <tr>
         <td colspan="100%" style="padding-top:2rem;">

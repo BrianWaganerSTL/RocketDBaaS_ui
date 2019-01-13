@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ServerPickerComponent } from './server-picker/server-picker.component';
 import { ClusterCreateService } from './cluster-create.service';
@@ -8,6 +8,7 @@ import { Environment } from '../models/environment.model';
 import { stringify } from 'querystring';
 import { ApplicationClusterServersPOST, Cluster } from '../models/cluster.model';
 import { Application } from '../models/application.model';
+import { Server } from '../models/server.model';
 
 
 @Component({
@@ -17,7 +18,6 @@ import { Application } from '../models/application.model';
 })
 export class ClusterCreateComponent implements OnInit {
   serverFormGroup: FormGroup;
-  servers: FormArray;
   dbmsTypeChoices: DbmsType[];
   environmentChoices: Environment[];
   applicationChoices: Application[];
@@ -25,6 +25,8 @@ export class ClusterCreateComponent implements OnInit {
   newAppToggleSw: boolean;
   createDB_cluster: Cluster;
   applicationClusterServersPOST: ApplicationClusterServersPOST;
+  server_ids: Int8Array[];
+  servers: Server[];
 
   newAppToggleModel: any = {
     onColor: 'primary',
@@ -39,37 +41,19 @@ export class ClusterCreateComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public dialog: MatDialog,
               private clusterCreateService: ClusterCreateService) {
+    this.server_ids = [];
+    this.servers = [];
   }
 
   addServer(pickedServer) {
+    console.log('pickedServer:' + stringify(pickedServer));
     pickedServer.node_role = 'PoolServerLocked';
-    const server = this.fb.control({
-      cluster: [],
-      server_name: pickedServer.server_name,
-      server_ip: pickedServer.server_ip,
-      cpu: pickedServer.cpu,
-      ram_gb: pickedServer.ram_gb,
-      db_gb: pickedServer.db_gb,
-      environment: pickedServer.environment,
-      datacenter: pickedServer.datacenter,
-      node_role: '',
-      server_health: 'ServerConfig',
-      os_version: '',
-      db_version: '',
-      pending_restart_sw: [ false ],
-      active_sw: [ true ]
-    });
-    this.serverFA.push(server);
-    console.log(this.serverFormGroup);
-    console.log(this.serverFA);
+    this.server_ids.push(pickedServer.id);
+    this.servers.push(pickedServer);
   }
 
   get f() {
     return this.serverFormGroup.controls;
-  }
-
-  get serverFA() {
-    return this.serverFormGroup.get('servers') as FormArray;
   }
 
   ngOnInit() {
@@ -79,7 +63,6 @@ export class ClusterCreateComponent implements OnInit {
       requested_ram_gb: [ '4', [ Validators.required, Validators.min(2), Validators.max(36) ] ],
       requested_db_gb: [ '10', [ Validators.required, Validators.min(0), Validators.max(1024) ] ],
       // =======================
-      application: [],
       application_name: [ '', Validators.required ],
       cluster_name: [ '', [ Validators.required, Validators.minLength(4), Validators.maxLength(30) ] ],
       dbms_type: [ '', [ Validators.required ] ],
@@ -87,8 +70,7 @@ export class ClusterCreateComponent implements OnInit {
       tls_enabled_sw: [ true, [ Validators.required ] ],
       backup_retention_days: [ '14', [ Validators.required, Validators.min(14), Validators.max(35) ] ],
       cluster_health: [ 'ClusterConfig', [ Validators.required ] ],
-      active_sw: [ true, [ Validators.required ] ],
-      servers: this.fb.array([]),
+      active_sw: [ true, [ Validators.required ] ]
     });
     this.serverFormGroup.valueChanges.subscribe(console.log);
     this.getChoices();
@@ -110,7 +92,6 @@ export class ClusterCreateComponent implements OnInit {
     const reqCpu = this.serverFormGroup.controls.requested_cpu.value;
     const reqRamGb = this.serverFormGroup.controls.requested_ram_gb.value;
     const reqDbGb = this.serverFormGroup.controls.requested_db_gb.value;
-    console.log('env=' + env);
     const serverDialogRef = this.dialog.open(ServerPickerComponent, {
       data: {
         env: env,
@@ -121,10 +102,7 @@ export class ClusterCreateComponent implements OnInit {
       },
     });
     serverDialogRef.afterClosed().subscribe(pickedServer => {
-      if (pickedServer) {
-        console.log('Dialog result: ' + stringify(pickedServer));
-        this.addServer(pickedServer);
-      }
+      if (pickedServer) { this.addServer(pickedServer); }
     });
   }
 
@@ -142,7 +120,8 @@ export class ClusterCreateComponent implements OnInit {
       cluster_name: this.serverFormGroup.controls.cluster_name.value,
       tls_enabled_sw: this.serverFormGroup.controls.tls_enabled_sw.value,
       backup_retention_days: this.serverFormGroup.controls.backup_retention_days.value,
-      cluster_health: 'ClusterConfig'
+      cluster_health: 'ClusterConfig',
+      server_ids: this.server_ids,
     };
     console.log('applicationClusterServersPOST: ' + stringify(this.applicationClusterServersPOST));
     this.clusterCreateService.createApplClusterServers(this.applicationClusterServersPOST)
@@ -151,7 +130,7 @@ export class ClusterCreateComponent implements OnInit {
           console.log('New Cluster: ' + stringify(result));
           this.createDB_cluster = result;
         },
-        error => { console.error('Failed to create New Application/Cluster/Servers: ' + error); }
+        error => { console.error('Failed to create New Application,Cluster,Servers: ' + error); }
       );
   }
 }

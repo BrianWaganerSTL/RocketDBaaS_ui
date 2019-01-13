@@ -33,4 +33,5 @@ export interface ApplicationClusterServersPOST {
   tls_enabled_sw: string;
   backup_retention_days: string;
   cluster_health: string;
+  server_ids: Int8Array[];
 }
