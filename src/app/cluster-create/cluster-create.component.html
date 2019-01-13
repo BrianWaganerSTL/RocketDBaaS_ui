@@ -50,11 +50,11 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="Environment" formControlName="environment" [errorStateMatcher]="matcher">
+      <mat-select placeholder="Environment" formControlName="env_name" [errorStateMatcher]="matcher">
         <mat-option>Clear</mat-option>
         <mat-option *ngFor="let envChoice of environmentChoices" [value]="envChoice.env_name">{{envChoice.env_name}}</mat-option>
       </mat-select>
-      <mat-error *ngIf="f.environment.invalid">You must make a selection</mat-error>
+      <mat-error *ngIf="f.env_name.invalid">You must make a selection</mat-error>
     </mat-form-field>
 
     <mat-form-field>

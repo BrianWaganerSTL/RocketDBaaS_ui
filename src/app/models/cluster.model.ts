@@ -1,23 +1,36 @@
-import {Application} from './application.model';
-import {ServerPort} from './serverPort.model';
+import { Application } from './application.model';
+import { ServerPort } from './serverPort.model';
 
 export interface Cluster {
-  id: number;
+  id?: number;
   cluster_name: string;
   dbms_type: string;
   application: Application;
+  // application_id: number;
+  // environment: Environment;
   environment: string;
-  requested_cpu: string;
-  requested_ram_gb: string;
-  requested_db_gb: string;
-  read_write_port: ServerPort;
-  read_only_port: ServerPort;
+  read_write_port?: ServerPort;
+  read_only_port?: ServerPort;
   tls_enabled_sw: string;
   backup_retention_days: string;
   cluster_health: string;
-  active_sw: string;
-  eff_dttm: string;
-  exp_dttm: string;
-  created_dttm: string;
-  updated_dttm: string;
+  active_sw?: string;
+  eff_dttm?: string;
+  exp_dttm?: string;
+  created_dttm?: string;
+  updated_dttm?: string;
+}
+
+// Used to create
+//  - Application(if doesn't exist
+//  - Cluster
+//  - Servers
+export interface ApplicationClusterServersPOST {
+  application_name: string;
+  environment_id: string;
+  dbms_type: string;
+  cluster_name: string;
+  tls_enabled_sw: string;
+  backup_retention_days: string;
+  cluster_health: string;
 }
