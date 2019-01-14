@@ -7,8 +7,8 @@ export const environment = {
 };
 
 export const globals = {
-  // apiOrigin: 'http://localhost:8080',
-  // apiUrl: 'http://ch3xr908389:8080/api',
+  // apiOrigin: 'http://ch3xr908389:8080',
+  // apiUrl: 'http://ch3xr908389:8080/dbaas_api',
   // dbaasUrl: 'http://ch3xr908389:8080/dbaas'
   apiOrigin: 'http://localhost:8080',
   apiUrl: 'http://localhost:8080/dbaas_api',
