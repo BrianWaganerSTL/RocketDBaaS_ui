@@ -1,7 +1,14 @@
 <div class="container">
-  <tabset>
+  <!--<div class="panel-body">-->
+  <!--<div class="wizard">-->
+  <!--<a [routerLink]="['/clusters', clusterDtl.clusterId, 'metrics']">Metrics</a><br>-->
+  <!--<a [routerLink]="['/clusters', clusterDtl.clusterId, 'issues']">Issues</a><br>-->
+  <!--<a [routerLink]="['/clusters', clusterDtl.clusterId, 'backups']">Backups</a><br>-->
+  <!--</div>-->
+  <!--</div>-->
+  <tabset class="wizard">
     <!--(select)="onSelect($event)"-->
-    <tab heading="Metrics" [routerLink]="['tab/Metrics']" routerLinkActive="active">
+    <tab heading="Metrics" [routerLink]="['/clusters', clusterDtl.clusterId, 'metrics']" routerLinkActive="active">
       <div class="d-table w-100">
         <div class="d-table-row">
           <div class="d-table-cell" *ngFor="let s of servers">
@@ -15,15 +22,15 @@
         </div>
       </div>
     </tab>
-    <tab heading="Backups" [routerLink]="['tab/Backups']" routerLinkActive="active">
+    <tab heading="Backups" [routerLink]="['/clusters', clusterDtl.clusterId, 'backup']" routerLinkActive="active">
       <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
       <!--<app-cluster-backups [clusterId]="cluster.id"></app-cluster-backups>-->
     </tab>
-    <tab heading="Restores" [routerLink]="['tab/Restores']">
+    <tab heading="Restores" [routerLink]="['/clusters', clusterDtl.clusterId, 'restores']">
       <!--Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}-->
-      <!--<app-cluster-restores [clusterId]="cluster.id"></app-cluster-restores>-->
+      <app-cluster-restores [clusterId]="clusterDtl.clusterId"></app-cluster-restores>
     </tab>
-    <tab heading="Activities" [routerLink]="['tab/Activities']" routerLinkActive="active">
+    <tab heading="Activities" [routerLink]="['/clusters', clusterDtl.clusterId, 'activities']" routerLinkActive="active">
       <div class="d-table w-100">
         <div class="d-table-row">
           <div class="d-table-cell" *ngFor="let s of servers">
@@ -37,7 +44,7 @@
         </div>
       </div>
     </tab>
-    <tab heading="Issues" [routerLink]="['tab/Issues']">
+    <tab heading="Issues" [routerLink]="['/clusters', clusterDtl.clusterId, 'issues']">
       <div class="d-table w-100">
         <div class="d-table-row">
           <div class="d-table-cell" *ngFor="let s of servers">
@@ -52,10 +59,10 @@
       </div>
     </tab>
     <!--<tab heading="Contacts" (select)="onSelect($event)" [routerLink]="['/clusters',cluster.id,'Issues']">-->
-    <tab heading="Contacts" [routerLink]="['tab/Contacts']">
+    <tab heading="Contacts" [routerLink]="['/clusters', clusterDtl.clusterId, 'issues']">
       <!--<app-application-contacts [applicationId]="cluster.application.id"></app-application-contacts>-->
     </tab>
-    <tab heading="Notes" [routerLink]="['tab/Notes']">
+    <tab heading="Notes" [routerLink]="['/clusters', clusterDtl.clusterId, 'notes']">
       <!--<app-cluster-notes [clusterId]="cluster.id"></app-cluster-notes>-->
     </tab>
   </tabset>

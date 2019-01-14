@@ -172,6 +172,7 @@ input {
   background-color: #f8f9fa !important;
   border: 3px solid #DDD;
   padding: 5px;
+  min-height: 13rem;
 }
 
 .tab-content tr th {
@@ -448,4 +449,38 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.tabs a {
+  opacity: .6;
+}
+
+.mat-ink-bar {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  transition: .75s cubic-bezier(.35, 0, .25, 1);
+}
+
+.mat-tab-link {
+  opacity: .55 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 0 15px !important;
+}
+
+.mat-tab-link:hover {
+  text-decoration: none !important;
+}
+
+.mat-tab-label-active {
+  opacity: 1 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  color: #369 !important;
+}
+
+.nav-username {
+  color: #80bdff !important;
+  padding-right: 1rem;
 }

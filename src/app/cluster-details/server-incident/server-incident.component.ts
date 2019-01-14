@@ -1,23 +1,23 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { IssueTrackerModel } from '../../models/issueTrackerModel';
-import { ServerIssuesService } from './server-issues.service';
+import { ServerIncidentService } from './server-incident.service';
 import { interval } from 'rxjs';
 import { AppComponent } from '../../app.component';
 import { GlobalVarsService } from '../../global-vars.service';
+import { Incident } from '../../models/incident.model';
 
 @Component({
-  selector: 'app-server-issues',
-  templateUrl: './server-issues.component.html',
-  styleUrls: [ './server-issues.component.css' ],
-  providers: [ ServerIssuesService ]
+  selector: 'app-server-incidents',
+  templateUrl: './server-incident.component.html',
+  styleUrls: [ './server-incident.component.css' ],
+  providers: [ ServerIncidentService ]
 })
-export class ServerIssuesComponent implements OnInit, OnDestroy {
+export class ServerIncidentComponent implements OnInit, OnDestroy {
   @Input() serverId: number;
-  issues: IssueTrackerModel[];
+  incidents: Incident[];
   alive = true;
   refreshTimer;
 
-  constructor(private serverIssuesService: ServerIssuesService,
+  constructor(private serverIncidentsService: ServerIncidentService,
               private appComponent: AppComponent,
               private globalVarsService: GlobalVarsService) {
   }
@@ -28,7 +28,7 @@ export class ServerIssuesComponent implements OnInit, OnDestroy {
     this.refreshTimer = interval((20 * 1000)) // 20 seconds
       .subscribe((value: number) => {
         if (this.globalVarsService.getGRefreshSw()) {
-          console.log('Refresh ServerIssues,  cnt:' + value);
+          console.log('Refresh ServerIncidents,  cnt:' + value);
           this.showData();
           if (value === 60) {
             this.refreshTimer.unsubscribe();
@@ -44,10 +44,10 @@ export class ServerIssuesComponent implements OnInit, OnDestroy {
   }
 
   showData() {
-    console.log('GetIssues(server:' + this.serverId + ')');
+    console.log('GetIncidents(server:' + this.serverId + ')');
     // if ( this.clusterDetailsComponent.tabSelectedName === 'Issues') {
-    this.serverIssuesService.getIssues(this.serverId)
-      .subscribe(data => this.issues = data);
+    this.serverIncidentsService.getIncidents(this.serverId)
+      .subscribe(data => this.incidents = data);
     // }
   }
 
@@ -64,22 +64,22 @@ export class ServerIssuesComponent implements OnInit, OnDestroy {
     let cssClasses;
     switch (a.current_status) {
       case 'Normal':
-        cssClasses = 'bg-issueNormal';
+        cssClasses = 'bg-incidentNormal';
         break;
       case 'Warning':
-        cssClasses = 'bg-issueWarning';
+        cssClasses = 'bg-incidentWarning';
         break;
       case 'Critical':
-        cssClasses = 'bg-issueCritical';
+        cssClasses = 'bg-incidentCritical';
         break;
       case 'Blackout':
-        cssClasses = 'bg-issueBlackout';
+        cssClasses = 'bg-incidentBlackout';
         break;
       case 'Info':
-        cssClasses = 'bg-issueInfo';
+        cssClasses = 'bg-incidentInfo';
         break;
       case 'Unknown':
-        cssClasses = 'bg-issueUnknown';
+        cssClasses = 'bg-incidentUnknown';
         break;
     }
     return cssClasses;

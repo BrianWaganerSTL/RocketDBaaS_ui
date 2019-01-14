@@ -1,0 +1,41 @@
+<div id="issues">
+  <div class="album">
+    <table class="table table-hover" style="font-size: .75rem">
+      <thead>
+      <tr style="text-align: center">
+        <th></th>
+        <th scope="col">Start</th>
+        <th scope="col">Last</th>
+        <th scope="col">Closed</th>
+        <th scope="col">Category</th>
+        <th scope="col">Metric</th>
+        <th scope="col">Element</th>
+        <th scope="col">Warning Check</th>
+        <th scope="col">Critical Check</th>
+        <th scope="col">Note</th>
+        <th scope="col">Note By</th>
+        <th scope="col">Ticket</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="incidents">
+      <tr *ngFor="let i of incidents"
+          class="bg-hover {{ getCssClass(i) }}">
+        <td style="width:100px;padding:0px;">
+          <img src="{{ getIcon(i) }}" alt="Tux" width="45px">
+        </td>
+        <td>{{ i.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ i.last_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ i.closed_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ i.threshold_test.threshold_metric.category.category_name }}</td>
+        <td>{{ i.threshold_test.threshold_metric.metric_name }}</td>
+        <td>{{ i.detail_element }}</td>
+        <td> {{ i.threshold_test.warning_predicate_type + ' ' + i.threshold_test.warning_value }}</td>
+        <td> {{ i.threshold_test.critical_predicate_type + ' ' + i.threshold_test.critical_value }}</td>
+        <td style="text-overflow: ellipsis">{{ a.note }}</td>
+        <td>{{ a.note_by }}</td>
+        <td>{{ a.ticket }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Cluster } from '../models/cluster.model';
 import { ClusterDetailsService } from './clusters-details.service';
 import { ClusterServersService } from './cluster-servers/cluster-servers.service';
@@ -20,8 +20,10 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
               private router: Router) {
   }
 
+  @Input() tabs;
   clusterDtl: { clusterId: number, tab: string };
   paramsSubscription: Subscription;
+  tabSubscription: Subscription;
   private id: number;
   error: any;
   cluster: Cluster;
@@ -62,10 +64,14 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
         (params: Params) => {
           this.clusterDtl.clusterId = params[ 'clusterId' ];
           this.clusterDtl.tab = params[ 'tab' ];
-          // console.log('In Cluster-Details.Component  (init) clusterId' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab);
+          console.log('In Cluster-Details.Component  (init) clusterId' + this.clusterDtl.clusterId + ', tab=' + this.clusterDtl.tab);
           this.showData();
         }
       );
+
+
+    // <mat-tab label="Backups" (selectedTabChange)="goToLink('/clusters' + clusterDtl.clusterId + 'backups')">Backups</mat-tab>
+
 
 
     //   this.paramsSubscription = this.route.data
@@ -94,11 +100,11 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // this.refreshTimer.unsubscribe();
-    this.paramsSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
     // this.sub.unsubscribe();
   }
-
-
 
   showData() {
     this.clusterDetailsService.getCluster(this.clusterDtl.clusterId)
@@ -123,6 +129,10 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
   //   console.log('return tabSelectedName=' + this.tabSelectedName);
   //   return this.tabSelectedName;
   // }
+  goToLink(link: string): void {
+    console.log('goToLink:' + link);
+    this.router.navigateByUrl(link);
+  }
 
   getFgClass(inValue) {
     let cssClass;

@@ -25,10 +25,10 @@ import { ServerMetricsComponent } from './cluster-details/server-metrics/server-
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ClusterRestoresComponent } from './cluster-details/cluster-restores/cluster-restores.component';
 import { ClusterRestoresService } from './cluster-details/cluster-restores/cluster-restores.service';
-import { ServerIssuesComponent } from './cluster-details/server-issues/server-issues.component';
+import { ServerIncidentComponent } from './cluster-details/server-incident/server-incident.component';
 import { ServerActivitiesComponent } from './cluster-details/server-activities/server-activities.component';
 import { ServerActivitiesService } from './cluster-details/server-activities/server-activities.service';
-import { ServerIssuesService } from './cluster-details/server-issues/server-issues.service';
+import { ServerIncidentService } from './cluster-details/server-incident/server-incident.service';
 import { ClusterNotesService } from './cluster-details/cluster-notes/cluster-notes.service';
 import { ApplicationContactsService } from './cluster-details/application-contacts/application-contacts.service';
 import { ApplicationContactsComponent } from './cluster-details/application-contacts/application-contacts.component';
@@ -94,7 +94,7 @@ import { LoginComponent } from './login/login.component';
     ClusterBackupsComponent,
     ClusterRestoresComponent,
     ServerActivitiesComponent,
-    ServerIssuesComponent,
+    ServerIncidentComponent,
     ApplicationContactsComponent,
     ClusterServersComponent,
     ServerMetricsComponent,
@@ -119,7 +119,7 @@ import { LoginComponent } from './login/login.component';
     ClusterBackupsService,
     ClusterRestoresService,
     ServerActivitiesService,
-    ServerIssuesService,
+    ServerIncidentService,
     ClusterNotesService,
     ClusterServersService,
     ApplicationContactsService,

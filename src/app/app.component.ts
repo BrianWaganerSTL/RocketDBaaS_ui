@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { globals } from '../environments/environment';
 import { GlobalVarsService } from './global-vars.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
     value: true
   };
 
-  constructor(private globalVarsService: GlobalVarsService) {}
+  constructor(private globalVarsService: GlobalVarsService,
+              private authService: AuthService) {}
 
   ngOnInit() {
     this.setRefreshToggle(true);
@@ -29,6 +31,10 @@ export class AppComponent implements OnInit {
   setRefreshToggle(swValue) {
     console.log('In setRefreshToggle value=' + swValue);
     this.globalVarsService.setGRefreshSw(swValue);
+  }
+
+  getUser() {
+    return (this.authService.loggedInUser.username);
   }
 
   // getRefreshToggle() {
