@@ -8,7 +8,7 @@
     <th>Pending Restart</th>
   </tr>
   <tr *ngFor="let s of clusterServers" id="{{ s.server_name }}" class="bg-hover {{ getCssClass(s) }}">
-    <td>{{ s.data_center }}</td>
+    <td>{{ s.datacenter.datacenter }}</td>
     <td>{{ s.server_name }}</td>
     <td>{{ s.server_ip }}</td>
     <td>{{ s.node_role }}</td>

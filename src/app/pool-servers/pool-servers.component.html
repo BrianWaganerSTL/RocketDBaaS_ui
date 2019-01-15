@@ -19,14 +19,18 @@
     </thead>
     <tbody *ngFor="let ps of servers">
     <tr class="bg-hover {{ getCssClass(ps) }}">
-      <td>{{ ps.environment.env_name }}</td>
+      <td>
+        <div *ngIf="ps.environment"> {{ ps.environment.env_name }}</div>
+      </td>
       <td>{{ ps.server_name }}</td>
       <td>{{ ps.server_ip }}</td>
       <td>{{ ps.dbms_type }}</td>
       <td>{{ ps.cpu| number:'1.0-0' }}</td>
       <td>{{ ps.ram_gb | number:'1.0-0' }}</td>
       <td>{{ ps.db_gb | number:'1.1-1'}}</td>
-      <td>{{ ps.datacenter.datacenter }}</td>
+      <td>
+        <div *ngIf="ps.datacenter"> {{ ps.datacenter.datacenter }}</div>
+      </td>
       <td>{{ ps.server_health }}</td>
       <td>{{ ps.last_reboot | date: 'd-MMM HH:mm' }}</td>
       <td>{{ ps.os_version }}</td>
