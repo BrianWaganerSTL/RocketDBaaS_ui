@@ -3,9 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Cluster } from '../models/cluster.model';
 import { ClustersService } from './clusters.service';
 import { Application } from '../models/application.model';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { AppComponent } from '../app.component';
-import { GlobalVarsService } from '../global-vars.service';
+import { GlobalVars } from '../global-vars.service';
 
 @Component({
   selector: 'app-clusters',
@@ -17,24 +17,23 @@ export class ClustersComponent implements OnInit, OnDestroy {
   private clusterNameSearch = '';
   clusters: Cluster[];
   application: Application;
-  refreshTimer: any;
+  refreshTimer: Subscription;
   toggle = {};
 
   constructor(private clustersService: ClustersService,
               private appComponent: AppComponent,
-              private globalVarsService: GlobalVarsService) {}
+              private globalVars: GlobalVars) {}
 
   ngOnInit() {
     this.getClusters(); // Initial Load
-    // Refresh from database
-    this.refreshTimer = interval((15 * 1000))
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
       .subscribe((value: number) => {
-        console.log('refreshToggleModel=' + this.globalVarsService.getGRefreshSw());
-        if (this.globalVarsService.getGRefreshSw()) {
-          console.log('Refresh Overview,  cnt:' + value);
+        if (this.globalVars.getGRefreshSw()) {
+          console.log('Refresh Clusters,  cnt:' + value);
           this.getClusters();
-          if (value === 60) {
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
             this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
           }
         }
       });

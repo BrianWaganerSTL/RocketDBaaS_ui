@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ClusterRestoresService} from './cluster-restores.service';
-import {Restore} from '../../models/restore.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ClusterRestoresService } from './cluster-restores.service';
+import { Restore } from '../../models/restore.model';
+import { interval, Subscription } from 'rxjs';
+import { GlobalVars } from '../../global-vars.service';
 
 @Component({
   selector: 'app-cluster-restores',
@@ -8,17 +10,36 @@ import {Restore} from '../../models/restore.model';
   styleUrls: ['./cluster-restores.component.css'],
   providers: [ClusterRestoresService]
 })
-export class ClusterRestoresComponent implements OnInit {
+export class ClusterRestoresComponent implements OnInit, OnDestroy {
   @Input() clusterId: number;
   restores: Restore[];
-  // id: number;
-  // error: any;
+  refreshTimer: Subscription;
 
-  constructor(private clusterRestoresService: ClusterRestoresService) {
+  constructor(private clusterRestoresService: ClusterRestoresService,
+              private globalVars: GlobalVars) {
   }
 
   ngOnInit() {
-    this.showRestores();
+    this.showRestores(); // Initial Load
+    // Refresh from database
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
+      .subscribe((value: number) => {
+        console.log('refreshToggleModel=' + this.globalVars.getGRefreshSw());
+        if (this.globalVars.getGRefreshSw()) {
+          console.log('Refresh Clusters,  cnt:' + value);
+          this.showRestores();
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
+            this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
+          }
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showRestores(): void {

@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ServerIncidentService } from './server-incident.service';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { AppComponent } from '../../app.component';
-import { GlobalVarsService } from '../../global-vars.service';
+import { GlobalVars } from '../../global-vars.service';
 import { Incident } from '../../models/incident.model';
 
 @Component({
@@ -15,23 +15,25 @@ export class ServerIncidentComponent implements OnInit, OnDestroy {
   @Input() serverId: number;
   incidents: Incident[];
   alive = true;
-  refreshTimer;
+  refreshTimer: Subscription;
 
   constructor(private serverIncidentsService: ServerIncidentService,
               private appComponent: AppComponent,
-              private globalVarsService: GlobalVarsService) {
+              private globalVars: GlobalVars) {
   }
 
   ngOnInit() {
-    this.showData();   // Initial Load
-    console.log('Initial ServerIssues');
-    this.refreshTimer = interval((20 * 1000)) // 20 seconds
+    this.showData(); // Initial Load
+    // Refresh from database
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
       .subscribe((value: number) => {
-        if (this.globalVarsService.getGRefreshSw()) {
-          console.log('Refresh ServerIncidents,  cnt:' + value);
+        console.log('refreshToggleModel=' + this.globalVars.getGRefreshSw());
+        if (this.globalVars.getGRefreshSw()) {
+          console.log('Refresh Incidents,  cnt:' + value);
           this.showData();
-          if (value === 60) {
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
             this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
           }
         }
       });

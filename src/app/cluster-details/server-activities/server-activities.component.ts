@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ServerActivity } from '../../models/serverActivity.model';
 import { ServerActivitiesService } from './server-activities.service';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { AppComponent } from '../../app.component';
-import { GlobalVarsService } from '../../global-vars.service';
+import { GlobalVars } from '../../global-vars.service';
 
 @Component({
   selector: 'app-server-activities',
@@ -15,23 +15,25 @@ export class ServerActivitiesComponent implements OnInit, OnDestroy {
   @Input() serverId: number;
   serverActivities: ServerActivity[];
   alive = true;
-  refreshTimer;
+  refreshTimer: Subscription;
 
   constructor(private serverActivitiesService: ServerActivitiesService,
               private appComponent: AppComponent,
-              private globalVarsService: GlobalVarsService) {
+              private globalVars: GlobalVars) {
   }
 
   ngOnInit() {
     this.showData(); // Initial Load
-    console.log('Initial ServerActivities');
-    this.refreshTimer = interval((15 * 1000)) // 15 seconds
+    // Refresh from database
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
       .subscribe((value: number) => {
-        if (this.globalVarsService.getGRefreshSw()) {
+        console.log('refreshToggleModel=' + this.globalVars.getGRefreshSw());
+        if (this.globalVars.getGRefreshSw()) {
           console.log('Refresh ServerActivities,  cnt:' + value);
           this.showData();
-          if (value === 60) {
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
             this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
           }
         }
       });

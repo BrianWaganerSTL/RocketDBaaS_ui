@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ApplicationContactsService} from './application-contacts.service';
-import {ApplicationContact} from '../../models/applicationContact.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ApplicationContactsService } from './application-contacts.service';
+import { ApplicationContact } from '../../models/applicationContact.model';
+import { GlobalVars } from '../../global-vars.service';
+import { interval, Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,15 +11,36 @@ import {ApplicationContact} from '../../models/applicationContact.model';
   styleUrls: ['./application-contacts.component.css'],
   providers: [ApplicationContactsService]
 })
-export class ApplicationContactsComponent implements OnInit {
+export class ApplicationContactsComponent implements OnInit, OnDestroy {
   @Input() applicationId: number;
   applicationContacts: ApplicationContact[];
+  refreshTimer: Subscription;
 
-  constructor(private applicationContactsService: ApplicationContactsService) {
+  constructor(private applicationContactsService: ApplicationContactsService,
+              private globalVars: GlobalVars) {
   }
 
   ngOnInit() {
-    this.showApplicationContacts();
+    this.showApplicationContacts(); // Initial Load
+    // Refresh from database
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
+      .subscribe((value: number) => {
+        console.log('refreshToggleModel=' + this.globalVars.getGRefreshSw());
+        if (this.globalVars.getGRefreshSw()) {
+          console.log('Refresh ApplicationContacts,  cnt:' + value);
+          this.showApplicationContacts();
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
+            this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
+          }
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showApplicationContacts(): void {

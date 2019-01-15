@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ClusterBackupsService} from './cluster-backups.service';
-import {Backup} from '../../models/backup.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ClusterBackupsService } from './cluster-backups.service';
+import { Backup } from '../../models/backup.model';
+import { interval, Subscription } from 'rxjs';
+import { GlobalVars } from '../../global-vars.service';
 
 @Component({
   selector: 'app-cluster-backups',
@@ -8,15 +10,36 @@ import {Backup} from '../../models/backup.model';
   styleUrls: ['./cluster-backups.component.css'],
   providers: [ClusterBackupsService]
 })
-export class ClusterBackupsComponent implements OnInit {
+export class ClusterBackupsComponent implements OnInit, OnDestroy {
   @Input() clusterId: number;
   backups: Backup[];
+  refreshTimer: Subscription;
 
-  constructor(private clusterBackupsService: ClusterBackupsService) {
+  constructor(private clusterBackupsService: ClusterBackupsService,
+              private globalVars: GlobalVars) {
   }
 
   ngOnInit() {
-    this.showBackups();
+    this.showBackups(); // Initial Load
+    // Refresh from database
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
+      .subscribe((value: number) => {
+        console.log('refreshToggleModel=' + this.globalVars.getGRefreshSw());
+        if (this.globalVars.getGRefreshSw()) {
+          console.log('Refresh Backups,  cnt:' + value);
+          this.showBackups();
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
+            this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
+          }
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showBackups(): void {

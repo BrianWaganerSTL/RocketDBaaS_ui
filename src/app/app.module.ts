@@ -48,7 +48,7 @@ import { ServerMetricsPingServerComponent } from './cluster-details/server-metri
 import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/server-metrics-load/server-metrics-load.component';
 import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tabs.component';
 import { NgxToggleModule } from 'ngx-toggle';
-import { GlobalVarsService } from './global-vars.service';
+import { GlobalVars } from './global-vars.service';
 import { ClusterCreateService } from './cluster-create/cluster-create.service';
 import { LoginComponent } from './login/login.component';
 
@@ -110,7 +110,7 @@ import { LoginComponent } from './login/login.component';
     ClusterTabsComponent,
     LoginComponent,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     AuthService,
     HttpErrorHandler,
@@ -125,11 +125,11 @@ import { LoginComponent } from './login/login.component';
     ApplicationContactsService,
     ClusterCreateService,
     ServerPickerService,
-    GlobalVarsService,
-    {provide: RequestCache, useClass: RequestCacheWithMap},
+    GlobalVars,
+    { provide: RequestCache, useClass: RequestCacheWithMap },
     httpInterceptorProviders
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [ AppComponent ],
   entryComponents: [ ServerPickerComponent ]
 })
 export class AppModule {

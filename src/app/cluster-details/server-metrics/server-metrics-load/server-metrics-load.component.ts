@@ -59,6 +59,7 @@ export class ServerMetricsLoadComponent implements OnInit {
     console.log('Server: ' + this.serverId);
     this.serverMetricsLoadService.getMetricsLoad(this.serverId)
       .subscribe((data: MetricsLoad[]) => {
+        if (data) {
           for (const d of data) {
             this.load1MinDP.push({ name: moment(d.created_dttm).toDate(), value: (d.load_1min) });
             this.load5MinDP.push({ name: moment(d.created_dttm).toDate(), value: (d.load_5min) });
@@ -71,12 +72,12 @@ export class ServerMetricsLoadComponent implements OnInit {
           ];
           Object.assign(this, this.loadGraphData);
 
-        this.autoScale = false;
-        this.yScaleMax = (this.serverCpus * 10);
-        this.referenceLines = [ { name: 'Warning', value: (this.serverCpus * 5) }, { name: 'Critical', value: (this.serverCpus * 10) } ];
-        console.log('this.serverCpus=' + this.serverCpus);
+          this.autoScale = false;
+          this.yScaleMax = (this.serverCpus * 10);
+          this.referenceLines = [ { name: 'Warning', value: (this.serverCpus * 5) }, { name: 'Critical', value: (this.serverCpus * 10) } ];
+          console.log('this.serverCpus=' + this.serverCpus);
         }
-      );
+      });
   }
 }
 

@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ClusterServersService } from './cluster-servers.service';
 import { Server } from '../../models/server.model';
+import { GlobalVars } from '../../global-vars.service';
+import { interval, Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,15 +11,36 @@ import { Server } from '../../models/server.model';
   styleUrls: [],
   providers: [ClusterServersService]
 })
-export class ClusterServersComponent implements OnInit {
+export class ClusterServersComponent implements OnInit, OnDestroy {
   @Input() clusterId: number;
   servers: Server[];
+  refreshTimer: Subscription;
 
-  constructor(private clusterServerService: ClusterServersService) {
+  constructor(private clusterServerService: ClusterServersService,
+              private globalVars: GlobalVars) {
   }
 
   ngOnInit() {
-    this.showServers();
+    this.showServers(); // Initial Load
+    // Refresh from database
+    this.refreshTimer = interval((this.globalVars.getGRefreshRate()))
+      .subscribe((value: number) => {
+        console.log('refreshToggleModel=' + this.globalVars.getGRefreshSw());
+        if (this.globalVars.getGRefreshSw()) {
+          console.log('Refresh Servers,  cnt:' + value);
+          this.showServers();
+          if (value === this.globalVars.getGRefreshMaxCnt()) {
+            this.refreshTimer.unsubscribe();
+            this.globalVars.setGRefreshSw(false);
+          }
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.refreshTimer) {
+      this.refreshTimer.unsubscribe();
+    }
   }
 
   showServers(): void {
@@ -70,7 +93,6 @@ export class ClusterServersComponent implements OnInit {
         cssClass = 'fg-ServerOnLineMaint';
         break;
     }
-    // console.log('cssFgClass=' + cssClass);
     return cssClass;
   }
 }
