@@ -65,15 +65,15 @@ export class ServerMetricsMountPointsComponent implements OnInit {
             if (d.mount_point === '/') {
               this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
             } else if (d.mount_point === '/opt/pgsql/data') {
-              this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
+              this.mntDataDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
             } else if (d.mount_point === '/opt/pgsql/logs') {
-              this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-            } else if (d.mount_point === '/opt/pgsql/logs') {
-              this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
+              this.mntLogsDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
+            } else if (d.mount_point === '/opt/pgsql/backups') {
+              this.mntBkupsDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
             } else if (d.mount_point === '/home') {
-              this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
+              this.mntHomeDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
             } else if (d.mount_point === '/tmp') {
-              this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
+              this.mntTmpDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
           }
           }
           this.mountPointGraphData = [
