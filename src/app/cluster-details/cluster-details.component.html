@@ -16,7 +16,7 @@
       </thead>
       <tbody>
       <tr class="bg-clusters bg-hover">
-        <th>{{ cluster.cluster_name }} {{ cluster.id }}</th>
+        <th>{{ cluster.cluster_name }}</th>
         <td>{{ cluster.environment }}</td>
         <td>{{ cluster.dbms_type }}</td>
         <td>{{ cluster.application.application_name }}</td>
@@ -32,40 +32,8 @@
       </tr>
       </tbody>
     </table>
-    <div class="text-center mw-100">{{ tabSelectedName }} - {{ selectedTabChange }}</div>
-    <!--<button [routerLink]="['/clusters',cluster.id,'Metrics']" routerLinkActive="active" class="mat-tab-nav-bar mat-tab-label">Metrics</button>-->
-    <!--<button [routerLink]="['/clusters',cluster.id,'Backups']" routerLinkActive="active">Backups</button>-->
-    <!--<button [routerLink]="['/clusters',cluster.id,'Restores']" routerLinkActive="active">Restores</button>-->
-    <!--<button [routerLink]="['/clusters',cluster.id,'Activities']" routerLinkActive="active">Activities</button>-->
-    <!--<button [routerLink]="['/clusters',cluster.id,'Issues']" routerLinkActive="active">Issues</button>-->
-    <!--<button [routerLink]="['/clusters',cluster.id,'Contacts']" routerLinkActive="active">Contacts</button>-->
-    <!--<button [routerLink]="['/clusters',cluster.id,'Notes']" routerLinkActive="active">Notes</button>-->
-
-
-    <!--<nav mat-tab-nav-bar>-->
-    <!--<a mat-tab-link-->
-    <!--*ngFor="let link of links"-->
-    <!--[routerLink]="['/clusters', cluster.id, link]"-->
-    <!--routerLinkActive #rla="routerLinkActive">-->
-    <!--&lt;!&ndash;[active]="activeLink == link">&ndash;&gt;-->
-    <!--{{link}}-->
-    <!--</a>-->
-    <!--</nav>-->
 
     <div class="panel-body">
-      <!--<div class="wizard">-->
-      <!--<a [routerLink]="['/clusters', clusterDtl.clusterId, 'metrics']">Metrics</a><br>-->
-      <!--<a [routerLink]="['/clusters', clusterDtl.clusterId, 'incidents']">incidents</a><br>-->
-      <!--<a [routerLink]="['/clusters', clusterDtl.clusterId, 'backups']">Backups</a><br>-->
-      <!--</div>-->
-      <!--</div>-->
-
-      <!--<mat-tab-group #tabs>-->
-      <!--<mat-tab label="Metrics" (click)="console.log('==============================')">Metrics</mat-tab>-->
-      <!--<mat-tab label="Incidents" (select)="console.log('CHANGES================')">Incidents</mat-tab>-->
-      <!--<mat-tab label="Backups" (selectedTabChange)="goToLink('/clusters' + clusterDtl.clusterId + 'backups')">Backups</mat-tab>-->
-      <!--<mat-tab label="Restores" (selectedIndexChange)="console.log('CHANGES================')">Restores</mat-tab>-->
-      <!--</mat-tab-group>-->
 
       <nav mat-tab-nav-bar #tabs style="margin-bottom: .75rem">
         <a mat-tab-link [routerLink]="['/clusters', clusterDtl.clusterId, 'metrics']" routerLinkActive #metrics="routerLinkActive" [active]="metrics.isActive">Metrics</a>
@@ -127,9 +95,5 @@
         <app-cluster-notes [clusterId]="cluster.id" *ngIf="clusterDtl.tab === 'notes'"></app-cluster-notes>
       </div>
     </div>
-    <!--<router-outlet></router-outlet>-->
-
-    <!--<app-cluster-tabs [clusterDtl]="clusterDtl"></app-cluster-tabs>-->
-
   </div>
 </div>
