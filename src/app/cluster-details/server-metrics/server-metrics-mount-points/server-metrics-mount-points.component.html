@@ -1,9 +1,9 @@
 <ngx-charts-line-chart
-  *ngIf="mountPointGraphData"
+  *ngIf="mountPointData"
   [view]="view"
   [scheme]="colorScheme"
   [schemeType]="colorSchemeType"
-  [results]="mountPointGraphData"
+  [results]="mountPointData"
   [gradient]="gradient"
   [xAxis]="showXAxis"
   [yAxis]="showYAxis"
@@ -19,5 +19,6 @@
   [referenceLines]="referenceLines"
   [showRefLines]="showRefLines"
   [showRefLabels]="showRefLabels"
+  [timeline]="timeline"
   (select)="onSelect($event)">
 </ngx-charts-line-chart>

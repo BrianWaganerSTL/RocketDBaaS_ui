@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ServerMetricsMountPointsService } from './server-metrics-mount-points.service';
-import { DataPoint } from '../../../models/graphs.obj';
-import * as moment from 'moment';
-import { MetricsMountPoints } from '../../../models/metricsMountPoints.model';
 
 @Component({
   selector: 'app-server-metrics-mount-points',
@@ -13,8 +10,8 @@ import { MetricsMountPoints } from '../../../models/metricsMountPoints.model';
 })
 export class ServerMetricsMountPointsComponent implements OnInit {
   @Input() serverId: number;
-  metricsMountPoints: MetricsMountPoints[];
-
+  dataWithDates = [];
+  data: any[];
   view: any[] = [ , 200 ];
 
   // options
@@ -30,7 +27,7 @@ export class ServerMetricsMountPointsComponent implements OnInit {
   yScaleMin = 0;
   yScaleMax = 100;
   roundDomains = true;
-  timeline = false;
+  timeline = true;
   autoScale = false;  // line, area
   colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#8cd77b' ] };
   colorSchemeType = 'ordinal';
@@ -38,57 +35,39 @@ export class ServerMetricsMountPointsComponent implements OnInit {
   showRefLabels = true;
   referenceLines = [ { name: 'Warning', value: 80 }, { name: 'Critical', value: 95 } ];
 
-  UsedPctDP: DataPoint[] = [];
-  mountPointGraphData = [];
-  mntSlashDP = [];
-  mntDataDP = [];
-  mntLogsDP = [];
-  mntBkupsDP = [];
-  mntHomeDP = [];
-  mntTmpDP = [];
+  mountPointData = [];
 
 
   constructor(private serverMetricsMountPointsService: ServerMetricsMountPointsService) {
   }
 
-  ngOnInit() { this.showMetricsMountPoints(); }
+  ngOnInit() {
+    this.showChartMountPoints();
+  }
 
   onSelect(event) {
     console.log(event);
   }
 
-  showMetricsMountPoints(): void {
+  showChartMountPoints(): void {
     console.log('Server: ' + this.serverId);
-    this.serverMetricsMountPointsService.getMetricsMountPoints(this.serverId)
-      .subscribe((data: MetricsMountPoints[]) => {
-          for (const d of data) {
-            if (d.mount_point === '/') {
-              this.mntSlashDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-            } else if (d.mount_point === '/opt/pgsql/data') {
-              this.mntDataDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-            } else if (d.mount_point === '/opt/pgsql/logs') {
-              this.mntLogsDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-            } else if (d.mount_point === '/opt/pgsql/backups') {
-              this.mntBkupsDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-            } else if (d.mount_point === '/home') {
-              this.mntHomeDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-            } else if (d.mount_point === '/tmp') {
-              this.mntTmpDP.push({ name: moment(d.created_dttm).toDate(), value: (d.used_pct) });
-          }
-          }
-          this.mountPointGraphData = [
-            { name: '/', series: this.mntSlashDP },
-            { name: 'data', series: this.mntDataDP },
-            { name: 'logs', series: this.mntLogsDP },
-            { name: 'backups', series: this.mntBkupsDP },
-            { name: 'home', series: this.mntHomeDP },
-            { name: 'tmp', series: this.mntTmpDP },
-          ];
-
-          Object.assign(this, this.mountPointGraphData);
-          console.log('this.metricsMountPoints:' + this.metricsMountPoints);
+    this.serverMetricsMountPointsService.getChartMountPoints(this.serverId)
+      .subscribe((data: any[]) => {
+        this.mountPointData = this.convertChartStrDatesToDates(data);
+        Object.assign(this, this.mountPointData);
         }
       );
+  }
+
+  convertChartStrDatesToDates(data: any[]) {
+    this.dataWithDates = data.map(group => {
+      group.series = group.series.map(dataItem => {
+        dataItem.name = new Date(dataItem.name);
+        return dataItem;
+      });
+      return group;
+    });
+    return this.dataWithDates;
   }
 }
 
