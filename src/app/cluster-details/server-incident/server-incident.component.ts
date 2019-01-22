@@ -47,10 +47,9 @@ export class ServerIncidentComponent implements OnInit, OnDestroy {
 
   showData() {
     console.log('GetIncidents(server:' + this.serverId + ')');
-    // if ( this.clusterDetailsComponent.tabSelectedName === 'Issues') {
     this.serverIncidentsService.getIncidents(this.serverId)
       .subscribe(data => this.incidents = data);
-    // }
+
   }
 
   getIcon(a) {
