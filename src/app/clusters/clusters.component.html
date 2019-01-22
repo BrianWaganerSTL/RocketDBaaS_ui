@@ -10,9 +10,6 @@
     <th scope="col">Cluster</th>
     <th scope="col">DBMS</th>
     <th scope="col">Application</th>
-    <th scope="col">CPU</th>
-    <th scope="col">RAM (GB)</th>
-    <th scope="col">DB GB</th>
     <th scope="col">Health</th>
     <th scope="col">R/W Port</th>
     <th scope="col">R/O Port</th>
@@ -31,9 +28,6 @@
     </th>
     <td>{{ c.dbms_type }}</td>
     <td>{{ c.application.application_name }}</td>
-    <td>{{ c.requested_cpu }}</td>
-    <td>{{ c.requested_ram_gb }}</td>
-    <td>{{ c.requested_db_gb }}</td>
     <td class="{{ getFgClass(c.cluster_health) }}">{{ c.cluster_health }}</td>
     <td>{{ c.read_write_port.port }}</td>
     <td>{{ c.read_only_port.port }}</td>

@@ -23,7 +23,7 @@ export class ServerMetricsLoadComponent implements OnInit {
   showYAxis = true;
   autoscale = false; // line, area
   yScaleMin = 0;
-  yScaleMax = (this.serverCpus * 10);
+  yScaleMax = (this.serverCpus * 20);
   gradient = true;
   showLegend = true;
   legendTitle = 'Server Load';
@@ -70,7 +70,7 @@ export class ServerMetricsLoadComponent implements OnInit {
             { name: '15 Min', series: this.load15MinDP },
           ];
           Object.assign(this, this.loadGraphData);
-          this.yScaleMax = (this.serverCpus * 10);
+          this.yScaleMax = (this.serverCpus * 20);
           this.referenceLines = [ { name: 'Warning', value: (this.serverCpus * 5) }, { name: 'Critical', value: (this.serverCpus * 10) } ];
           console.log('this.serverCpus=' + this.serverCpus);
         }

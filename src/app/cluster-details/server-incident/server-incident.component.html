@@ -10,8 +10,13 @@
         <th scope="col">Category</th>
         <th scope="col">Metric</th>
         <th scope="col">Element</th>
+        <th scope="col">Cur Test</th>
+        <th scope="col">Cur Val</th>
+        <th scope="col">Cur Min</th>
+        <th scope="col">Cur Max</th>
         <th scope="col">Warning Check</th>
         <th scope="col">Critical Check</th>
+        <th scope="col">Current Status</th>
         <th scope="col">Note</th>
         <th scope="col">Note By</th>
         <th scope="col">Ticket</th>
@@ -29,11 +34,16 @@
         <td>{{ i.threshold_test.threshold_metric.category.category_name }}</td>
         <td>{{ i.threshold_test.threshold_metric.metric_name }}</td>
         <td>{{ i.detail_element }}</td>
-        <td> {{ i.threshold_test.warning_predicate_type + ' ' + i.threshold_test.warning_value }}</td>
-        <td> {{ i.threshold_test.critical_predicate_type + ' ' + i.threshold_test.critical_value }}</td>
-        <td style="text-overflow: ellipsis">{{ a.note }}</td>
-        <td>{{ a.note_by }}</td>
-        <td>{{ a.ticket }}</td>
+        <td>{{ i.cur_test_w_values}}</td>
+        <td>{{ i.cur_value}}</td>
+        <td>{{ i.min_value}}</td>
+        <td>{{ i.max_value}}</td>
+        <td>{{ i.threshold_test.warning_predicate_type + ' ' + i.threshold_test.warning_value }}</td>
+        <td>{{ i.threshold_test.critical_predicate_type + ' ' + i.threshold_test.critical_value }}</td>
+        <td>{{ i.current_status}}</td>
+        <td style="text-overflow: ellipsis">{{ i.note }}</td>
+        <td>{{ i.note_by }}</td>
+        <td>{{ i.ticket }}</td>
       </tr>
       </tbody>
     </table>
