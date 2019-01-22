@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GlobalVars {
   private gRefreshSw;
-  private gRefreshRate = 15 * 1000;  // equals seconds
+  private gRefreshRate = 30 * 1000;  // equals seconds
   private gRefreshMaxCnt = 100;
 
   constructor() {}
