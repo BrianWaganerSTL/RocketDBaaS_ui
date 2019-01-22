@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ServerMetricsCpuService } from './server-metrics-cpu.service';
-import { MetricsCpu } from '../../../models/metricsCpu.model';
-import { DataPoint } from '../../../models/graphs.obj';
-import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-server-metrics-cpu',
@@ -13,7 +11,6 @@ import * as moment from 'moment';
 })
 export class ServerMetricsCpuComponent implements OnInit {
   @Input() serverId: number;
-  metricsCpus: MetricsCpu[];
 
   view: any[] = [ , 200 ];
   showXAxis = true;
@@ -30,12 +27,8 @@ export class ServerMetricsCpuComponent implements OnInit {
   colorScheme = { domain: [ '#0509a4', '#c700ab', '#e90005', '#7a9298', '#a4d79c' ] };
   colorSchemeType = 'ordinal';
 
-  cpuIdlePctDP: DataPoint[] = [];
-  cpuUserPctDP: DataPoint[] = [];
-  cpuSystemPctDP: DataPoint[] = [];
-  cpuIoWaitPctDP: DataPoint[] = [];
-  cpuStealPctDP: DataPoint[] = [];
-  cpuGraphData = [];
+  chartData = [];
+  dataWithDates = [];
 
 
   constructor(private serverMetricsCpuService: ServerMetricsCpuService) {
@@ -50,25 +43,22 @@ export class ServerMetricsCpuComponent implements OnInit {
   showMetricsCpu(): void {
     console.log('Server: ' + this.serverId);
     this.serverMetricsCpuService.getMetricsCpu(this.serverId)
-      .subscribe((data: MetricsCpu[]) => {
-
-          for (const d of data) {
-            this.cpuIdlePctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_idle_pct) / 100 });
-            this.cpuUserPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_user_pct) / 100 });
-            this.cpuSystemPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_system_pct) / 100 });
-            this.cpuIoWaitPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_iowait_pct) / 100 });
-            this.cpuStealPctDP.push({ name: moment(d.created_dttm).toDate(), value: (d.cpu_steal_pct) / 100 });
-          }
-        this.cpuGraphData = [
-            { name: 'User', series: this.cpuUserPctDP },
-            { name: 'System', series: this.cpuSystemPctDP },
-            { name: 'Wait', series: this.cpuIoWaitPctDP },
-            { name: 'Steal', series: this.cpuStealPctDP },
-            { name: 'Idle', series: this.cpuIdlePctDP },
-          ];
-        Object.assign(this, this.cpuGraphData);
+      .subscribe((data: any[]) => {
+          this.chartData = this.convertChartStrDatesToDates(data);
+          Object.assign(this, this.chartData);
         }
       );
+  }
+
+  convertChartStrDatesToDates(data: any[]) {
+    this.dataWithDates = data.map(group => {
+      group.series = group.series.map(dataItem => {
+        dataItem.name = new Date(dataItem.name);
+        return dataItem;
+      });
+      return group;
+    });
+    return this.dataWithDates;
   }
 }
 
