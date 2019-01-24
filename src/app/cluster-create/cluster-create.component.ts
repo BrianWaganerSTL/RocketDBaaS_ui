@@ -5,10 +5,11 @@ import { ServerPickerComponent } from './server-picker/server-picker.component';
 import { ClusterCreateService } from './cluster-create.service';
 import { DbmsType } from '../models/dbmsType.model';
 import { Environment } from '../models/environment.model';
-import { stringify } from 'querystring';
+
 import { ApplicationClusterServersPOST, Cluster } from '../models/cluster.model';
 import { Application } from '../models/application.model';
 import { Server } from '../models/server.model';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -115,7 +116,7 @@ export class ClusterCreateComponent implements OnInit {
   addClusterToDB(): void {
     this.applicationClusterServersPOST = {
       application_name: this.serverFormGroup.controls.application_name.value,
-      environment_id: this.serverFormGroup.controls.env_name.value,
+      environment_name: this.serverFormGroup.controls.env_name.value,
       dbms_type: this.serverFormGroup.controls.dbms_type.value,
       cluster_name: this.serverFormGroup.controls.cluster_name.value,
       tls_enabled_sw: this.serverFormGroup.controls.tls_enabled_sw.value,

@@ -12,7 +12,7 @@ export const globals = {
   // dbaasUrl: 'http://ch3xr908389:8080/dbaas'
   apiOrigin: 'http://localhost:8080',
   apiUrl: 'http://localhost:8080/dbaas_api',
-  dbaasUrl: 'http://localhost:8080/dbaas'
+  dbaasUrl: 'http://localhost:8080/admin/dbaas'
 };
 
 /*

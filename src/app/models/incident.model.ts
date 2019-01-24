@@ -1,4 +1,4 @@
-import { ThresholdTest } from './thresholdTest.model';
+import { ThresholdTest } from './ThresholdTest.model';
 import { Server } from './server.model';
 
 export interface Incident {

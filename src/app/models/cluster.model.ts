@@ -1,5 +1,6 @@
 import { Application } from './application.model';
 import { ServerPort } from './serverPort.model';
+import { Environment } from './environment.model';
 
 export interface Cluster {
   id?: number;
@@ -7,8 +8,8 @@ export interface Cluster {
   dbms_type: string;
   application: Application;
   // application_id: number;
-  // environment: Environment;
-  environment: string;
+  environment: Environment;
+  // environment: string;
   read_write_port?: ServerPort;
   read_only_port?: ServerPort;
   tls_enabled_sw: string;
@@ -27,7 +28,7 @@ export interface Cluster {
 //  - Servers
 export interface ApplicationClusterServersPOST {
   application_name: string;
-  environment_id: string;
+  environment_name: string;
   dbms_type: string;
   cluster_name: string;
   tls_enabled_sw: string;

@@ -33,6 +33,15 @@
     </li>
     <!--========================================================================-->
     <div dropdown class="nav-item dropdown">
+      <a dropdownToggle class="nav-link dropdown-toggle" aria-controls="dropdownThresholds">Thresholds ...</a>
+      <div id="dropdownThresholds" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+        <a class="dropdown-item" routerLink="/threshold_tests">Tests</a>
+        <a class="dropdown-item disabled" routerLink="/threshold_metrics/">Metrics</a>
+        <a class="dropdown-item disabled" routerLink="/threshold_categories/">Categories</a>
+      </div>
+    </div>
+    <!--========================================================================-->
+    <div dropdown class="nav-item dropdown">
       <a dropdownToggle class="nav-link dropdown-toggle" aria-controls="dropdownAdmin">Admin ...</a>
       <div id="dropdownAdmin" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
         <a class="dropdown-item" href="{{ dbaasUrl }}">Admin</a>

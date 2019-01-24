@@ -8,6 +8,7 @@ import { ClustersComponent } from './clusters/clusters.component';
 import { PoolServersComponent } from './pool-servers/pool-servers.component';
 import { ClusterCreateComponent } from './cluster-create/cluster-create.component';
 import { LoginComponent } from './login/login.component';
+import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.component';
 
 
 const appRoutes: Routes = [
@@ -21,6 +22,8 @@ const appRoutes: Routes = [
   { path: 'clusters/:clusterId', component: ClusterDetailsComponent },
   { path: 'poolservers', component: PoolServersComponent },
   { path: 'cluster/create', component: ClusterCreateComponent },
+  { path: 'threshold_tests', component: ThresholdTestsComponent },
+
   { path: '**', component: PageNotFoundComponent }
 ];
 

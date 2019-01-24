@@ -17,7 +17,7 @@
       <tbody>
       <tr class="bg-clusters bg-hover">
         <th>{{ cluster.cluster_name }}</th>
-        <td>{{ cluster.environment }}</td>
+        <td>{{ cluster.environment.env_name }}</td>
         <td>{{ cluster.dbms_type }}</td>
         <td>{{ cluster.application.application_name }}</td>
         <td class="{{ getFgClass(cluster.cluster_health) }}">{{ cluster.cluster_health }}</td>

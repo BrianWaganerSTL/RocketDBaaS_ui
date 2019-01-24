@@ -8,6 +8,7 @@
   <thead>
   <tr class="bg-clusters-header">
     <th scope="col">Cluster</th>
+    <th scope="col">Env</th>
     <th scope="col">DBMS</th>
     <th scope="col">Application</th>
     <th scope="col">Health</th>
@@ -26,6 +27,7 @@
          routerLinkActive="active">
         {{ c.cluster_name }}</a>
     </th>
+    <td>{{ c.environment.env_name }}</td>
     <td>{{ c.dbms_type }}</td>
     <td>{{ c.application.application_name }}</td>
     <td class="{{ getFgClass(c.cluster_health) }}">{{ c.cluster_health }}</td>

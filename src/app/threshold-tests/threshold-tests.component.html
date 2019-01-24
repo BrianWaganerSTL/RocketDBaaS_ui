@@ -1,0 +1,39 @@
+<div>
+  <table class="table table-hover" style="background-color: #eaf8ff">
+    <thead>
+    <tr style="background-color: #79aec8; border: 0px;">
+      <th scope="col" style="border: 0px;">Category</th>
+      <th scope="col" style="border: 0px;">Metric Name</th>
+      <th scope="col" style="border: 0px;">Detail Element</th>
+      <th scope="col" style="border: 0px; text-align: center;" colspan="2">Warning</th>
+      <th scope="col" style="border: 0px; text-align: center;" colspan="2">Critical</th>
+      <th scope="col" colspan="3" style="text-align: center; border: 0px; border-bottom: black 3px solid;">Ticks</th>
+      <th scope="col" style="border: 0px;">Notification</th>
+      <th scope="col" style="border: 0px;">Active</th>
+    </tr>
+    <tr style="background-color: #79aec8; padding: 3px;">
+      <th scope="col" style="border: 0px; padding: 3px" colspan="7"></th>
+      <th scope="col" style="border: 0px; padding: 3px">Normal</th>
+      <th scope="col" style="border: 0px; padding: 3px">Warning</th>
+      <th scope="col" style="border: 0px; padding: 3px">Critical</th>
+      <th scope="col" style="border: 0px; padding: 3px" colspan="2"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let tt of thresholdTests">
+    <tr>
+      <td>{{ tt.threshold_metric.category.category_name}}</td>
+      <td>{{ tt.threshold_metric.metric_name }}</td>
+      <td>{{ tt.detail_element }}</td>
+      <td>{{ tt.warning_predicate_type }}</td>
+      <td>{{ tt.warning_value }}</td>
+      <td>{{ tt.critical_predicate_type }}</td>
+      <td>{{ tt.critical_value }}</td>
+      <td>{{ tt.normal_ticks}}</td>
+      <td>{{ tt.warning_ticks}}</td>
+      <td>{{ tt.critical_ticks}}</td>
+      <td>{{ tt.notification_method.notification_method }}</td>
+      <td>{{ tt.active_sw}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

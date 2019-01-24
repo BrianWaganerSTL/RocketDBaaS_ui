@@ -51,6 +51,7 @@ import { NgxToggleModule } from 'ngx-toggle';
 import { GlobalVars } from './global-vars.service';
 import { ClusterCreateService } from './cluster-create/cluster-create.service';
 import { LoginComponent } from './login/login.component';
+import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.component';
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import { LoginComponent } from './login/login.component';
     ServerMetricsPingDbComponent,
     ClusterTabsComponent,
     LoginComponent,
+    ThresholdTestsComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
