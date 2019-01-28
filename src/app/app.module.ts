@@ -12,7 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { PackageSearchComponent } from './package-search/package-search.component';
 import { Router } from '@angular/router';
 import { httpInterceptorProviders } from './http-interceptors';
-import { ModalModule, TabsModule } from 'ngx-bootstrap';
+import { AlertModule, ModalModule, TabsModule } from 'ngx-bootstrap';
 import { ServersComponent } from './clusters/servers/servers.component';
 import { ClusterDetailsComponent } from './cluster-details/cluster-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -45,7 +45,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ServerMetricsMountPointsComponent } from './cluster-details/server-metrics/server-metrics-mount-points/server-metrics-mount-points.component';
 import { ServerMetricsPingDbComponent } from './cluster-details/server-metrics/server-metrics-ping-db/server-metrics-ping-db.component';
 import { ServerMetricsPingServerComponent } from './cluster-details/server-metrics/server-metrics-ping-server/server-metrics-ping-server.component';
-import { ServerMetricsLoadComponent } from './cluster-details/server-metrics/server-metrics-load/server-metrics-load.component';
+import { ServerMetricsCpuLoadComponent } from './cluster-details/server-metrics/server-metrics-cpu-load/server-metrics-cpu-load.component';
 import { ClusterTabsComponent } from './cluster-details/cluster-tabs/cluster-tabs.component';
 import { NgxToggleModule } from 'ngx-toggle';
 import { GlobalVars } from './global-vars.service';
@@ -65,6 +65,7 @@ import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.compo
     }),
     NgxChartsModule,
     NgxToggleModule,
+    AlertModule.forRoot(),
     BrowserAnimationsModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),
@@ -105,7 +106,7 @@ import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.compo
     ServerPickerComponent,
     ServerMetricsCpuComponent,
     ServerMetricsMountPointsComponent,
-    ServerMetricsLoadComponent,
+    ServerMetricsCpuLoadComponent,
     ServerMetricsPingServerComponent,
     ServerMetricsPingDbComponent,
     ClusterTabsComponent,

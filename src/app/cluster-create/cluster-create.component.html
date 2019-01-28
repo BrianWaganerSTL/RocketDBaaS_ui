@@ -143,4 +143,7 @@
   <!--<button mat-raised-button color="primary" (click)="addPhone()">Add Phone Number</button>-->
   <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0" color="primary" (click)="addClusterToDB()">Just Add to DB</button>
   <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0" color="primary" (click)="createCluster()" disabled>Create a Cluster</button>
+  <div *ngFor="let alert of alerts">
+    <alert [type]="alert.type" [dismissible]="dismissible" (onClosed)="onClosed(alert)"><span [innerHtml]="alert.msg"></span></alert>
+  </div>
 </form>

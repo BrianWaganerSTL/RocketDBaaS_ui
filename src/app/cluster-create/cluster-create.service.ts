@@ -18,7 +18,6 @@ export class ClusterCreateService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-      // 'Authorization': '6289e86c56ffe922bf93addad01108cb6683c0bd',
     })
   };
 
@@ -42,7 +41,10 @@ export class ClusterCreateService {
     return this.httpClient.post<Cluster>(url, applicationClusterServersPOST, this.httpOptions)
       .pipe(
         retry(1),  // retry a failed request up to 3 times
-        catchError(this.handleError<Cluster>('createApplClusterServers'))
+        catchError(err => {
+          this.handleError<Cluster>('createApplClusterServers');
+          throw err;
+        })
       );
   }
 

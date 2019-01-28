@@ -8,7 +8,7 @@ import { MetricsLoad } from '../../../models/metricsLoad.model';
 import { globals } from '../../../../environments/environment';
 
 @Injectable()
-export class ServerMetricsLoadService {
+export class ServerMetricsCpuLoadService {
   private handleError: HandleError;
 
   constructor(

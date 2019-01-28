@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ServerMetricsLoadService } from './server-metrics-load.service';
+import { ServerMetricsCpuLoadService } from './server-metrics-cpu-load.service';
 import { DataPoint } from '../../../models/graphs.obj';
 import { MetricsLoad } from '../../../models/metricsLoad.model';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-server-metrics-load',
-  templateUrl: './server-metrics-load.component.html',
+  templateUrl: './server-metrics-cpu-load.component.html',
   styleUrls: [],
-  providers: [ ServerMetricsLoadService ]
+  providers: [ ServerMetricsCpuLoadService ]
 })
-export class ServerMetricsLoadComponent implements OnInit {
+export class ServerMetricsCpuLoadComponent implements OnInit {
   @Input() serverId: number;
   @Input() serverCpus: number;
   metricsLoad: MetricsLoad[];
@@ -45,7 +45,7 @@ export class ServerMetricsLoadComponent implements OnInit {
   loadGraphData = [];
 
 
-  constructor(private serverMetricsLoadService: ServerMetricsLoadService) {
+  constructor(private serverMetricsLoadService: ServerMetricsCpuLoadService) {
   }
 
   ngOnInit() { this.showMetricsLoad(); }

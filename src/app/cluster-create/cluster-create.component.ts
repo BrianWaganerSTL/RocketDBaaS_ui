@@ -10,7 +10,7 @@ import { ApplicationClusterServersPOST, Cluster } from '../models/cluster.model'
 import { Application } from '../models/application.model';
 import { Server } from '../models/server.model';
 import { stringify } from 'querystring';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cluster-create',
@@ -39,9 +39,13 @@ export class ClusterCreateComponent implements OnInit {
     value: false
   };
 
+  alerts: any = [];
+  dismissible = true;
+
   constructor(private fb: FormBuilder,
               public dialog: MatDialog,
-              private clusterCreateService: ClusterCreateService) {
+              private clusterCreateService: ClusterCreateService,
+              private router: Router) {
     this.server_ids = [];
     this.servers = [];
   }
@@ -129,9 +133,21 @@ export class ClusterCreateComponent implements OnInit {
       .subscribe(
         result => {
           console.log('New Cluster: ' + stringify(result));
-          this.createDB_cluster = result;
+          this.alerts = [ { type: 'success', msg: '<strong>Well done!</strong> Successfully added the Cluster' } ];
         },
-        error => { console.error('Failed to create New Application,Cluster,Servers: ' + error); }
+        err => {
+          console.warn('Failed to create New Application, Cluster, Servers: Error: %s', stringify(err.error).replace(/%20/g, ' '));
+          console.warn('ErrorHeaders:', err);
+          this.alerts = [ {
+            type: 'danger',
+            msg: '<strong>Warning: </strong>' + stringify(err.error).replace(/%20/g, ' ')
+          } ];
+        }
       );
+  }
+
+  onClosed(dismissedAlert: any): void {
+    console.log('dismissedAlert:' + stringify(dismissedAlert));
+    if (dismissedAlert.valueOf().type === 'success') { this.router.navigateByUrl('/clusters'); }
   }
 }

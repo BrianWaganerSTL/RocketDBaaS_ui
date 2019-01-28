@@ -3,20 +3,17 @@
     <table class="table table-hover" style="font-size: .75rem">
       <thead>
       <tr style="text-align: center">
-        <th></th>
+        <th style="width:100px;padding:0px;"></th>
         <th scope="col">Start</th>
         <th scope="col">Last</th>
         <th scope="col">Closed</th>
         <th scope="col">Category</th>
         <th scope="col">Metric</th>
         <th scope="col">Element</th>
-        <th scope="col">Cur Test</th>
-        <th scope="col">Cur Val</th>
-        <th scope="col">Cur Min</th>
-        <th scope="col">Cur Max</th>
-        <th scope="col">Warning Check</th>
-        <th scope="col">Critical Check</th>
-        <th scope="col">Current Status</th>
+        <th scope="col">Min</th>
+        <th scope="col">Max</th>
+        <th scope="col">Active Test</th>
+        <th scope="col">Status</th>
         <th scope="col">Note</th>
         <th scope="col">Note By</th>
         <th scope="col">Ticket</th>
@@ -24,22 +21,19 @@
       </thead>
       <tbody *ngIf="incidents">
       <tr *ngFor="let i of incidents"
-          class="bg-hover {{ getCssClass(i) }}">
+          class="bg-hover {{ getCssClass(i) }} text-center">
         <td style="width:100px;padding:0px;">
-          <img src="{{ getIcon(i) }}" alt="Tux" width="45px">
+          <img src="{{ getIcon(i) }}" alt="Tux" width="40px">
         </td>
-        <td>{{ i.start_dttm | date: 'd-MMM HH:mm:ss' }}</td>
-        <td>{{ i.last_dttm | date: 'd-MMM HH:mm:ss' }}</td>
-        <td>{{ i.closed_dttm | date: 'd-MMM HH:mm:ss' }}</td>
+        <td>{{ i.start_dttm | date: 'd-MMM HH:mm' }}</td>
+        <td>{{ i.last_dttm | date: 'd-MMM HH:mm' }}</td>
+        <td>{{ i.closed_dttm | date: 'd-MMM HH:mm' }}</td>
         <td>{{ i.threshold_test.threshold_metric.category.category_name }}</td>
         <td>{{ i.threshold_test.threshold_metric.metric_name }}</td>
         <td>{{ i.detail_element }}</td>
-        <td>{{ i.cur_test_w_values}}</td>
-        <td>{{ i.cur_value}}</td>
         <td>{{ i.min_value}}</td>
         <td>{{ i.max_value}}</td>
-        <td>{{ i.threshold_test.warning_predicate_type + ' ' + i.threshold_test.warning_value }}</td>
-        <td>{{ i.threshold_test.critical_predicate_type + ' ' + i.threshold_test.critical_value }}</td>
+        <td>{{ i.cur_test_w_values.replace('<<','').replace('>>','') }}</td>
         <td>{{ i.current_status}}</td>
         <td style="text-overflow: ellipsis">{{ i.note }}</td>
         <td>{{ i.note_by }}</td>
