@@ -14,6 +14,7 @@
         <th scope="col">Max</th>
         <th scope="col">Active Test</th>
         <th scope="col">Status</th>
+        <th scope="col">Max Status</th>
         <th scope="col">Note</th>
         <th scope="col">Note By</th>
         <th scope="col">Ticket</th>
@@ -35,6 +36,7 @@
         <td>{{ i.max_value}}</td>
         <td>{{ i.cur_test_w_values.replace('<<','').replace('>>','') }}</td>
         <td>{{ i.current_status}}</td>
+        <td>{{ i.max_status}}</td>
         <td style="text-overflow: ellipsis">{{ i.note }}</td>
         <td>{{ i.note_by }}</td>
         <td>{{ i.ticket }}</td>
