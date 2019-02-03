@@ -9,7 +9,6 @@
         <th scope="col">Closed</th>
         <th scope="col">Category</th>
         <th scope="col">Metric</th>
-        <th scope="col">Element</th>
         <th scope="col">Min</th>
         <th scope="col">Max</th>
         <th scope="col">Active Test</th>
@@ -30,8 +29,7 @@
         <td>{{ i.last_dttm | date: 'd-MMM HH:mm' }}</td>
         <td>{{ i.closed_dttm | date: 'd-MMM HH:mm' }}</td>
         <td>{{ i.threshold_test.threshold_metric.category.category_name }}</td>
-        <td>{{ i.threshold_test.threshold_metric.metric_name }}</td>
-        <td>{{ i.detail_element }}</td>
+        <td>{{ i.threshold_test.threshold_metric.metric_name }} {{ i.detail_element }}</td>
         <td>{{ i.min_value}}</td>
         <td>{{ i.max_value}}</td>
         <td>{{ i.cur_test_w_values.replace('<<','').replace('>>','') }}</td>

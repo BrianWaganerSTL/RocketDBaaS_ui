@@ -14,6 +14,7 @@ export interface Incident {
   cur_test_w_values: string;
   pending_status: string;
   current_status: string;
+  max_status: string;
   detail_element: string;
   critical_ticks: Int8Array;
   warning_ticks: Int8Array;

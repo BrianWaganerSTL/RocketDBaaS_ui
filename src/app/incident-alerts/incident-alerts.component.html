@@ -1,0 +1,49 @@
+<mat-accordion *ngIf="(warning_count + critical_count) > 0">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="expansion_header_height" class="bg-HeaderIncidentCritical">
+      <mat-panel-title>
+        Open Incidents:
+      </mat-panel-title>
+      <mat-panel-description>
+        <span class="{{ getCssClassText('Warning', warning_count) }}">Warnings: {{ warning_count }}</span> &nbsp;&nbsp;
+        <span class="{{ getCssClassText('Critical', critical_count) }}">Criticals: {{ critical_count }}</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <table class="table table-hover" style="font-size: .75rem" *ngIf="incidentAlerts">
+      <thead>
+      <tr style="text-align: center">
+        <th scope="col">Start</th>
+        <th scope="col">Last</th>
+        <th scope="col">Env</th>
+        <th scope="col">Cluster</th>
+        <th scope="col">Server</th>
+        <th scope="col">Category</th>
+        <th scope="col">Metric</th>
+        <th scope="col">Min</th>
+        <th scope="col">Max</th>
+        <th scope="col">Active Test</th>
+        <th scope="col">Status</th>
+        <th scope="col">Max Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of incidentAlerts"
+          class="bg-hover {{ getCssClass(i) }} text-center">
+        <td>{{ i.start_dttm | date: 'd-MMM HH:mm' }}</td>
+        <td>{{ i.last_dttm | date: 'd-MMM HH:mm' }}</td>
+        <td>{{ i.server.environment.env_name}}</td>
+        <td>{{ i.server.cluster.cluster_name}}</td>
+        <td>{{ i.server.server_name }}</td>
+        <td>{{ i.threshold_test.threshold_metric.category.category_name }}</td>
+        <td>{{ i.threshold_test.threshold_metric.metric_name }} {{ i.detail_element }}</td>
+        <td>{{ i.min_value}}</td>
+        <td>{{ i.max_value}}</td>
+        <td>{{ i.cur_test_w_values.replace('<<','').replace('>>','') }}</td>
+        <td>{{ i.current_status}}</td>
+        <td>{{ i.max_status}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>

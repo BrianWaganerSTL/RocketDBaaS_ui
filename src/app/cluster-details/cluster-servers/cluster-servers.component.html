@@ -17,9 +17,9 @@
     <td>{{ s.server_name }}</td>
     <td>{{ s.server_ip }}</td>
     <td>{{ s.node_role }}</td>
-    <td>{{ s.cpu }}</td>
-    <td>{{ s.ram_gb }}</td>
-    <td>{{ s.db_gb }}</td>
+    <td>{{ s.cpu | number:'1.0-0' }}</td>
+    <td>{{ s.ram_gb | number:'1.0-0' }}</td>
+    <td>{{ s.db_gb | number:'1.1-1' }}</td>
     <td>{{ s.os_version }}</td>
     <td>{{ s.db_version }}</td>
     <td class="bg-hover {{ getFgClass2(s.server_health) }}">{{ s.server_health }}</td>

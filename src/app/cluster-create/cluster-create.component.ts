@@ -125,7 +125,7 @@ export class ClusterCreateComponent implements OnInit {
       cluster_name: this.serverFormGroup.controls.cluster_name.value,
       tls_enabled_sw: this.serverFormGroup.controls.tls_enabled_sw.value,
       backup_retention_days: this.serverFormGroup.controls.backup_retention_days.value,
-      cluster_health: 'ClusterConfig',
+      cluster_health: 'ClusterUp',
       server_ids: this.server_ids,
     };
     console.log('applicationClusterServersPOST: ' + stringify(this.applicationClusterServersPOST));

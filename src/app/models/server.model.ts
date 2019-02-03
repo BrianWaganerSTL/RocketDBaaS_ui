@@ -1,9 +1,10 @@
 import { Environment } from './environment.model';
 import { Datacenter } from './datacenter.model';
+import { Cluster } from './cluster.model';
 
 export interface Server {
   id?: number;
-  cluster?: number;
+  cluster?: Cluster;
   environment?: Environment;
   server_name?: string;
   server_ip?: string;

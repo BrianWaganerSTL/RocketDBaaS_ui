@@ -124,25 +124,8 @@
     </table>
   </div>
 
-
-  <!--<div formArrayName="phones">-->
-  <!--<div *ngFor="let phone of phones.controls; let i=index" [formGroupName]="i">-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="area" formControlName="area">-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="prefix" formControlName="prefix">-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="line" formControlName="line">-->
-  <!--</mat-form-field>-->
-  <!--<button mat-raised-button color="warn" (click)="deletePhone(i)">Delete</button>-->
-  <!--<br>-->
-  <!--</div>-->
-
-  <!--<button mat-raised-button color="primary" (click)="addPhone()">Add Phone Number</button>-->
   <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0" color="primary" (click)="addClusterToDB()">Just Add to DB</button>
-  <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0" color="primary" (click)="createCluster()" disabled>Create a Cluster</button>
+  <button mat-raised-button [disabled]="serverFormGroup.invalid || servers.length === 0 || 1" color="info" (click)="createCluster()" disabled>Create a Cluster</button>
   <div *ngFor="let alert of alerts">
     <alert [type]="alert.type" [dismissible]="dismissible" (onClosed)="onClosed(alert)"><span [innerHtml]="alert.msg"></span></alert>
   </div>

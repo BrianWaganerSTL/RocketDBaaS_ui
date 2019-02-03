@@ -22,7 +22,9 @@
         <td class="{{ getFgClass(cluster.cluster_health) }}">{{ cluster.cluster_health }}</td>
         <td>{{ cluster.read_write_port.port }}</td>
         <td>{{ cluster.read_only_port.port }}</td>
-        <td>{{ cluster.tls_enabled_sw }}</td>
+        <td>
+          <mat-checkbox [checked]="cluster.tls_enabled_sw"></mat-checkbox>
+        </td>
       </tr>
       <tr>
         <td colspan="100%" style="padding-top:2rem;">

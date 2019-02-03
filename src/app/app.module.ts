@@ -37,7 +37,22 @@ import { ClusterServersService } from './cluster-details/cluster-servers/cluster
 import { PoolServersComponent } from './pool-servers/pool-servers.component';
 import { ClusterCreateComponent } from './cluster-create/cluster-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatBadgeModule, MatButtonModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatInputModule, MatSelectModule, MatTabsModule } from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatBadgeModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatCommonModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatInputModule,
+  MatSelectModule,
+  MatTableModule,
+  MatTabsModule
+} from '@angular/material';
 import { ServerPickerComponent } from './cluster-create/server-picker/server-picker.component';
 import { ServerPickerService } from './cluster-create/server-picker/server-picker.service';
 import { ServerMetricsCpuComponent } from './cluster-details/server-metrics/server-metrics-cpu/server-metrics-cpu.component';
@@ -52,6 +67,7 @@ import { GlobalVars } from './global-vars.service';
 import { ClusterCreateService } from './cluster-create/cluster-create.service';
 import { LoginComponent } from './login/login.component';
 import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.component';
+import { IncidentAlertsComponent } from './incident-alerts/incident-alerts.component';
 
 
 @NgModule({
@@ -83,7 +99,13 @@ import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.compo
     MatDialogModule,
     MatChipsModule,
     MatBadgeModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule,
+    MatCardModule,
+    MatCommonModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatTableModule
   ],
   declarations: [
     AppComponent,
@@ -112,6 +134,7 @@ import { ThresholdTestsComponent } from './threshold-tests/threshold-tests.compo
     ClusterTabsComponent,
     LoginComponent,
     ThresholdTestsComponent,
+    IncidentAlertsComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [

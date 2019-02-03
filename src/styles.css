@@ -240,6 +240,23 @@ input {
 /*color: black;*/
 /*}*/
 
+.text-IncidentCritical {
+  color: darkred;
+  font-weight: 600;
+  /*text-effect: engrave;*/
+}
+
+.text-IncidentWarning {
+  color: orange;
+  font-weight: 600;
+  /*text-effect: engrave;*/
+}
+
+.mat-expansion-panel-header, .mat-expansion-panel-header:hover {
+  background: #e7aeae !important;
+}
+
+
 .bg-clusters {
   background-color: whitesmoke;
   color: black;
@@ -256,7 +273,7 @@ input {
   font-weight: 400;
 }
 
-.bg-issueBlackout,
+.bg-incidentBlackout,
 .bg-PoolServerUsed {
   background-image: linear-gradient(to bottom, rgba(120, 120, 120, .7), rgba(0, 0, 0, .8));
   color: white;
@@ -264,7 +281,7 @@ input {
 
 .bg-BkupSuccessful,
 .bg-RestoreSuccessful,
-.bg-issueNormal,
+.bg-incidentNormal,
 .bg-PoolServerAvailable,
 .bg-ActivitySuccessful {
   background-color: whitesmoke;
@@ -287,14 +304,14 @@ input {
 .bg-ServerUpWithIssues,
 .bg-BkupFailed,
 .bg-RestoreFailed,
-.bg-issueWarning,
-.bg-issueUnknown {
+.bg-incidentWarning,
+.bg-incidentUnknown {
   background-color: rgba(255, 114, 0, 0.3);
 }
 
 .bg-ServerDown,
 .bg-ActivityFailed,
-.bg-issueCritical {
+.bg-incidentCritical {
   background-color: rgba(255, 151, 159, 0.71);
 }
 
@@ -302,7 +319,8 @@ input {
 .bg-BkupRunning,
 .bg-RestoreRunning,
 .bg-ActivityProcessing,
-.bg-issueInfo {
+.bg-incidentInfo,
+.bg-incidentWatching {
   background-color: rgba(255, 237, 0, 0.3);
 }
 
